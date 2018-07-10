@@ -1,0 +1,28 @@
+<script src="../../services/drag-ship/drag-ship.service.ts"></script>
+<div #ships
+     class="field col-12"
+     [ngClass]="{fieldBorder: showFieldBorder}">
+  <div *ngFor="let row of board.board;let i = index"
+       class="row row{{i}}"
+  >
+    <div *ngFor="let cell of row.row; let j = index"
+         class="square square{{i}}{{j}} "
+         (dragover)="dragShipService.dragOver($event, ships, i, j)"
+    >
+
+      <div *ngIf="cell.isShipHere()"
+           class="ship ship1"
+           draggable="true"
+           onclick="handleClick()"
+      >
+        <!--[ngStyle]="{'background-color': 'blue', 'width': '100px'}"-->
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="col-12"
+>
+  Start: {{result2}} :End
+
+</div>

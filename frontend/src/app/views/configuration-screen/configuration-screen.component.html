@@ -1,0 +1,25 @@
+<div class="container ">
+  <p class="col-12">
+    configuration-screen works!
+  </p>
+
+  <mat-input-container class="col-12">
+    <input type="text" matInput [(ngModel)]="player.name" placeholder="Player name:">
+  </mat-input-container>
+
+  <mat-input-container class="col-12">
+    <input type="text" matInput [(ngModel)]="player.roomNumber" placeholder="Player room number:">
+  </mat-input-container>
+
+  <mat-button-toggle class="col-12"
+                     (click)="setValue()"
+                     *ngIf="isThereInputFromPlayer()"
+                     routerLink="/configuration/board"
+  >
+    Go to board!
+
+  </mat-button-toggle>
+
+  <p>{{player.name}}</p>
+</div>
+

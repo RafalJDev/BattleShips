@@ -1,0 +1,18 @@
+<p>
+  ships-to-place works!
+</p>
+
+<div class="container">
+  <div *ngFor="let ship of availableShips.ships"
+       class="col-6"
+  >
+    {{ship.mastCount}}
+    <div class="ship{{ship.mastCount}} col-6"
+         draggable="true"
+         (dragstart)="dragShipService.onDragStart($event, ship)"
+         (dragend)="dragShipService.onDragEnd($event)"
+    >
+
+    </div>
+  </div>
+</div>

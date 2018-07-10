@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.ship {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.ship1 {
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-image: url("assets/ship_1.png");
+}
+
+.ship2 {
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-image: url("assets/ship_2.jpg");
+}
+
+.ship3 {
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-image: url("assets/ship3.png");
+}

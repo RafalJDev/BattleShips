@@ -1,0 +1,34 @@
+<p>
+  ships-configuration works!
+</p>
+
+<div>
+
+  <div class="container">
+    <div class="row">
+
+      <app-player-board class="col-xs-6"
+                        style="float: left;"
+                        (isFleetCorrectFromPlayer)="startGameChange($event)"
+      >
+      </app-player-board>
+
+      <app-opponent-board class="col-xs-6"
+      >
+      </app-opponent-board>
+
+    </div>
+  </div>
+
+  <app-ships-to-place class="col-3"
+  >
+
+  </app-ships-to-place>
+
+  <app-start-game-button class="col-6"
+                         *ngIf="canIStartGame"
+  >
+
+  </app-start-game-button>
+
+</div>
