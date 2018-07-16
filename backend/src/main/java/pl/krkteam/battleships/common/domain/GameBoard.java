@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.common.domain.player;
+package pl.krkteam.battleships.common.domain;
 
 import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.Board;
