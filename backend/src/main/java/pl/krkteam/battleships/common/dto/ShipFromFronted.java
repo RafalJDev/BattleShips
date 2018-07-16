@@ -1,4 +1,4 @@
-package pl.krkteam.model;
+package pl.krkteam.battleships.common.dto;
 
 import java.util.Arrays;
 
@@ -9,7 +9,7 @@ public class ShipFromFronted {
   @Override
   public String toString() {
     return "ShipFromFronted{" +
-       "ships=" + Arrays.toString(ships) +
+       "shipDTOS=" + Arrays.toString(ships) +
        '}';
   }
 }

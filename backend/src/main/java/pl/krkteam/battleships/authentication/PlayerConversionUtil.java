@@ -1,4 +1,7 @@
-package pl.krkteam.player;
+package pl.krkteam.battleships.authentication;
+
+import pl.krkteam.battleships.common.domain.player.Player;
+import pl.krkteam.battleships.common.dto.PlayerDTO;
 
 import java.util.Collection;
 

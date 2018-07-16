@@ -1,4 +1,4 @@
-package pl.krkteam.player;
+package pl.krkteam.battleships.common.domain.player;
 
 
 public class Player {

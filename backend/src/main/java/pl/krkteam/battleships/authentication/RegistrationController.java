@@ -1,9 +1,8 @@
-package pl.krkteam.authentication;
+package pl.krkteam.battleships.authentication;
 
 import com.google.gson.Gson;
-import pl.krkteam.player.Player;
-import pl.krkteam.player.PlayerConversionUtil;
-import pl.krkteam.player.PlayerDTO;
+import pl.krkteam.battleships.common.domain.player.Player;
+import pl.krkteam.battleships.common.dto.PlayerDTO;
 import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 

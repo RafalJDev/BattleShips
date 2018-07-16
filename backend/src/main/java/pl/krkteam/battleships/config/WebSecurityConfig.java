@@ -1,4 +1,4 @@
-package pl.krkteam.config;
+package pl.krkteam.battleships.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

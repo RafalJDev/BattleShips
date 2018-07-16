@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   {path: 'configuration', component: ConfigurationScreenComponent},
   {path: 'game/board', component: BoardComponent},
   {path: 'configuration/board', component: GameComponent},
-  {path: 'players/registered', component: RegisteredPlayersComponent},
+  {path: 'player/registered', component: RegisteredPlayersComponent},
   {path: 'game', component: GameComponent}
 ];
 

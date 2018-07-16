@@ -1,4 +1,4 @@
-package pl.krkteam.player;
+package pl.krkteam.battleships.common.dto;
 
 public class PlayerDTO {
 

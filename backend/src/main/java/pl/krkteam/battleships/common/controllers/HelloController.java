@@ -1,4 +1,4 @@
-package pl.krkteam.controllers;
+package pl.krkteam.battleships.common.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

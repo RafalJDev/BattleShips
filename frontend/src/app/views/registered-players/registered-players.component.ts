@@ -4,8 +4,8 @@ import {Player} from "../../models/player";
 
 @Component({
   selector: 'app-registered-players',
-  templateUrl: './registered-players.component.html',
-  styleUrls: ['./registered-players.component.scss']
+  templateUrl: './registered-player.component.html',
+  styleUrls: ['./registered-player.component.scss']
 })
 export class RegisteredPlayersComponent implements OnInit, OnDestroy {
 
