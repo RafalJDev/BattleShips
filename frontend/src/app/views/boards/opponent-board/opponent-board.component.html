@@ -1,4 +1,22 @@
-<app-board-component
+<div #boardDiv
+     class="field col-12"
 >
+  <div *ngFor="let row of opponentBoard.board;let y = index"
+       class="row row{{y}}"
+  >
+    <div *ngFor="let cell of row.row; let x = index"
+         class="square square{{y}}{{x}} "
+         (click)="opponentBoardHandler.handleShotClick(boardDiv, y, x)"
+    >
+      <div class="inner-color inner-color-locator">
 
-</app-board-component>
+        <div class="ship">
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+

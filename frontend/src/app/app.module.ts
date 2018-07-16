@@ -18,10 +18,20 @@ import {ShipSender} from "./rest/post/ship-sender";
 import {StartGameButtonComponent} from "./views/game/start-game-button/start-game-button.component";
 import {PlayerBoardComponent} from './views/boards/player-board/player-board.component';
 import {OpponentBoardComponent} from './views/boards/opponent-board/opponent-board.component';
+import {RequestExecutor} from "./rest/request-executor";
+import {OpponentBoardHandler} from "./services/click-handler/oppent-board-handler.service";
+import {ShotSender} from "./rest/post/shot-sender";
+import {RegisteredPlayersComponent} from "./views/registered-players/registered-players.component";
+import {OpponentInfoComponent} from "./views/opponent-info/opponent-info.component";
+import {LoginRequestSender} from "./rest/post/login-request";
+import {PlayersService} from "./services/players-service.service";
+import {RegisteredPlayers} from "./rest/get/registered-players";
 
 const appRoutes: Routes = [
   {path: 'configuration', component: ConfigurationScreenComponent},
   {path: 'game/board', component: BoardComponent},
+  {path: 'configuration/board', component: GameComponent},
+  {path: 'players/registered', component: RegisteredPlayersComponent},
   {path: 'game', component: GameComponent}
 ];
 
@@ -35,6 +45,8 @@ const appRoutes: Routes = [
               StartGameButtonComponent,
               PlayerBoardComponent,
               OpponentBoardComponent,
+              RegisteredPlayersComponent,
+              OpponentInfoComponent
             ],
             imports: [
               BrowserModule,
@@ -52,6 +64,12 @@ const appRoutes: Routes = [
               BoardOfCells,
               ShipGenerator,
               ShipSender,
+              RequestExecutor,
+              OpponentBoardHandler,
+              ShotSender,
+              LoginRequestSender,
+              PlayersService,
+              RegisteredPlayers
             ],
             bootstrap: [AppComponent]
           })

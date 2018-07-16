@@ -8,14 +8,14 @@
     <div class="row">
 
       <app-player-board class="col-xs-6"
-                        style="float: left;"
+                        style=" float: left;"
                         (isFleetCorrectFromPlayer)="startGameChange($event)"
       >
       </app-player-board>
 
       <app-opponent-board class="col-xs-6"
       >
-      </app-opponent-board>
+      </app-opponent-board >
 
     </div>
   </div>
@@ -26,7 +26,6 @@
   </app-ships-to-place>
 
   <app-start-game-button class="col-6"
-                         *ngIf="canIStartGame"
   >
 
   </app-start-game-button>

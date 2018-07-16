@@ -1,0 +1,37 @@
+.field {
+  display: inline-block;
+  font-size: 0;
+  margin: 10px 0;
+}
+
+.fieldBorder {
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.square {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  outline: 1px solid aliceblue;
+  vertical-align: middle;
+}
+
+.inner-color {
+  width: 35px;
+  height: 35px;
+  background-color: #00b3ee;
+}
+
+.inner-color-black {
+  width: 35px;
+  height: 35px;
+  background-color: black;
+}

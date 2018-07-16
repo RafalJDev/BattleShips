@@ -2,6 +2,4 @@
 
 cd frontend/
 
-ng serve --port 4100
-
-#--proxy-config proxy.conf.json
+mvn frontend:npm -Dfrontend.npm.arguments="start -- --port 4100"

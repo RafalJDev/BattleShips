@@ -1,6 +1,8 @@
 export class Player {
-  
-  constructor(public name: string, public roomNumber: number) {
+  token: String;
+
+  constructor(public name: string) {
   }
-  
+
+
 }

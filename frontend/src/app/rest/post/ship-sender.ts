@@ -1,25 +1,13 @@
+import {PostRequestExecutor} from "./post-request-executor";
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
 
 @Injectable()
-export class ShipSender {
-  
-  hostUrl: string = this.getHostString();
-  
-  constructor(private httpClient: HttpClient) {
+export class ShipSender extends PostRequestExecutor {
+
+  hostUrl: string = PostRequestExecutor.getHostString();
+
+  postShip(shipArrayJson: string) {
+    return this.post(this.hostUrl + "/ships", shipArrayJson);
   }
-  
-  async postShip(shipArrayJson: string) {
-    let result = await this.httpClient
-                           .post<string>(this.hostUrl + "/ships", shipArrayJson)
-                           .toPromise();
-    console.log(this.hostUrl);
-    return result;
-  }
-  
-  private getHostString(): string {
-    const host = window.location.host;
-  
-    return host.includes("localhost") ? "http://localhost:8080" : "";
-  }
+
 }

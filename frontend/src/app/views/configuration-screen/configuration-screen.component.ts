@@ -1,25 +1,30 @@
 import {Component} from "@angular/core";
 import {Player} from "../../models/player";
+import {LoginRequestSender} from "../../rest/post/login-request";
 
 @Component({
-             selector: 'app-configuration-screen',
-             templateUrl: './configuration-screen.component.html',
-             styleUrls: ['./configuration-screen.component.css']
-           })
+  selector: 'app-configuration-screen',
+  templateUrl: './configuration-screen.component.html',
+  styleUrls: ['./configuration-screen.component.css']
+})
 export class ConfigurationScreenComponent {
-  
-  public player: Player;
-  
-  constructor() {
-    this.player = new Player('sth', -1);
+
+  player: Player;
+
+    constructor(public loginRequestExecutor: LoginRequestSender) {
+    this.player = new Player('sth');
   }
-  
-  setValue() {
-    this.player.name = '  Nancy';
+
+  login() {
+    const playerInJSON = JSON.stringify(this.player);
+    this.loginRequestExecutor.postLogin(playerInJSON)
+      .then(result => {
+        this.player.token = result['result'];
+        console.log(this.player.token);
+      })
   }
-  
+
   isThereInputFromPlayer(): boolean {
-    return this.player.name != 'sth' &&
-      this.player.roomNumber != -1;
+    return this.player.name != 'sth';
   }
 }

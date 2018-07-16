@@ -1,4 +1,29 @@
-<app-board-component (isFleetCorrectResponse)="startGameChangeFromPlayer($event)"
+<div #boardDiv
+     class="field col-12"
 >
+  <div *ngFor="let row of playerBoard.board;let y = index"
+       class="row row{{y}}"
+  >
+    <div *ngFor="let cell of row.row; let x = index"
+         class="square square{{y}}{{x}} "
+         (dragover)="dragShipService.dragOver($event, boardDiv, y, x)"
+    >
 
-</app-board-component>
+      <div class="inner-color"
+      >
+        <div *ngIf="cell.isShipHere()"
+             class="ship ship1"
+             draggable="true"
+        >
+        </div >
+      </div >
+
+    </div >
+  </div >
+</div >
+
+
+<div class="col-12"
+>
+  Start: {{result2}} :End
+</div>

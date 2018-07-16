@@ -36,7 +36,7 @@ export class ShipGenerator {
       new MastCount(1),
       new MastCount(1),
     ];
-  }
+  };
   
   generateShipsManually() {
     this.generatedShips.addShipWithCoordinates(0, 0, 0, 1, 0, 2, 0, 3);
