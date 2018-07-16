@@ -7,7 +7,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipDTO;
@@ -33,16 +32,13 @@ public class ShipControllerTest {
     @Mock
     ShipsToShipHolder shipsToShipHolder;
 
-    @Mock
-    GameBoard gameBoard;
-
     MockMvc mockMvc;
 
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        shipController = new ShipController(shipsLocationValidatorService, shipsToShipHolder, gameBoard);
+        shipController = new ShipController(shipsLocationValidatorService, shipsToShipHolder);
 
         mockMvc = MockMvcBuilders.standaloneSetup(shipController).build();
 

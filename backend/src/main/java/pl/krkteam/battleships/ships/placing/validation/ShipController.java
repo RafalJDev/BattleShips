@@ -19,19 +19,16 @@ public class ShipController {
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
-    private final GameBoard gameBoard;
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder, GameBoard gameBoard) {
+            ShipsToShipHolder shipsToShipHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
-        this.gameBoard = gameBoard;
     }
 
     @PostMapping(value = "/post/ships")
     public String communicateWithAngularByPostingShip(@RequestBody String post) {
-        System.out.println(post);
 
         Gson gson = new Gson();
 
@@ -46,6 +43,8 @@ public class ShipController {
     public String validateAndSaveShips(@RequestBody String post) {
 
         Gson gson = new Gson();
+
+        GameBoard gameBoard = new GameBoard();
 
         ShipHolderDTO shipHolderDTO = gson.fromJson(post, ShipHolderDTO.class);
         final ShipHolderFromJson shipHolderFromJson = shipsToShipHolder.convert(shipHolderDTO);
