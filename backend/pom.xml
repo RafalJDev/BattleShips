@@ -53,6 +53,13 @@
             <artifactId>gson</artifactId>
             <version>${google.gson.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -127,7 +134,9 @@
                                     <excludes>
                                         <exclude>org.apache.maven.plugins:maven-verifier-plugin</exclude>
                                     </excludes>
-                                    <message>Please consider using the maven-invoker-plugin (http://maven.apache.org/plugins/maven-invoker-plugin/)!</message>
+                                    <message>Please consider using the maven-invoker-plugin
+                                        (http://maven.apache.org/plugins/maven-invoker-plugin/)!
+                                    </message>
                                 </bannedPlugins>
                                 <requireMavenVersion>
                                     <version>${maven.version}</version>
@@ -207,8 +216,12 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <includes><include>**/*Test.java</include></includes>
-                    <excludes><exclude>**/*IntegrationTest.java</exclude></excludes>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                    </excludes>
                     <systemPropertyVariables>
                         <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
                     </systemPropertyVariables>
