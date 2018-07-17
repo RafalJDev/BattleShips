@@ -89,5 +89,4 @@ public class GameBoardHolderTest {
         // when - then
         Assert.assertFalse(addResult);
     }
-
 }
