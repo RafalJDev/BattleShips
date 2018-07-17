@@ -1,6 +1,9 @@
 package pl.krkteam.battleships.common.domain;
 
 import org.springframework.stereotype.Component;
+import pl.krkteam.battleships.common.domain.Board;
+import pl.krkteam.battleships.common.domain.BoardSize;
+import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.cell.mastState.PresentMast;
 import pl.krkteam.battleships.common.domain.ship.Ship;
 import pl.krkteam.battleships.common.domain.ship.ShipHolder;
