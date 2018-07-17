@@ -17,6 +17,19 @@ public class ShotResultQueueHolder {
         playerShotResultQueueMap.put(player2, new ShotResultQueue());
     }
 
+    public ShotResultQueueHolder() {}
+
+    public boolean addPlayer(Player player) {
+        if (player == null) {
+            throw new IllegalArgumentException("Player cannot be null");
+        }
+        if (playerShotResultQueueMap.containsKey(player)) {
+            return false;
+        }
+        playerShotResultQueueMap.put(player, new ShotResultQueue());
+        return true;
+    }
+
     public ShotResultQueueHolder(Player player1, Player player2) {
         initializeQueueHolder(player1, player2);
     }

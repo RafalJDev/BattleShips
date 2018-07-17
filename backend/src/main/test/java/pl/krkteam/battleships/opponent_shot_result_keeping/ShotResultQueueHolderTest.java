@@ -44,7 +44,7 @@ public class ShotResultQueueHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenPlayerIsNull() {
+    public void shouldThrowExceptionWhenGivenPlayerToGetQueueIsNull() {
         // given
         ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1,player2);
         // when - then
@@ -81,6 +81,25 @@ public class ShotResultQueueHolderTest {
         OpponentShotResult forPlayer2 = queueOfPlayer2.getOpponentShotResult();
         Assert.assertEquals(forPlayer1.getMessage(), "Missed");
         Assert.assertEquals(forPlayer2.getMessage(), "Hit");
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenGivenPlayerToAddIsNull() {
+        // given
+        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
+        // when - then
+        shotResultQueueHolder.addPlayer(null);
+    }
+
+    @Test
+    public void shouldReturnFalseWhenGivenPlayerAlreadyExists() {
+        // given
+        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
+        // when
+        shotResultQueueHolder.addPlayer(player1);
+        boolean addResult = shotResultQueueHolder.addPlayer(player1);
+        //then
+        Assert.assertFalse(addResult);
     }
 
 }

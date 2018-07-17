@@ -10,16 +10,18 @@ public class GameBoardHolder {
 
     private Map<Player, GameBoard> playerGameBoardMap = new HashMap<>();
 
-    private void initializeGameBoards(Player player1, Player player2) {
-        if (player1 == null || player2 == null) {
+    public boolean addPlayer(Player player, GameBoard gameBoard) {
+        if (player == null) {
             throw new IllegalArgumentException("Player cannot be null");
         }
-        playerGameBoardMap.put(player1, new GameBoard());
-        playerGameBoardMap.put(player2, new GameBoard());
-    }
-
-    public GameBoardHolder(Player player1, Player player2) {
-        initializeGameBoards(player1, player2);
+        if (gameBoard == null) {
+            throw new IllegalArgumentException("GameBoard cannot be null");
+        }
+        if (playerGameBoardMap.containsKey(player)) {
+            return false;
+        }
+        playerGameBoardMap.put(player, gameBoard);
+        return true;
     }
 
     public GameBoard getGameBoard(Player player) {
