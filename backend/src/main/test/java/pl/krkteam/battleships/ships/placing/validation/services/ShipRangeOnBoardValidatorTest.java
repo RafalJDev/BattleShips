@@ -11,7 +11,7 @@ import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipFromJson;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class ShipDTORangeOnBoardValidatorTest {
+public class ShipRangeOnBoardValidatorTest {
     private Board board;
 
     @BeforeTest

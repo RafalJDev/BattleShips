@@ -12,7 +12,7 @@ import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipHolderFromJs
 
 import static org.testng.Assert.assertEquals;
 
-public class ShipHolderDTOPlacingValidatorServiceImplTest {
+public class ShipHolderPlacingValidatorServiceImplTest {
 
     private ShipsPlacingValidatorServiceImpl shipPlacingValidator;
 

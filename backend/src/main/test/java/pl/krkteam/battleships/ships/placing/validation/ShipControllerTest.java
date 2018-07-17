@@ -81,9 +81,7 @@ public class ShipControllerTest {
 
         Gson gson = new Gson();
         final String shipsJson = gson.toJson(shipHolderDTO);
-
-        System.out.println(mockMvc);
-
+        
         mockMvc.perform(post("/ships")
                 .content(shipsJson))
                 .andExpect(status().is2xxSuccessful());

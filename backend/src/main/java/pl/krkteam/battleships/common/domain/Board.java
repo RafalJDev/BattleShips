@@ -2,6 +2,7 @@ package pl.krkteam.battleships.common.domain;
 
 import pl.krkteam.battleships.common.domain.cell.Cell;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class Board {
     }
 
     public Map<Coordinates, Cell> getCoordinatesCellMap() {
-        return coordinatesCellMap;
+        return Collections.unmodifiableMap(coordinatesCellMap);
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {

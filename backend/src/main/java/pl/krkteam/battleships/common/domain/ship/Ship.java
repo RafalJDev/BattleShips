@@ -3,6 +3,7 @@ package pl.krkteam.battleships.common.domain.ship;
 import pl.krkteam.battleships.common.domain.cell.Mast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Ship {
@@ -16,6 +17,6 @@ public class Ship {
     }
 
     public List<Mast> getMastList() {
-        return mastList;
+        return Collections.unmodifiableList(mastList);
     }
 }

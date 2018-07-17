@@ -51,7 +51,6 @@ public class ShipController {
 
         final PlacingValidationResultDTO placingValidationResultDTO =
                 shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, gameBoard);
-        System.out.println(placingValidationResultDTO.getResult());
 
         return gson.toJson(placingValidationResultDTO);
     }

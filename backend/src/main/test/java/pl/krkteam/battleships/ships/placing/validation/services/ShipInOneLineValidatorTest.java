@@ -7,7 +7,7 @@ import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipFromJson;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class ShipDTOInOneLineValidatorTest {
+public class ShipInOneLineValidatorTest {
 
     @Test
     public void testIsShipInOneLineVertical() {
