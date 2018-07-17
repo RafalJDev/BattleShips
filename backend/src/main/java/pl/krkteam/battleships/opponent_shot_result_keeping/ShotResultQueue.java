@@ -23,10 +23,4 @@ public class ShotResultQueue {
         }
         return shotResultQueue.remove();
     }
-
-    public ShotResultQueue() {}
-
-    public ShotResultQueue(ShotResultQueue shotResultQueue) {
-        this.shotResultQueue = new LinkedList<>(shotResultQueue.shotResultQueue);
-    }
 }

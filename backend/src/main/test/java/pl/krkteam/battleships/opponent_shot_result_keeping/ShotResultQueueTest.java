@@ -82,24 +82,4 @@ public class ShotResultQueueTest {
         Assert.assertFalse(addResult);
     }
 
-    @Test
-    public void resultsInCopiedInstanceShouldBeTheSame() {
-        // given
-        ShotResultQueue shotResultQueue = new ShotResultQueue();
-        // when
-        when(opponentShotResult1.getMessage()).thenReturn("Missed");
-        when(opponentShotResult2.getMessage()).thenReturn("Shot");
-        boolean addResult1 = shotResultQueue.addShotResult(opponentShotResult1);
-        boolean addResult2 = shotResultQueue.addShotResult(opponentShotResult2);
-        ShotResultQueue copiedResultQueue = new ShotResultQueue(shotResultQueue);
-        // then
-        OpponentShotResult queue1result = shotResultQueue.getOpponentShotResult();
-        OpponentShotResult queue2result = copiedResultQueue.getOpponentShotResult();
-        Assert.assertEquals(queue1result.getMessage(),queue2result.getMessage());
-        queue1result = shotResultQueue.getOpponentShotResult();
-        queue2result = copiedResultQueue.getOpponentShotResult();
-        Assert.assertEquals(queue1result.getMessage(),queue2result.getMessage());
-        Assert.assertEquals(queue1result.getMessage(),queue2result.getMessage());
-    }
-
 }

@@ -28,6 +28,6 @@ public class ShotResultQueueHolder {
         if (!playerShotResultQueueMap.containsKey(player)) {
             throw new NoSuchElementException("Given player does not belong to this holder");
         }
-        return new ShotResultQueue(playerShotResultQueueMap.get(player));
+        return playerShotResultQueueMap.get(player);
     }
 }

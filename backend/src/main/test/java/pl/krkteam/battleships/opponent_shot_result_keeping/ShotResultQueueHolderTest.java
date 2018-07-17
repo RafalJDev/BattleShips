@@ -72,12 +72,15 @@ public class ShotResultQueueHolderTest {
         when(opponentShotResult1.getMessage()).thenReturn("Missed");
         when(opponentShotResult2.getMessage()).thenReturn("Hit");
         // when
-        ShotResultQueue queueOfPlayer1 = shotResultQueueHolder.getShotResultQueue(player1);
-        queueOfPlayer1.addShotResult(opponentShotResult1);
-        ShotResultQueue queueOfPlayer2 = shotResultQueueHolder.getShotResultQueue(player2);
-        queueOfPlayer2.addShotResult(opponentShotResult2);
+        shotResultQueueHolder.getShotResultQueue(player1).addShotResult(opponentShotResult1);
+        shotResultQueueHolder.getShotResultQueue(player2).addShotResult(opponentShotResult2);
         // then
-        
+        ShotResultQueue queueOfPlayer1 = shotResultQueueHolder.getShotResultQueue(player1);
+        OpponentShotResult forPlayer1 = queueOfPlayer1.getOpponentShotResult();
+        ShotResultQueue queueOfPlayer2 = shotResultQueueHolder.getShotResultQueue(player2);
+        OpponentShotResult forPlayer2 = queueOfPlayer2.getOpponentShotResult();
+        Assert.assertEquals(forPlayer1.getMessage(), "Missed");
+        Assert.assertEquals(forPlayer2.getMessage(), "Hit");
     }
 
 }
