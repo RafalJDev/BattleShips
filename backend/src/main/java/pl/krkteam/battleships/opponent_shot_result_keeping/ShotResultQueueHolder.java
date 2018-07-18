@@ -9,6 +9,12 @@ public class ShotResultQueueHolder {
 
     private Map<Player, ShotResultQueue> playerShotResultQueueMap = new HashMap<>();
 
+    public ShotResultQueueHolder() {}
+
+    public ShotResultQueueHolder(Player player1, Player player2) {
+        initializeQueueHolder(player1, player2);
+    }
+
     private void initializeQueueHolder(Player player1, Player player2) {
         if (player1 == null || player2 == null) {
             throw new IllegalArgumentException("Player cannot be null");
@@ -16,8 +22,6 @@ public class ShotResultQueueHolder {
         playerShotResultQueueMap.put(player1, new ShotResultQueue());
         playerShotResultQueueMap.put(player2, new ShotResultQueue());
     }
-
-    public ShotResultQueueHolder() {}
 
     public boolean addPlayer(Player player) {
         if (player == null) {
@@ -28,10 +32,6 @@ public class ShotResultQueueHolder {
         }
         playerShotResultQueueMap.put(player, new ShotResultQueue());
         return true;
-    }
-
-    public ShotResultQueueHolder(Player player1, Player player2) {
-        initializeQueueHolder(player1, player2);
     }
 
     public ShotResultQueue getShotResultQueue(Player player) {
