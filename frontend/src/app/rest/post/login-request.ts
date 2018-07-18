@@ -10,5 +10,4 @@ export class LoginRequestSender extends PostRequestExecutor {
     return this.post(this.hostUrl + "/login",authData);
   }
 
-
 }

@@ -10,9 +10,8 @@ export class OpponentInfoComponent implements OnInit {
 
   player: Player;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

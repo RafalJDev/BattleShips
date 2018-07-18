@@ -1,32 +1,49 @@
-import {BoardOfCells} from "../../../models/board/board-of-cells";
-import {Component} from "@angular/core";
-import {Coordinate} from "../../../models/ship/coordinate/coordinate";
-import {ContentEnum} from "../../../models/board/row/cell/content/content";
-import {OpponentBoardHandler} from "../../../services/click-handler/oppent-board-handler.service";
+import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
+import {Component, Input} from "@angular/core";
+import {OpponentBoardHandler} from "../../../services/shooting/player/click-handler/opponent-board-handler.service";
+import {Round} from "../../../models/domain/player-turn/round";
+import {ShotSender} from "../../../rest/post/shot-sender";
+import {DOMCell} from "../../../services/DOM/dom-cell";
+import {OpponentAsker} from "../../../rest/get/opponent-asker";
 
 @Component({
-             selector: 'app-opponent-board',
-             templateUrl: './opponent-board.component.html',
-             styleUrls: ['./opponent-board.component.css']
-           })
+  selector: 'app-opponent-board',
+  templateUrl: './opponent-board.component.html',
+  styleUrls: ['./opponent-board.component.css']
+})
 export class OpponentBoardComponent {
 
-  public opponentBoard: BoardOfCells;
+  opponentBoard: BoardOfCells;
 
-  squareColor: string;
-  clickedCoordinate: Coordinate = new Coordinate(-1, -1);
   shotsArray: Array<Array<string>> = [];
+
+  round: Round;
+
+  opponentBoardHandler: OpponentBoardHandler;
+
+  @Input()
+  playerBoardDiv: Element;
+
   calledFunction;
-  counter: number = 1;
 
-  constructor(public opponentBoardHandler: OpponentBoardHandler) {
-    this.fillArrayWithEmpty();
-
+  constructor(public shotSender: ShotSender, public opponentAsker: OpponentAsker) {
     this.opponentBoard = new BoardOfCells();
+    this.round = Round.ofNewGame();
+    this.opponentBoardHandler = new OpponentBoardHandler(shotSender, opponentAsker, this.round);
 
     this.generateOpponentBoardWithWater();
 
-    console.log("content:" + ContentEnum.WATER);
+    this.calledFunction = setInterval(() => {
+      console.log("Callback my dear");
+
+      if (this.playerBoardDiv != null) {
+
+        this.opponentBoardHandler.setPlayerBoardDiv(this.playerBoardDiv);
+
+        clearInterval(this.calledFunction);
+      }
+
+    }, 500);
   }
 
   generateOpponentBoardWithWater(): BoardOfCells {
@@ -34,26 +51,9 @@ export class OpponentBoardComponent {
     return this.opponentBoard;
   }
 
-  whatColor(rowIndex, columnIndex): string {
-    console.log("OpponentBoard:");
-    console.log("indexes: " + rowIndex + " : " + columnIndex);
-    if (this.shotsArray[rowIndex][columnIndex] === 'X') {
-      console.log("shotsArray" + this.shotsArray[rowIndex][columnIndex]);
-      console.log("get in");
-      return "black";
-    }
-    console.log("color:" + this.squareColor);
-    return this.squareColor;
-  }
-
   handleClick(boardDiv: Element, rowIndex, columnIndex) {
-
-    console.log("click!");
-
-    this.clickedCoordinate = new Coordinate(rowIndex, columnIndex);
-
-    this.shotsArray[rowIndex][columnIndex] = 'X';
-
+    let domCell = DOMCell.ofBoardAndIndexes(boardDiv, rowIndex, columnIndex);
+    this.opponentBoardHandler.handleShotClick(domCell);
   }
 
   printBoard() {
@@ -76,4 +76,5 @@ export class OpponentBoardComponent {
       }
     }
   }
+
 }

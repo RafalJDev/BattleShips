@@ -7,16 +7,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HelloController {
 
-  @GetMapping(value = "hello", produces = MediaType.APPLICATION_JSON_VALUE)
-  public String sayHello() {
-    System.out.println("what");
+    @GetMapping(value = "hello", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String sayHello() {
+        System.out.println("what");
+        return "{\"message\": \"Hello, Tylde!\"}";
+    }
 
-    return "{\"message\": \"Hello, Tylde!\"}";
-  }
-
-  @PostMapping(value = "hello/postt")
-  public String post(@RequestBody String post) {
-    System.out.println(post);
-    return "{\"message\": \"Cry Argentina!\"}";
-  }
+    @PostMapping(value = "hello/postt")
+    public String post(@RequestBody String post) {
+        System.out.println(post);
+        return "{\"message\": \"Cry Argentina!\"}";
+    }
 }

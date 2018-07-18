@@ -9,13 +9,14 @@
 
       <app-player-board class="col-xs-6"
                         style=" float: left;"
-                        (isFleetCorrectFromPlayer)="startGameChange($event)"
+                        (boardDivEmitter)="capturePlayerBoardDiv($event)"
       >
       </app-player-board>
 
       <app-opponent-board class="col-xs-6"
+                          [playerBoardDiv]="playerBoardDiv"
       >
-      </app-opponent-board >
+      </app-opponent-board>
 
     </div>
   </div>

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {BoardOfCells} from "../../../models/board/board-of-cells";
-import {Ship} from "../../../models/ship/ship";
-import {ShipArray} from "../../../models/ship/ship-array";
+import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
+import {Ship} from "../../../models/domain/ship/ship";
+import {ShipArray} from "../../../models/domain/ship/ship-array";
 
 @Injectable()
 export class ShipOnBoardPlacer {

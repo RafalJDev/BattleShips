@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {IndexRandomGenerator} from "../index-random-generator/index-random-generator.service";
 import {CoordinatesOnSurrounding} from "./coordinate-on-surronding";
-import {BoardOfCells} from "../../../models/board/board-of-cells";
+import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
+import {IndexVerification} from "../../verification/index-verification";
 
 @Injectable()
 export class CoordinateChecker {
@@ -42,8 +43,8 @@ export class CoordinateChecker {
   }
   
   private isThereShipOnCoordinate(rowIndex, columnIndex, board: BoardOfCells): boolean {
-    
-    if (this.indexGenerator.isOneIndexNotInRange(board.getBoardSize(), rowIndex, columnIndex)) {
+  
+    if (IndexVerification.isOneIndexNotInRangeForBoardSize(board.getBoardSize(), rowIndex, columnIndex)) {
       return false;
     }
     

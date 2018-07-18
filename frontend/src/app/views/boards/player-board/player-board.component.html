@@ -1,27 +1,26 @@
 <div #boardDiv
      class="field col-12"
 >
-  <div *ngFor="let row of playerBoard.board;let y = index"
-       class="row row{{y}}"
+  <div #fakeDiv
+       (click)="takeJustBoardDiv(boardDiv)"
+  >
+  </div>
+  <div *ngFor="let row of playerBoard.board;let rowIndex = index"
+       class="row row{{rowIndex}}"
   >
     <div *ngFor="let cell of row.row; let x = index"
-         class="square square{{y}}{{x}} "
-         (dragover)="dragShipService.dragOver($event, boardDiv, y, x)"
+         class="square square{{rowIndex}}{{x}} "
     >
-
-      <div class="inner-color"
+      <div class="inner-color-before-shot inner-color-locator"
       >
         <div *ngIf="cell.isShipHere()"
              class="ship ship1"
-             draggable="true"
         >
-        </div >
-      </div >
-
-    </div >
-  </div >
-</div >
-
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="col-12"
 >

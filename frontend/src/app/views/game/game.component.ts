@@ -7,7 +7,7 @@ import {Component, OnInit} from "@angular/core";
            })
 export class GameComponent implements OnInit {
   
-  canIStartGame = false;
+  playerBoardDiv: Element;
   
   constructor() {
   }
@@ -15,7 +15,8 @@ export class GameComponent implements OnInit {
   ngOnInit() {
   }
   
-  startGameChange(event) {
-    this.canIStartGame = event;
+  capturePlayerBoardDiv(event) {
+    this.playerBoardDiv = event;
+    console.log("capture gamecomponent" + this.playerBoardDiv);
   }
 }

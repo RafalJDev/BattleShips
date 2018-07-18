@@ -1,5 +1,5 @@
-import {Ship} from "../../../models/ship/ship";
-import {Coordinate} from "../../../models/ship/coordinate/coordinate";
+import {Ship} from "../../../models/domain/ship/ship";
+import {Coordinate} from "../../../models/domain/ship/coordinate/coordinate";
 
 export class ShipCreator {
   

@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {ShipArray} from "./models/ship/ship-array";
+import {ShipArray} from "./models/domain/ship/ship-array";
 import {ShipsDaoService} from "./models/dto/ships/ships-dao.service";
 
 @Component({

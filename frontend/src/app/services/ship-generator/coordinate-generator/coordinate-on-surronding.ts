@@ -1,4 +1,4 @@
-import {Coordinate} from "../../../models/ship/coordinate/coordinate";
+import {Coordinate} from "../../../models/domain/ship/coordinate/coordinate";
 
 export class CoordinatesOnSurrounding {
   //todo 6.7.2018 UGLY ASS HEL

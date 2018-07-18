@@ -1,21 +1,15 @@
 <div #boardDiv
      class="field col-12"
 >
-  <div *ngFor="let row of opponentBoard.board;let y = index"
-       class="row row{{y}}"
+  <div *ngFor="let row of opponentBoard.board;let rowIndex = index"
+       class="row row{{rowIndex}}"
   >
-    <div *ngFor="let cell of row.row; let x = index"
-         class="square square{{y}}{{x}} "
-         (click)="opponentBoardHandler.handleShotClick(boardDiv, y, x)"
+    <div *ngFor="let cell of row.row; let columnIndex = index"
+         class="square square{{rowIndex}}{{columnIndex}} "
+         (click)="handleClick(boardDiv, rowIndex, columnIndex)"
     >
-      <div class="inner-color inner-color-locator">
-
-        <div class="ship">
-
-        </div>
-
+      <div class="inner-color-before-shot inner-color-locator">
       </div>
-
     </div>
   </div>
 </div>

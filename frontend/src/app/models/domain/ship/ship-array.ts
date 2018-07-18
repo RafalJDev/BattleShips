@@ -1,4 +1,4 @@
-import {ShipCreator} from "../../services/ship-generator/ship-creator/ship-creator";
+import {ShipCreator} from "../../../services/ship-generator/ship-creator/ship-creator";
 import {Ship} from "./ship";
 
 export class ShipArray {

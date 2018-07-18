@@ -1,5 +1,5 @@
-import {ShipArray} from "../../../models/ship/ship-array";
-import {Ship} from "../../../models/ship/ship";
+import {ShipArray} from "../../../models/domain/ship/ship-array";
+import {Ship} from "../../../models/domain/ship/ship";
 
 export class ShipOnArrayPlacer {
   

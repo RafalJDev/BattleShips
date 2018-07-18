@@ -18,6 +18,15 @@ public class CoordinateDTO {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CoordinateDTO)) {
+            return false;
+        }
+        CoordinateDTO input = (CoordinateDTO) obj;
+        return (this.columnIndex == input.columnIndex && this.rowIndex == input.rowIndex);
+    }
+
     public int getX() {
         return columnIndex;
     }

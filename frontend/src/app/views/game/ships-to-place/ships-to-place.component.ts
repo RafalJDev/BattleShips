@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {DragShipService} from "../../../services/drag-ship/drag-ship.service";
-import {AvailableShips} from "../../../models/available-ships";
+import {AvailableShips} from "../../../models/domain/available-ships";
 
 @Component({
              selector: 'app-ships-to-place',

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {ConfigurationShip} from "../../models/configuration-ship";
+import {ConfigurationShip} from "../../models/domain/configuration-ship";
 
 @Injectable()
 export class DragShipService {
