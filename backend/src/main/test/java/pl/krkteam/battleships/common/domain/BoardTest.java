@@ -58,5 +58,4 @@ public class BoardTest {
 
         assertFalse(board.isCellEmpty(new Coordinates(5, 4)));
     }
-
 }
