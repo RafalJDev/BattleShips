@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipDTO;
@@ -32,13 +33,18 @@ public class ShipControllerTest {
     @Mock
     ShipsToShipHolder shipsToShipHolder;
 
+    @Mock
+    GameBoardHolder gameBoardHolder;
+
+
     MockMvc mockMvc;
 
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        shipController = new ShipController(shipsLocationValidatorService, shipsToShipHolder);
+        shipController = new ShipController(
+                shipsLocationValidatorService, shipsToShipHolder, gameBoardHolder);
 
         mockMvc = MockMvcBuilders.standaloneSetup(shipController).build();
 
@@ -81,7 +87,7 @@ public class ShipControllerTest {
 
         Gson gson = new Gson();
         final String shipsJson = gson.toJson(shipHolderDTO);
-        
+
         mockMvc.perform(post("/ships")
                 .content(shipsJson))
                 .andExpect(status().is2xxSuccessful());
