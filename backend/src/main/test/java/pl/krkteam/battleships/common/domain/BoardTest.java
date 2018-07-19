@@ -1,7 +1,6 @@
 package pl.krkteam.battleships.common.domain;
 
 import org.testng.annotations.Test;
-import pl.krkteam.battleships.common.domain.cell.mastState.PresentMast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,10 +32,9 @@ public class BoardTest {
                 coordinates3, coordinates4);
 
 
-        Board board = new Board(new BoardSize(10));
-        coordinatesList.forEach(coor -> {
-            board.putCoordinatesAndCell(coor, new PresentMast());
-        });
+        GameBoard gameBoard = new GameBoard();
+        Board board = gameBoard.getBoard();
+        gameBoard.createShip(coordinatesList);
 
         assertTrue(board.isCellEmpty(new Coordinates(4, 7)));
     }
@@ -51,10 +49,9 @@ public class BoardTest {
                 coordinates3, coordinates4);
 
 
-        Board board = new Board(new BoardSize(10));
-        coordinatesList.forEach(coor -> {
-            board.putCoordinatesAndCell(coor, new PresentMast());
-        });
+        GameBoard gameBoard = new GameBoard();
+        Board board = gameBoard.getBoard();
+        gameBoard.createShip(coordinatesList);
 
         assertFalse(board.isCellEmpty(new Coordinates(5, 4)));
     }

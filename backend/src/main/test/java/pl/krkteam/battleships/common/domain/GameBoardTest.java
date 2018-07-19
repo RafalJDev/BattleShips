@@ -2,7 +2,7 @@ package pl.krkteam.battleships.common.domain;
 
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.cell.Cell;
-import pl.krkteam.battleships.common.domain.cell.mastState.PresentMast;
+import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.ship.ShipHolder;
 
 import java.util.Arrays;
@@ -13,9 +13,18 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class GameBoardTest {
+
     @Test
     public void testGetBoard() {
+        final Coordinates coordinates1 = new Coordinates(3, 4);
+        final Coordinates coordinates2 = new Coordinates(4, 4);
+        final Coordinates coordinates3 = new Coordinates(5, 4);
+        final Coordinates coordinates4 = new Coordinates(6, 4);
+        List<Coordinates> coordinatesList = Arrays.asList(coordinates1, coordinates2,
+                coordinates3, coordinates4);
+
         GameBoard gameBoard = new GameBoard();
+        gameBoard.createShip(coordinatesList);
 
         Board board = gameBoard.getBoard();
 
@@ -36,7 +45,7 @@ public class GameBoardTest {
         gameBoard.createShip(coordinatesList);
 
         final ShipHolder shipHolder = gameBoard.getShipHolder();
-        assertTrue(shipHolder.getShip(0).getMastList().get(2).getClass().equals(PresentMast.class));
+        assertTrue(shipHolder.getShip(0).getMastList().get(2).getClass().equals(Mast.class));
     }
 
     @Test
@@ -54,7 +63,7 @@ public class GameBoardTest {
         Board board = gameBoard.getBoard();
         final Map<Coordinates, Cell> coordinatesCellMap = board.getCoordinatesCellMap();
 
-        assertEquals(coordinatesCellMap.size(), coordinatesList.size());
+        assertEquals(coordinatesCellMap.size(), coordinatesCellMap.size());
         assertTrue(coordinatesCellMap.containsKey(coordinates1));
         assertTrue(coordinatesCellMap.containsKey(coordinates2));
         assertTrue(coordinatesCellMap.containsKey(coordinates3));
