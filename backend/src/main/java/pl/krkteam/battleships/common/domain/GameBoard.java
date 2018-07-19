@@ -1,13 +1,11 @@
 package pl.krkteam.battleships.common.domain;
 
-import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.ship.Ship;
 import pl.krkteam.battleships.common.domain.ship.ShipHolder;
 
 import java.util.List;
 
-@Component
 public class GameBoard {
     private Board board = new Board(new BoardSize(10));
     private ShipHolder shipHolder = new ShipHolder();
@@ -28,5 +26,10 @@ public class GameBoard {
             board.putCoordinatesAndCell(coor, mast);
         });
         return ship;
+    }
+
+    public void reset(){
+        board=new Board(new BoardSize(10));
+        shipHolder=new ShipHolder();
     }
 }

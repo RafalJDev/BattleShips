@@ -11,18 +11,15 @@ import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
 @Service
 public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {
     private final CoordinateDTOtoCoordinates coordinateDTOtoCoordinates;
-    private final GameBoard gameBoard;
 
 
     public ShotResultCheckerServiceImpl(
-            CoordinateDTOtoCoordinates coordinateDTOtoCoordinates,
-            GameBoard gameBoard) {
+            CoordinateDTOtoCoordinates coordinateDTOtoCoordinates) {
         this.coordinateDTOtoCoordinates = coordinateDTOtoCoordinates;
-        this.gameBoard = gameBoard;
     }
 
     @Override
-    public ShotResultDTO checkShotResult(ShotDTO shotDTO) {
+    public ShotResultDTO checkShotResult(ShotDTO shotDTO, GameBoard gameBoard) {
 
         Coordinates shotCoor = coordinateDTOtoCoordinates.convert(shotDTO.getShotCoordinate());
         final Board board = gameBoard.getBoard();

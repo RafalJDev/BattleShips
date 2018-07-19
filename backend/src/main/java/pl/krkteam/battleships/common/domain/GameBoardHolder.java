@@ -1,12 +1,21 @@
 package pl.krkteam.battleships.common.domain;
 
+import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+@Component
 public class GameBoardHolder {
+    public Player player=new Player("dupa");
+
+    public GameBoardHolder() {
+        addPlayer(player,new GameBoard());
+    }
+
+
 
     private Map<Player, GameBoard> playerGameBoardMap = new HashMap<>();
 

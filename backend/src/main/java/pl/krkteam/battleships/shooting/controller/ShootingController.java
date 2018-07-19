@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.krkteam.battleships.common.domain.GameBoard;
+import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.shooting.controller.mocking.as.hell.MockedBoard;
 import pl.krkteam.battleships.shooting.models.dto.ShotDTO;
 import pl.krkteam.battleships.shooting.models.dto.result.ResultHitDTO;
@@ -20,12 +22,13 @@ public class ShootingController {
   
   MockedBoard mockedBoard;
   private final ShotResultCheckerService shotResultCheckerService;
+  private final GameBoardHolder gameBoardHolder;
 
 
-  public ShootingController(MockedBoard mockedBoard,
-                            ShotResultCheckerService shotResultCheckerService) {
-    this.mockedBoard = mockedBoard;
+  public ShootingController(ShotResultCheckerService shotResultCheckerService,
+                            GameBoardHolder gameBoardHolder) {
     this.shotResultCheckerService = shotResultCheckerService;
+    this.gameBoardHolder = gameBoardHolder;
   }
 
   @PostMapping(value = "/game/player/shot")
@@ -36,13 +39,14 @@ public class ShootingController {
     ShotDTO shotDTO = gson.fromJson(post, ShotDTO.class);
     System.out.println("Shot from frontend:" + shotDTO);
 
-    final ShotResultDTO shotResultDTO = shotResultCheckerService.checkShotResult(shotDTO);
-
+    final GameBoard gameBoard = gameBoardHolder.getGameBoard(gameBoardHolder.player);
+    final ShotResultDTO shotResultDTO = shotResultCheckerService.checkShotResult(shotDTO,gameBoard);
+//
 //    ShotResultDTO shotResultDTO = shotResponse(shotDTO);
-    
+//
     String shotResultJson = gson.toJson(shotResultDTO);
     System.out.println(shotResultJson);
-    
+
     return shotResultJson;
   }
   

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.krkteam.battleships.common.domain.GameBoard;
+import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
 import pl.krkteam.battleships.common.dto.ShipHolderDTO;
@@ -19,12 +20,14 @@ public class ShipController {
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
+    private final GameBoardHolder gameBoardHolder;
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder) {
+            ShipsToShipHolder shipsToShipHolder, GameBoardHolder gameBoardHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
+        this.gameBoardHolder = gameBoardHolder;
     }
 
     @PostMapping(value = "/post/ships")
@@ -44,13 +47,22 @@ public class ShipController {
 
         Gson gson = new Gson();
 
-        GameBoard gameBoard = new GameBoard();
+        GameBoard playerGameBoard = gameBoardHolder.getGameBoard(gameBoardHolder.player);
+        playerGameBoard.reset();
+
 
         ShipHolderDTO shipHolderDTO = gson.fromJson(post, ShipHolderDTO.class);
         final ShipHolderFromJson shipHolderFromJson = shipsToShipHolder.convert(shipHolderDTO);
 
         final PlacingValidationResultDTO placingValidationResultDTO =
-                shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, gameBoard);
+                shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
+
+        if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
+            playerGameBoard.reset();
+            System.out.println("Validation WRONG");
+        }
+
+        System.out.println(placingValidationResultDTO.getResult());
 
         return gson.toJson(placingValidationResultDTO);
     }
