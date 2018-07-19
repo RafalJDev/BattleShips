@@ -1,12 +1,12 @@
 package pl.krkteam.battleships.ships.placing.validation;
 
 import com.google.gson.Gson;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.common.domain.GameBoardHolder;
+import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
 import pl.krkteam.battleships.common.dto.ShipHolderDTO;
@@ -20,15 +20,16 @@ public class ShipController {
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
-    private final GameBoardHolder gameBoardHolder;
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder, GameBoardHolder gameBoardHolder) {
+            ShipsToShipHolder shipsToShipHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
-        this.gameBoardHolder = gameBoardHolder;
     }
+
+    @Autowired
+    Game game;
 
     @PostMapping(value = "/post/ships")
     public String communicateWithAngularByPostingShip(@RequestBody String post) {
@@ -43,13 +44,14 @@ public class ShipController {
     }
 
     @PostMapping(value = "/ships")
-    public String validateAndSaveShips(@RequestBody String post) {
+    public String validateAndSaveShips(@RequestBody String post, @RequestParam String playerName) {
 
         Gson gson = new Gson();
 
-        GameBoard playerGameBoard = gameBoardHolder.getGameBoard(gameBoardHolder.player);
-        playerGameBoard.reset();
+        Player player = new Player(playerName);
 
+        GameBoard playerGameBoard = game.gameBoardHolder.getGameBoard(player);
+        playerGameBoard.reset();
 
         ShipHolderDTO shipHolderDTO = gson.fromJson(post, ShipHolderDTO.class);
         final ShipHolderFromJson shipHolderFromJson = shipsToShipHolder.convert(shipHolderDTO);

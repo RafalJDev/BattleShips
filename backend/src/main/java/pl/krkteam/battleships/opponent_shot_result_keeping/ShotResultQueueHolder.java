@@ -1,9 +1,8 @@
 package pl.krkteam.battleships.opponent_shot_result_keeping;
 
 import pl.krkteam.battleships.common.domain.player.Player;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
+
+import java.util.*;
 
 public class ShotResultQueueHolder {
 
@@ -42,5 +41,15 @@ public class ShotResultQueueHolder {
             throw new NoSuchElementException("Given player does not belong to this holder");
         }
         return playerShotResultQueueMap.get(player);
+    }
+
+    public Player getOpponent(Player player) {
+        Set<Player> all = playerShotResultQueueMap.keySet();
+        List<Player> allList = new ArrayList(all);
+
+        allList.remove(player);
+
+        return allList.get(0);
+
     }
 }

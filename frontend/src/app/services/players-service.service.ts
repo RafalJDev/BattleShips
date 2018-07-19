@@ -10,6 +10,7 @@ export class PlayersService {
   whoami:Player;
 
   constructor(private registeredPlayers: RegisteredPlayers) {
+    this.whoami = new Player("sth");
   }
 
   public getPlayers(): Observable<Player[]> {

@@ -13,7 +13,7 @@ export class ShotSender extends PostRequestExecutor {
   }
 
   postShot(shotJson: string) {
-    return this.post(this.hostUrl + "/game/player/shot?player=" + this.playersService.whoami.name, shotJson);
+    return this.post(this.hostUrl + "/game/player/shot?playerName=" + this.playersService.whoami.name, shotJson);
   }
 
 }
