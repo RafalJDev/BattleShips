@@ -8,7 +8,7 @@ public class ShipHolder {
     private List<Ship> shipList = new ArrayList<>();
     private FleetState fleetState = FleetState.FLEET_FLOATING;
 
-    public void attachShip(final Ship ship) {
+    void attachShip(final Ship ship) {
         shipList.add(ship);
     }
 
@@ -16,7 +16,7 @@ public class ShipHolder {
         return shipList.get(index);
     }
 
-    public void notifyShipChangeState() {
+    void notifyShipChangeState() {
         final Optional<Ship> anyFloatingShip = shipList.stream().filter(
                 mast -> mast.getShipState().equals(ShipState.FLOATING)).findAny();
         if (!anyFloatingShip.isPresent()) {

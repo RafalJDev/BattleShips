@@ -26,7 +26,7 @@ public class Board {
         return boardSize;
     }
 
-    public Map<Coordinates, Cell> getCoordinatesCellMap() {
+    Map<Coordinates, Cell> getCoordinatesCellMap() {
         return coordinatesCellMap;
     }
 
