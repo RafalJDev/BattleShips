@@ -6,10 +6,10 @@ import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.domain.player.Player;
-import pl.krkteam.battleships.opponent.shot.response.dto.*;
-import pl.krkteam.battleships.shooting.controller.mocking.as.hell.MockedBoard;
+import pl.krkteam.battleships.common.dto.CoordinateDTO;
+import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 import pl.krkteam.battleships.shooting.dto.ShotDTO;
-import pl.krkteam.battleships.shooting.dto.result.*;
+import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 
 
@@ -57,55 +57,12 @@ public class ShootingController {
     }
 
     private void setResponseToOpponentPlayer(ShotResultDTO shotResultDTO, ShotDTO shotDTO, Player opponentPlayer) {
-        OpponentShotResult opponentShotResult = new OpponentNoShot();
+        CoordinateDTO shotCoordinates = shotDTO.getShotCoordinate();
 
-        int x = shotDTO.getShotCoordinate().getX();
-        int y = shotDTO.getShotCoordinate().getY();
-
-        if (shotResultDTO instanceof ResultHitDTO) {
-            opponentShotResult = new OpponentShotHit(x, y);
-        }
-        if (shotResultDTO instanceof ResultMissDTO) {
-            opponentShotResult = new OpponentShotMiss(x, y);
-        }
-        if (shotResultDTO instanceof ResultSunkDTO) {
-            opponentShotResult = new OpponentShotSunk(x, y);
-        }
-        if (shotResultDTO instanceof ResultPlayerWonDTO) {
-            opponentShotResult = new OpponentShotPlayerLoose(x, y);
-        }
+        OpponentShotResult opponentShotResult = shotResultDTO
+                .getOpponentShotResult(shotCoordinates.getY(),
+                        shotCoordinates.getX());
 
         game.getShotResultQueueHolder().getShotResultQueue(opponentPlayer).addShotResult(opponentShotResult);
-    }
-
-    //this method is mocked shot verifier
-    public ShotResultDTO shotResponse(ShotDTO shotDTO) {
-        MockedBoard mockedBoard = new MockedBoard();
-        ShotResultDTO shotResultDTO = new ResultMissDTO();
-
-        if (mockedBoard.isThereSuchMastOnFirstShip(shotDTO.getShotCoordinate())) {
-            shotResultDTO = new ResultHitDTO();
-            mockedBoard.hittedMastCountForFirstShip++;
-        }
-
-        if (mockedBoard.isThereSuchMastOnSecondShip(shotDTO.getShotCoordinate())) {
-            shotResultDTO = new ResultHitDTO();
-            mockedBoard.hittedMastCountForSecondShip++;
-        }
-
-        System.out.println("hittedMastCountForFirstShip" + mockedBoard.hittedMastCountForFirstShip);
-        if (mockedBoard.hittedMastCountForFirstShip == mockedBoard.shipDTOS[0].getCoordinates().length) {
-            shotResultDTO = new ResultSunkDTO();
-            mockedBoard.hittedMastCountForFirstShip = 0;
-        }
-
-        System.out.println("hittedMastCountForSecondShip" + mockedBoard.hittedMastCountForSecondShip);
-
-        if (mockedBoard.hittedMastCountForSecondShip == mockedBoard.shipDTOS[1].getCoordinates().length) {
-            shotResultDTO = new ResultSunkDTO();
-            mockedBoard.hittedMastCountForSecondShip = 0;
-        }
-
-        return shotResultDTO;
     }
 }
