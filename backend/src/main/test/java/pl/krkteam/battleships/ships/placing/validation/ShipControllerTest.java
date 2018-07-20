@@ -33,10 +33,6 @@ public class ShipControllerTest {
     @Mock
     ShipsToShipHolder shipsToShipHolder;
 
-    @Mock
-    GameBoardHolder gameBoardHolder;
-
-
     MockMvc mockMvc;
 
     @BeforeMethod
@@ -44,7 +40,7 @@ public class ShipControllerTest {
         MockitoAnnotations.initMocks(this);
 
         shipController = new ShipController(
-                shipsLocationValidatorService, shipsToShipHolder, gameBoardHolder);
+                shipsLocationValidatorService, shipsToShipHolder);
 
         mockMvc = MockMvcBuilders.standaloneSetup(shipController).build();
 

@@ -6,6 +6,7 @@ import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.shooting.conventers.CoordinateDTOtoCoordinates;
 import pl.krkteam.battleships.shooting.models.dto.ShotDTO;
+import pl.krkteam.battleships.shooting.models.dto.result.ResultWrongShotDTO;
 import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
 
 @Service
@@ -25,7 +26,12 @@ public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {
         final Board board = gameBoard.getBoard();
 
         ChainOfShotResult chainOfShotResult = new CheckMiss();
-        return chainOfShotResult.getShotResult(shotCoor, board);
+        try {
+            return chainOfShotResult.getShotResult(shotCoor, board);
+        } catch (UnexpectedShotResultException e) {
+            System.out.println(e.getMessage());
+            return new ResultWrongShotDTO();
+        }
     }
 
 }

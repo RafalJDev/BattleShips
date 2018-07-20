@@ -11,16 +11,16 @@ import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
 
 public class CheckPlayerWon implements ChainOfShotResult {
 
-    ChainOfShotResult chainOfShotResult=new CheckSunk();
+    private ChainOfShotResult chainOfShotResult = new CheckSunk();
 
     @Override
-    public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) {
+    public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) throws UnexpectedShotResultException {
         final Mast mast = (Mast) board.getCoorValue(shotCoord);
         final Ship ship = mast.getShip();
         final ShipHolder shipHolder = ship.getShipHolder();
-        if (shipHolder.getFleetState().equals(FleetState.FLEET_SUNK)){
+        if (shipHolder.getFleetState().equals(FleetState.FLEET_SUNK)) {
             return new ResultPlayerWonDTO();
         }
-        return chainOfShotResult.getShotResult(shotCoord,board);
+        return chainOfShotResult.getShotResult(shotCoord, board);
     }
 }

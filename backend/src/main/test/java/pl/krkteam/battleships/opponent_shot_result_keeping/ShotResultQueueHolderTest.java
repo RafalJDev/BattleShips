@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.player.Player;
+import pl.krkteam.battleships.result.models.dto.OpponentShotResult;
+
 import java.util.NoSuchElementException;
 
 import static org.mockito.Mockito.when;

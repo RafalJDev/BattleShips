@@ -4,7 +4,11 @@ import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.shooting.models.dto.ShotDTO;
 
 public abstract class OpponentShotResult {
-  
+
+  public String getMessage() {
+    return opponentShotResult;
+  }
+
   public String opponentShotResult;
   
   ShotDTO opponentShotDTO;

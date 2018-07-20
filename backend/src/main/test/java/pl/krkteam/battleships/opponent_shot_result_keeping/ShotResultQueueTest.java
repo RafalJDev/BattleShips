@@ -5,6 +5,8 @@ import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pl.krkteam.battleships.result.models.dto.OpponentNoShot;
+import pl.krkteam.battleships.result.models.dto.OpponentShotResult;
 
 import static org.mockito.Mockito.when;
 
@@ -75,7 +77,7 @@ public class ShotResultQueueTest {
     public void shouldReturnFalseWhenAddingResultIsNoShoot() {
         // given
         ShotResultQueue shotResultQueue = new ShotResultQueue();
-        OpponentShotResult shotResult = new NoShoot();
+        OpponentShotResult shotResult = new OpponentNoShot();
         // when
         boolean addResult = shotResultQueue.addShotResult(shotResult);
         // then

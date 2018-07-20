@@ -13,7 +13,7 @@ public class CheckMiss implements ChainOfShotResult {
     private ChainOfShotResult chainOfShotResult = new CheckPlayerWon();
 
     @Override
-    public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) {
+    public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) throws UnexpectedShotResultException {
 
         if (board.isCellEmpty(shotCoord)) {
             board.putCoordinatesAndCell(shotCoord, new Missed());

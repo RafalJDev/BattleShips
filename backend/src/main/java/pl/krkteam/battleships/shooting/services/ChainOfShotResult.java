@@ -5,5 +5,5 @@ import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
 
 public interface ChainOfShotResult {
-    ShotResultDTO getShotResult(Coordinates shotCoord, Board board);
+    ShotResultDTO getShotResult(Coordinates shotCoord, Board board) throws UnexpectedShotResultException;
 }
