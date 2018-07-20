@@ -30,9 +30,9 @@ public class RegistrationController {
 
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
 
-        game.gameBoardHolder.addPlayer(player, new GameBoard());
+        game.getGameBoardHolder().addPlayer(player, new GameBoard());
 
-        game.shotResultQueueHolder.addPlayer(player);
+        game.getShotResultQueueHolder().addPlayer(player);
 
         boolean result = playerHolder.addPlayer(player);
 

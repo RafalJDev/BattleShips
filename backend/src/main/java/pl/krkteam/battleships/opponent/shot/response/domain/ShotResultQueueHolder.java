@@ -2,13 +2,16 @@ package pl.krkteam.battleships.opponent.shot.response.domain;
 
 import pl.krkteam.battleships.common.domain.player.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class ShotResultQueueHolder {
 
     private Map<Player, ShotResultQueue> playerShotResultQueueMap = new HashMap<>();
 
-    public ShotResultQueueHolder() {}
+    public ShotResultQueueHolder() {
+    }
 
     public ShotResultQueueHolder(Player player1, Player player2) {
         initializeQueueHolder(player1, player2);
@@ -43,13 +46,4 @@ public class ShotResultQueueHolder {
         return playerShotResultQueueMap.get(player);
     }
 
-    public Player getOpponent(Player player) {
-        Set<Player> all = playerShotResultQueueMap.keySet();
-        List<Player> allList = new ArrayList(all);
-
-        allList.remove(player);
-
-        return allList.get(0);
-
-    }
 }

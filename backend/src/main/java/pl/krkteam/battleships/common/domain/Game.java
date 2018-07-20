@@ -6,8 +6,15 @@ import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueueHolde
 @Component
 public class Game {
 
-    public GameBoardHolder gameBoardHolder = new GameBoardHolder();
+    private GameBoardHolder gameBoardHolder = new GameBoardHolder();
 
-    public ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
+    private ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
 
+    public GameBoardHolder getGameBoardHolder() {
+        return gameBoardHolder;
+    }
+
+    public ShotResultQueueHolder getShotResultQueueHolder() {
+        return shotResultQueueHolder;
+    }
 }

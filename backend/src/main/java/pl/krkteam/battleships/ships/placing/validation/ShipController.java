@@ -42,11 +42,11 @@ public class ShipController {
     }
 
     @PostMapping(value = "/ships")
-    public String validateAndSaveShips(@RequestBody String postData, @RequestParam String playerName) {
+    public String validateAndSaveShips(@RequestBody String shipsJson, @RequestParam String playerName) {
 
         GameBoard playerGameBoard = prepareGameBoard(playerName);
 
-        final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(postData);
+        final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(shipsJson);
 
         final PlacingValidationResultDTO placingValidationResultDTO =
                 shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
@@ -65,7 +65,7 @@ public class ShipController {
 
     private GameBoard prepareGameBoard(String playerName) {
         Player player = new Player(playerName);
-        GameBoard playerGameBoard = game.gameBoardHolder.getGameBoard(player);
+        GameBoard playerGameBoard = game.getGameBoardHolder().getGameBoard(player);
         playerGameBoard.reset();
         return playerGameBoard;
     }

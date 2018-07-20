@@ -31,6 +31,6 @@ public class OpponentResultController {
 
     private OpponentShotResult getResponse(String playerName) {
         Player opponentPlayer = new Player(playerName);
-        return game.shotResultQueueHolder.getShotResultQueue(opponentPlayer).getOpponentShotResult();
+        return game.getShotResultQueueHolder().getShotResultQueue(opponentPlayer).getOpponentShotResult();
     }
 }
