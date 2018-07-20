@@ -1,7 +1,7 @@
-package pl.krkteam.battleships.opponent_shot_result_keeping;
+package pl.krkteam.battleships.opponent.shot.response.domain;
 
-import pl.krkteam.battleships.result.models.dto.OpponentNoShot;
-import pl.krkteam.battleships.result.models.dto.OpponentShotResult;
+import pl.krkteam.battleships.opponent.shot.response.dto.OpponentNoShot;
+import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -5,8 +5,8 @@ import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.ship.Ship;
 import pl.krkteam.battleships.common.domain.ship.ShipState;
-import pl.krkteam.battleships.shooting.models.dto.result.ResultSunkDTO;
-import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
+import pl.krkteam.battleships.shooting.dto.result.ResultSunkDTO;
+import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 public class CheckSunk implements ChainOfShotResult {
 

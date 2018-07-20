@@ -5,8 +5,8 @@ import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.cell.MastState;
 import pl.krkteam.battleships.common.domain.cell.Missed;
-import pl.krkteam.battleships.shooting.models.dto.result.ResultMissDTO;
-import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
+import pl.krkteam.battleships.shooting.dto.result.ResultMissDTO;
+import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 public class CheckMiss implements ChainOfShotResult {
 

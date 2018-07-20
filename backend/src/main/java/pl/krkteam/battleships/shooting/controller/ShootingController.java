@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.common.domain.player.Player;
-import pl.krkteam.battleships.result.models.dto.*;
+import pl.krkteam.battleships.opponent.shot.response.dto.*;
 import pl.krkteam.battleships.shooting.controller.mocking.as.hell.MockedBoard;
-import pl.krkteam.battleships.shooting.models.dto.ShotDTO;
-import pl.krkteam.battleships.shooting.models.dto.result.*;
+import pl.krkteam.battleships.shooting.dto.ShotDTO;
+import pl.krkteam.battleships.shooting.dto.result.*;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 
 

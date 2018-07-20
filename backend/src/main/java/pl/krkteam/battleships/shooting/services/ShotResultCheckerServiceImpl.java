@@ -5,9 +5,9 @@ import pl.krkteam.battleships.common.domain.Board;
 import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.shooting.conventers.CoordinateDTOtoCoordinates;
-import pl.krkteam.battleships.shooting.models.dto.ShotDTO;
-import pl.krkteam.battleships.shooting.models.dto.result.ResultWrongShotDTO;
-import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
+import pl.krkteam.battleships.shooting.dto.ShotDTO;
+import pl.krkteam.battleships.shooting.dto.result.ResultWrongShotDTO;
+import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 @Service
 public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {

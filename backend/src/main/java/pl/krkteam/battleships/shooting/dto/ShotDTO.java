@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.shooting.models.dto;
+package pl.krkteam.battleships.shooting.dto;
 
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 

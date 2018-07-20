@@ -6,8 +6,8 @@ import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.ship.FleetState;
 import pl.krkteam.battleships.common.domain.ship.Ship;
 import pl.krkteam.battleships.common.domain.ship.ShipHolder;
-import pl.krkteam.battleships.shooting.models.dto.result.ResultPlayerWonDTO;
-import pl.krkteam.battleships.shooting.models.dto.result.ShotResultDTO;
+import pl.krkteam.battleships.shooting.dto.result.ResultPlayerWonDTO;
+import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 public class CheckPlayerWon implements ChainOfShotResult {
 

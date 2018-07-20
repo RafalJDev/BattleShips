@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.result.models.dto;
+package pl.krkteam.battleships.opponent.shot.response.dto;
 
 public class OpponentShotMiss extends OpponentShotResult {
   

@@ -1,12 +1,13 @@
-package pl.krkteam.battleships.opponent_shot_result_keeping;
+package pl.krkteam.battleships.opponent.shot.response.domain;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.krkteam.battleships.result.models.dto.OpponentNoShot;
-import pl.krkteam.battleships.result.models.dto.OpponentShotResult;
+import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueue;
+import pl.krkteam.battleships.opponent.shot.response.dto.OpponentNoShot;
+import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 
 import static org.mockito.Mockito.when;
 

@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.result.controller;
+package pl.krkteam.battleships.opponent.shot.response.controllers;
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.player.Player;
-import pl.krkteam.battleships.result.models.dto.OpponentShotResult;
+import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController

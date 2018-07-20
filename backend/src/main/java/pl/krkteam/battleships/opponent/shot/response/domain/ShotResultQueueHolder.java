@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.opponent_shot_result_keeping;
+package pl.krkteam.battleships.opponent.shot.response.domain;
 
 import pl.krkteam.battleships.common.domain.player.Player;
 

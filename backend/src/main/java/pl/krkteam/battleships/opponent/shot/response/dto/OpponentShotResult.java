@@ -1,7 +1,7 @@
-package pl.krkteam.battleships.result.models.dto;
+package pl.krkteam.battleships.opponent.shot.response.dto;
 
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
-import pl.krkteam.battleships.shooting.models.dto.ShotDTO;
+import pl.krkteam.battleships.shooting.dto.ShotDTO;
 
 public abstract class OpponentShotResult {
 

@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.shooting.models.dto.result;
+package pl.krkteam.battleships.shooting.dto.result;
 
 public class ResultWrongShotDTO extends ShotResultDTO {
 

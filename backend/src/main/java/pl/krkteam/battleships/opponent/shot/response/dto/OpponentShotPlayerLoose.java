@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.result.models.dto;
+package pl.krkteam.battleships.opponent.shot.response.dto;
 
 public class OpponentShotPlayerLoose extends OpponentShotResult {
   public OpponentShotPlayerLoose(int rowIndex, int columnIndex) {
