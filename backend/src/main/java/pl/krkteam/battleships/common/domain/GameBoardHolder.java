@@ -3,9 +3,10 @@ package pl.krkteam.battleships.common.domain;
 import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
-@Component
 public class GameBoardHolder {
 
     private Map<Player, GameBoard> playerGameBoardMap = new HashMap<>();
@@ -32,15 +33,5 @@ public class GameBoardHolder {
             throw new NoSuchElementException("Given player does not belong to this holder");
         }
         return playerGameBoardMap.get(player);
-    }
-
-    public Player getOpponent(Player player) {
-        Set<Player> all = playerGameBoardMap.keySet();
-        List<Player> allList = new ArrayList(all);
-
-        allList.remove(player);
-
-        return allList.get(0);
-
     }
 }

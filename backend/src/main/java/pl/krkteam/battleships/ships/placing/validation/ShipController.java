@@ -1,11 +1,9 @@
 package pl.krkteam.battleships.ships.placing.validation;
 
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
-import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
@@ -20,16 +18,16 @@ public class ShipController {
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
+    private final Game game;
+
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder) {
+            ShipsToShipHolder shipsToShipHolder, Game game) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
+        this.game = game;
     }
-
-    @Autowired
-    Game game;
 
     @PostMapping(value = "/post/ships")
     public String communicateWithAngularByPostingShip(@RequestBody String post) {
@@ -44,28 +42,38 @@ public class ShipController {
     }
 
     @PostMapping(value = "/ships")
-    public String validateAndSaveShips(@RequestBody String post, @RequestParam String playerName) {
+    public String validateAndSaveShips(@RequestBody String postData, @RequestParam String playerName) {
 
         Gson gson = new Gson();
 
-        Player player = new Player(playerName);
+        GameBoard playerGameBoard = prepareGameBoard(playerName);
 
-        GameBoard playerGameBoard = game.gameBoardHolder.getGameBoard(player);
-        playerGameBoard.reset();
-
-        ShipHolderDTO shipHolderDTO = gson.fromJson(post, ShipHolderDTO.class);
-        final ShipHolderFromJson shipHolderFromJson = shipsToShipHolder.convert(shipHolderDTO);
+        final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(postData);
 
         final PlacingValidationResultDTO placingValidationResultDTO =
                 shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
 
-        if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
-            playerGameBoard.reset();
-            System.out.println("Validation WRONG");
-        }
-
-        System.out.println(placingValidationResultDTO.getResult());
+        afterValidation(placingValidationResultDTO, playerGameBoard);
 
         return gson.toJson(placingValidationResultDTO);
+    }
+
+    private ShipHolderFromJson createShipHolderFromJson(String postData) {
+        Gson gson = new Gson();
+        final ShipHolderDTO shipHolderDTO = gson.fromJson(postData, ShipHolderDTO.class);
+        return shipsToShipHolder.convert(shipHolderDTO);
+    }
+
+    private GameBoard prepareGameBoard(String playerName) {
+        Player player = new Player(playerName);
+        GameBoard playerGameBoard = game.gameBoardHolder.getGameBoard(player);
+        playerGameBoard.reset();
+        return playerGameBoard;
+    }
+
+    private void afterValidation(PlacingValidationResultDTO placingValidationResultDTO, GameBoard playerGameBoard) {
+        if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
+            playerGameBoard.reset();
+        }
     }
 }
