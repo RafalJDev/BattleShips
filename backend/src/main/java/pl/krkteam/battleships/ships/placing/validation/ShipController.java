@@ -44,8 +44,6 @@ public class ShipController {
     @PostMapping(value = "/ships")
     public String validateAndSaveShips(@RequestBody String postData, @RequestParam String playerName) {
 
-        Gson gson = new Gson();
-
         GameBoard playerGameBoard = prepareGameBoard(playerName);
 
         final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(postData);
@@ -55,6 +53,7 @@ public class ShipController {
 
         afterValidation(placingValidationResultDTO, playerGameBoard);
 
+        Gson gson = new Gson();
         return gson.toJson(placingValidationResultDTO);
     }
 
