@@ -34,6 +34,8 @@ public class RegistrationController {
 
         game.getShotResultQueueHolder().addPlayer(player);
 
+        game.getTurnHolder().addPlayer(player);
+
         boolean result = playerHolder.addPlayer(player);
 
         String send = "{\"result\":" + "\"" + result + "\"" + " }";

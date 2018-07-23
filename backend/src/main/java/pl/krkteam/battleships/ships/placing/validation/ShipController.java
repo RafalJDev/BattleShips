@@ -1,6 +1,7 @@
 package pl.krkteam.battleships.ships.placing.validation;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
@@ -19,7 +20,6 @@ public class ShipController {
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
     private final Game game;
-
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
