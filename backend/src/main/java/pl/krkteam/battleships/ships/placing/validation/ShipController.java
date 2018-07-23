@@ -1,11 +1,12 @@
 package pl.krkteam.battleships.ships.placing.validation;
 
 import com.google.gson.Gson;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
-import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
@@ -17,6 +18,8 @@ import pl.krkteam.battleships.ships.placing.validation.services.ShipsPlacingVali
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShipController {
+
+    private static final Logger logger = LogManager.getLogger(ShipController.class);
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
@@ -38,7 +41,7 @@ public class ShipController {
 
         ShipFromFronted shipFromFronted = gson.fromJson(post, ShipFromFronted.class);
 
-        System.out.println(shipFromFronted);
+        logger.info("One ship has been posted: " + shipFromFronted);
 
         return "{\"message\": \"Cry Germoney!\"}";
     }
@@ -61,10 +64,10 @@ public class ShipController {
 
         if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
             playerGameBoard.reset();
-            System.out.println("Validation WRONG");
+            logger.error("Validation WRONG");
         }
 
-        System.out.println(placingValidationResultDTO.getResult());
+        logger.info("Validation shot result from player " + playerName + ": " + placingValidationResultDTO.getResult());
 
         return gson.toJson(placingValidationResultDTO);
     }

@@ -1,6 +1,8 @@
 package pl.krkteam.battleships.authentication;
 
 import com.google.gson.Gson;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
@@ -13,6 +15,8 @@ import java.util.Set;
 @RestController
 public class RegistrationController {
 
+    private static final Logger logger = LogManager.getLogger(RegistrationController.class);
+
     @Autowired
     Game game;
 
@@ -20,13 +24,13 @@ public class RegistrationController {
 
     @PostMapping(value = "/login")
     public String signPlayer(@RequestBody String post) {
-        System.out.println(post);
+        logger.debug("Post body: " + post);
 
         Gson gson = new Gson();
 
         PlayerDTO playerDTO = gson.fromJson(post, PlayerDTO.class);
 
-        System.out.println(playerDTO);
+        logger.debug("PlayerDTO: " + playerDTO);
 
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
 
@@ -47,7 +51,7 @@ public class RegistrationController {
 
         Gson gson = new Gson();
         String result = gson.toJson(playerDTOs);
-        System.out.println(result);
+
         return result;
     }
 

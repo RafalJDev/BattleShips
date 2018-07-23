@@ -1,6 +1,8 @@
 package pl.krkteam.battleships.result.controller;
 
 import com.google.gson.Gson;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +17,8 @@ import pl.krkteam.battleships.result.models.dto.OpponentShotResult;
 @RestController
 public class OpponentResultController {
 
+  private static final Logger logger = LogManager.getLogger(OpponentShotResult.class);
+
   @Autowired
   Game game;
   
@@ -27,7 +31,7 @@ public class OpponentResultController {
 
     Gson gson = new Gson();
     String opponentShotResultJson = gson.toJson(shotResult);
-    System.out.println(opponentShotResultJson);
+    logger.debug("Opponent shot result in JSON: " + opponentShotResultJson);
     
     return opponentShotResultJson;
   }

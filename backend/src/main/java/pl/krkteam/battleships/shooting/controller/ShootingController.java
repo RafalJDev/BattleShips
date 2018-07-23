@@ -1,6 +1,8 @@
 package pl.krkteam.battleships.shooting.controller;
 
 import com.google.gson.Gson;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
@@ -17,6 +19,8 @@ import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShootingController {
+
+  private static final Logger logger = LogManager.getLogger(ShootingController.class);
   
   MockedBoard mockedBoard;
   private final ShotResultCheckerService shotResultCheckerService;
@@ -31,13 +35,13 @@ public class ShootingController {
 
   @PostMapping(value = "/game/player/shot")
   public String communicateWithAngularByPostingShip(@RequestBody String post, @RequestParam String playerName) {
-    System.out.println(post);
+    logger.debug("Post body: " + post);
 
     Player player = new Player(playerName);
 
     Gson gson = new Gson();
     ShotDTO shotDTO = gson.fromJson(post, ShotDTO.class);
-    System.out.println("Shot from frontend:" + shotDTO);
+    logger.info("Shot from frontend:" + shotDTO);
 
     Player opponent = game.shotResultQueueHolder.getOpponent(player);
 
@@ -65,38 +69,8 @@ public class ShootingController {
     game.shotResultQueueHolder.getShotResultQueue(opponent).addShotResult(opponentShotResult);
 
     String shotResultJson = gson.toJson(shotResultDTO);
-    System.out.println(shotResultJson);
+    logger.info("Result of shot: " + shotResultJson);
 
     return shotResultJson;
-  }
-  
-  //this method is mocked shot verifier
-  public ShotResultDTO shotResponse(ShotDTO shotDTO) {
-    ShotResultDTO shotResultDTO = new ResultMissDTO();
-    
-    if (mockedBoard.isThereSuchMastOnFirstShip(shotDTO.getShotCoordinate())) {
-      shotResultDTO = new ResultHitDTO();
-      mockedBoard.hittedMastCountForFirstShip++;
-    }
-    
-    if (mockedBoard.isThereSuchMastOnSecondShip(shotDTO.getShotCoordinate())) {
-      shotResultDTO = new ResultHitDTO();
-      mockedBoard.hittedMastCountForSecondShip++;
-    }
-    
-    System.out.println("hittedMastCountForFirstShip" + mockedBoard.hittedMastCountForFirstShip);
-    if (mockedBoard.hittedMastCountForFirstShip == mockedBoard.shipDTOS[0].getCoordinates().length) {
-      shotResultDTO = new ResultSunkDTO();
-      mockedBoard.hittedMastCountForFirstShip = 0;
-    }
-    
-    System.out.println("hittedMastCountForSecondShip" + mockedBoard.hittedMastCountForSecondShip);
-    
-    if (mockedBoard.hittedMastCountForSecondShip == mockedBoard.shipDTOS[1].getCoordinates().length) {
-      shotResultDTO = new ResultSunkDTO();
-      mockedBoard.hittedMastCountForSecondShip = 0;
-    }
-    
-    return shotResultDTO;
   }
 }
