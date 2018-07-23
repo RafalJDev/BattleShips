@@ -43,10 +43,14 @@ export class OpponentBoardHandler {
             console.log("shotStrategy: " + shotStrategy.resultNameJustForTesting());
         
             shotStrategy.handleResult(this.round, domCell);
-        
-            this.opponentResponseHandler.handleOpponentResult();
+  
+            this.handleOpponentResult();
           });
     }
+  }
+  
+  handleOpponentResult() {
+    this.opponentResponseHandler.handleOpponentResult();
   }
   
   setPlayerBoardDiv(playerBoardDiv: Element) {

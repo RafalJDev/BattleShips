@@ -1,6 +1,5 @@
 package pl.krkteam.battleships.shooting.services;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import pl.krkteam.battleships.common.domain.Board;
 import pl.krkteam.battleships.common.domain.Coordinates;
@@ -11,11 +10,9 @@ import pl.krkteam.battleships.shooting.dto.result.ResultWrongShotDTO;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 @Service
-@Scope()
 public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {
     private final CoordinateDTOtoCoordinates coordinateDTOtoCoordinates;
-
-
+    
     public ShotResultCheckerServiceImpl(
             CoordinateDTOtoCoordinates coordinateDTOtoCoordinates) {
         this.coordinateDTOtoCoordinates = coordinateDTOtoCoordinates;

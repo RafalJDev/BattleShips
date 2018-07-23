@@ -25,6 +25,8 @@ import {LoginRequestSender} from "./rest/post/login-request";
 import {PlayersService} from "./services/players-service.service";
 import {RegisteredPlayers} from "./rest/get/registered-players";
 import {OpponentAsker} from "./rest/get/opponent-asker";
+import {FirstTurnAsker} from "./rest/get/first-turn-asker";
+import {WindowRef} from "./WindowRef";
 
 const appRoutes: Routes = [
   {path: 'configuration', component: ConfigurationScreenComponent},
@@ -65,9 +67,16 @@ const appRoutes: Routes = [
               LoginRequestSender,
               PlayersService,
               RegisteredPlayers,
-              OpponentAsker
+              OpponentAsker,
+              FirstTurnAsker,
+              WindowRef,
             ],
             bootstrap: [AppComponent]
           })
 export class AppModule {
+  
+  constructor(private winRef: WindowRef) {
+    winRef.nativeWindow.document.locale = 'fr';
+    
+  }
 }

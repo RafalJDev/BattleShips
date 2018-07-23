@@ -1,12 +1,17 @@
 export class Round {
   
-  private playerRoundBoolean: boolean;
+  playerRoundBoolean: boolean;
   
-  private waitingForShotResult: boolean;
+  waitingForShotResult: boolean;
   
-  constructor(playerRoundBoolean: boolean) {
-    this.playerRoundBoolean = playerRoundBoolean;
-    this.waitingForShotResult = false;
+  constructor(playerRoundBoolean) {
+    if (playerRoundBoolean === 'true') {
+      this.playerRoundBoolean = true;
+      this.waitingForShotResult = false;
+    } else {
+      this.playerRoundBoolean = false;
+      this.waitingForShotResult = true;
+    }
   }
   
   static ofNewGame(playerRoundBoolean: boolean): Round {
@@ -24,11 +29,7 @@ export class Round {
   }
   
   isPlayerRound(): boolean {
-    return this.playerRoundBoolean;
-  }
-  
-  isWaitingForShotResult(): boolean {
-    return this.waitingForShotResult;
+    return this.playerRoundBoolean/*.toString() === 'true'*/;
   }
   
   private nowIsPlayerTurn() {
@@ -36,6 +37,7 @@ export class Round {
   }
   
   waitForShotResult() {
+    console.log("i shouldnt be here at begining");
     this.waitingForShotResult = true;
   }
   
@@ -48,10 +50,10 @@ export class Round {
   }
   
   isNotWaitingForShotResult(): boolean {
-    return !(this.waitingForShotResult);
+    return !this.waitingForShotResult/*.toString() === 'false'*/;
   }
   
-  isOpponentRound() {
-    return !this.isPlayerRound();
+  isOpponentRound(): boolean {
+    return !this.isPlayerRound()/*.toString() === 'false'*/;
   }
 }
