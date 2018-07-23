@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.turns.holding.dto.TurnResult;
 
@@ -14,8 +15,8 @@ public class TurnController {
 
     private TurnHolder turnHolder;
 
-    public TurnController(TurnHolder turnHolder) {
-        this.turnHolder = turnHolder;
+    public TurnController(Game game) {
+        this.turnHolder = game.getTurnHolder();
     }
 
     @GetMapping(value = "/game/player/isTurn")
