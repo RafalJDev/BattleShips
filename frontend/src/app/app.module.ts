@@ -18,7 +18,6 @@ import {StartGameButtonComponent} from "./views/game/start-game-button/start-gam
 import {PlayerBoardComponent} from './views/boards/player-board/player-board.component';
 import {OpponentBoardComponent} from './views/boards/opponent-board/opponent-board.component';
 import {RequestExecutor} from "./rest/request-executor";
-import {OpponentBoardHandler} from "./services/click-handler/oppent-board-handler.service";
 import {ShotSender} from "./rest/post/shot-sender";
 import {RegisteredPlayersComponent} from "./views/registered-players/registered-players.component";
 import {OpponentInfoComponent} from "./views/opponent-info/opponent-info.component";
@@ -62,7 +61,6 @@ const appRoutes: Routes = [
               ShipGenerator,
               ShipSender,
               RequestExecutor,
-              OpponentBoardHandler,
               ShotSender,
               LoginRequestSender,
               PlayersService,

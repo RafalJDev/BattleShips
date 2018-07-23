@@ -28,7 +28,8 @@ export class OpponentBoardComponent {
 
   constructor(public shotSender: ShotSender, public opponentAsker: OpponentAsker) {
     this.opponentBoard = new BoardOfCells();
-    this.round = Round.ofNewGame();
+  
+    this.round = Round.ofNewGame(true);
     this.opponentBoardHandler = new OpponentBoardHandler(shotSender, opponentAsker, this.round);
 
     this.generateOpponentBoardWithWater();
@@ -53,6 +54,9 @@ export class OpponentBoardComponent {
 
   handleClick(boardDiv: Element, rowIndex, columnIndex) {
     let domCell = DOMCell.ofBoardAndIndexes(boardDiv, rowIndex, columnIndex);
+  
+    if (this.round.isPlayerRound()) {
+    }
     this.opponentBoardHandler.handleShotClick(domCell);
   }
 

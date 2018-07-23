@@ -19,7 +19,7 @@ export class ShotResultFactory {
       case "ResultMiss":
         strategyShotResult = new StrategyMiss();
         break;
-      case "ResultPlayerWin":
+      case "PlayerWon":
         strategyShotResult = new StrategyPlayerWin();
         break;
       case "ResultSunk":
