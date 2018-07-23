@@ -9,13 +9,15 @@ import java.util.*;
 @Component
 public class TurnHolder {
 
-    volatile private Player currentPlayer;
+    private volatile Player currentPlayer;
 
-    private final Player firstPlayer;
+    private volatile Player firstPlayer;
 
-    private final Player secondPlayer;
+    private volatile Player secondPlayer;
 
     private volatile boolean gameHasBeenStarted = false;
+
+    public TurnHolder() {}
 
     public TurnHolder(Player initialPlayer, Player opponent) {
         if (initialPlayer == null || opponent == null) {
@@ -34,6 +36,23 @@ public class TurnHolder {
             throw new NoSuchElementException("Player is not registered in this holder");
         }
         currentPlayer = pretendToBeFirst;
+    }
+
+    public synchronized void addPlayer(Player player) {
+        if (player == null) {
+            throw new IllegalArgumentException("Player cannot be null");
+        }
+        if (player.equals(firstPlayer) || player.equals(secondPlayer)) {
+            throw new IllegalArgumentException("Player is already registered in this holder");
+        }
+        if (firstPlayer == null) {
+            firstPlayer = player;
+            currentPlayer = player;
+        } else if (secondPlayer == null) {
+            secondPlayer = player;
+        } else {
+            throw new IllegalStateException("No available slots in this holder");
+        }
     }
 
     public synchronized void addShotResult(Player shootingPlayer, ShotResultDTO shotResult) {
