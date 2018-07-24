@@ -53,7 +53,9 @@ export class OpponentBoardComponent {
   askWhichPlayerIsFirst(shotSender: ShotSender, opponentAsker: OpponentAsker) {
     this.firstRoundAsker.getFirstRoundResult()
         .then(result => {
-      
+  
+          console.log("done Ask Start");
+          
           let firstRound = result['message'];
           console.log("FirstTurn:" + firstRound);
           this.round = Round.ofNewGame(firstRound);
@@ -63,6 +65,8 @@ export class OpponentBoardComponent {
           this.generateOpponentBoardWithWater();
       
           this.firstTurnRequestDone = true;
+  
+          console.log("done Ask End");
         });
   }
   

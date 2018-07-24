@@ -18,10 +18,10 @@ public class CheckMiss implements ChainOfShotResult {
         if (board.isCellEmpty(shotCoord)) {
             board.putCoordinatesAndCell(shotCoord, new Missed());
             return new ResultMissDTO();
-        } else if (board.getCoorValue(shotCoord) instanceof Missed) {
+        } else if (board.getCell(shotCoord) instanceof Missed) {
             return new ResultMissDTO();
         } else {
-            final Mast mast = (Mast) board.getCoorValue(shotCoord);
+            final Mast mast = (Mast) board.getCell(shotCoord);
             mast.changeMastState(MastState.MAST_DESTROYED);
 
             return chainOfShotResult.getShotResult(shotCoord, board);

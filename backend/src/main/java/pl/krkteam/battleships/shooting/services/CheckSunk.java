@@ -14,7 +14,7 @@ public class CheckSunk implements ChainOfShotResult {
 
     @Override
     public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) throws UnexpectedShotResultException {
-        final Mast mast = (Mast) board.getCoorValue(shotCoord);
+        final Mast mast = (Mast) board.getCell(shotCoord);
         final Ship ship = mast.getShip();
         if (ship.getShipState().equals(ShipState.DESTROYED)) {
             return new ResultSunkDTO();

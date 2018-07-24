@@ -30,9 +30,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 const appRoutes: Routes = [
-  {path: 'configuration/:lang', component: ConfigurationScreenComponent},
-  {path: 'game/board/:lang', component: GameComponent},
-  {path: 'players/registered/:lang', component: RegisteredPlayersComponent},
+  {path: 'configuration', component: ConfigurationScreenComponent},
+  {path: 'game/board', component: GameComponent},
+  {path: 'players/registered', component: RegisteredPlayersComponent},
 ];
 
 // AoT requires an exported function for factories

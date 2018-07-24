@@ -8,8 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.player.Player;
-import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueue;
-import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueueHolder;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 
 import java.util.NoSuchElementException;

@@ -5,7 +5,6 @@ import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueue;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentNoShot;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 
@@ -63,7 +62,7 @@ public class ShotResultQueueTest {
         ShotResultQueue shotResultQueue = new ShotResultQueue();
         // when - then
         OpponentShotResult result = shotResultQueue.getOpponentShotResult();
-        Assert.assertEquals(result.getMessage(), "NoShot");
+        Assert.assertEquals(result.getMessage(), "NoShoot");
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)

@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 public class GameBoardTest {
 
     @Test
-    public void testGetBoard() {
+    public void testGetBoardAndExpectDimensions() {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);

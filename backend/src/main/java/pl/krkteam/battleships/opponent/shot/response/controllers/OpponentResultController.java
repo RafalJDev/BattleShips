@@ -28,9 +28,8 @@ public class OpponentResultController {
         return gson.toJson(shotResult);
     }
 
-
     private OpponentShotResult getResponse(String playerName) {
         Player opponentPlayer = new Player(playerName);
-        return game.getShotResultQueueHolder().getShotResultQueue(opponentPlayer).getOpponentShotResult();
+        return game.getShotResultFromQueue(opponentPlayer);
     }
 }

@@ -16,8 +16,6 @@ export class AppComponent implements OnInit {
   data1: string;
   data2: string;
   
-  selectedLanguage: string = "en";
-  
   constructor(private httpClient: HttpClient, public translate: TranslateService) {
     
     translate.addLangs(['en', 'pl']);
@@ -29,8 +27,6 @@ export class AppComponent implements OnInit {
   
   languageChange(languageValue) {
     this.translate.use(languageValue);
-    
-    this.selectedLanguage = languageValue;
   }
   
   ngOnInit(): void {

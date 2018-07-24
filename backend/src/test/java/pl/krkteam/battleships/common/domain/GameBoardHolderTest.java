@@ -10,8 +10,6 @@ import pl.krkteam.battleships.common.domain.player.Player;
 
 import java.util.NoSuchElementException;
 
-import static org.mockito.Mockito.when;
-
 public class GameBoardHolderTest {
 
     @Mock

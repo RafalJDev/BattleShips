@@ -8,6 +8,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.Game;
+import pl.krkteam.battleships.common.domain.GameBoard;
+import pl.krkteam.battleships.common.domain.GameBoardHolder;
+import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipDTO;
@@ -83,12 +86,17 @@ public class ShipControllerTest {
         when(shipsToShipHolder.convert(any())).thenReturn(shipHolderFromJson);
         when(shipsLocationValidatorService.validateShipLocation(any(), any())).thenReturn(
                 new PlacingValidationResultDTO(PlacingValidationResultDTO.Result.OK));
+    
+        GameBoardHolder gameBoardHolder = new GameBoardHolder();
+        Player player = new Player("SomePlayer");
+        gameBoardHolder.addPlayer(player, new GameBoard());
+        when(game.getGameBoardHolder()).thenReturn(gameBoardHolder);
+
 
         Gson gson = new Gson();
         final String shipsJson = gson.toJson(shipHolderDTO);
 
-        mockMvc.perform(post("/ships")
-                .content(shipsJson))
+        mockMvc.perform(post("/ships").content(shipsJson).param("playerName", "SomePlayer"))
                 .andExpect(status().is2xxSuccessful());
     }
 

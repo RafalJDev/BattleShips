@@ -10,7 +10,7 @@ import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 public class CheckHit implements ChainOfShotResult {
     @Override
     public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) throws UnexpectedShotResultException {
-        final Mast mast = (Mast) board.getCoorValue(shotCoord);
+        final Mast mast = (Mast) board.getCell(shotCoord);
         if (mast.getMastState().equals(MastState.MAST_DESTROYED)) {
             return new ResultHitDTO();
         }

@@ -15,7 +15,7 @@ public class CheckPlayerWon implements ChainOfShotResult {
 
     @Override
     public ShotResultDTO getShotResult(Coordinates shotCoord, Board board) throws UnexpectedShotResultException {
-        final Mast mast = (Mast) board.getCoorValue(shotCoord);
+        final Mast mast = (Mast) board.getCell(shotCoord);
         final Ship ship = mast.getShip();
         final ShipHolder shipHolder = ship.getShipHolder();
         if (shipHolder.getFleetState().equals(FleetState.FLEET_SUNK)) {

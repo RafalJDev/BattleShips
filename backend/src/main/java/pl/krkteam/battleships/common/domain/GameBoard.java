@@ -21,15 +21,19 @@ public class GameBoard {
 
     public Ship createShip(List<Coordinates> coordinates) {
         Ship ship = new Ship(shipHolder);
+        putMastsOnBoard(coordinates, ship);
+        return ship;
+    }
+    
+    public void reset() {
+        board = new Board(new BoardSize(10));
+        shipHolder = new ShipHolder();
+    }
+    
+    private void putMastsOnBoard(List<Coordinates> coordinates, Ship ship) {
         coordinates.forEach(coor -> {
             Mast mast = new Mast(ship);
             board.putCoordinatesAndCell(coor, mast);
         });
-        return ship;
-    }
-
-    public void reset(){
-        board=new Board(new BoardSize(10));
-        shipHolder=new ShipHolder();
     }
 }

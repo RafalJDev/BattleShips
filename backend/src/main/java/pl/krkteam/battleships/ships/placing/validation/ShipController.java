@@ -1,10 +1,10 @@
 package pl.krkteam.battleships.ships.placing.validation;
 
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
+import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
@@ -20,6 +20,7 @@ public class ShipController {
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
     private final Game game;
+
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
@@ -50,8 +51,8 @@ public class ShipController {
 
         final PlacingValidationResultDTO placingValidationResultDTO =
                 shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
-
-        afterValidation(placingValidationResultDTO, playerGameBoard);
+    
+        resetGameBoardIfValidationFailed(placingValidationResultDTO, playerGameBoard);
 
         Gson gson = new Gson();
         return gson.toJson(placingValidationResultDTO);
@@ -65,12 +66,14 @@ public class ShipController {
 
     private GameBoard prepareGameBoard(String playerName) {
         Player player = new Player(playerName);
-        GameBoard playerGameBoard = game.getGameBoardHolder().getGameBoard(player);
+        final GameBoardHolder gameBoardHolder = game.getGameBoardHolder();
+        GameBoard playerGameBoard = gameBoardHolder.getGameBoard(player);
         playerGameBoard.reset();
         return playerGameBoard;
     }
-
-    private void afterValidation(PlacingValidationResultDTO placingValidationResultDTO, GameBoard playerGameBoard) {
+    
+    private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
+                                                  GameBoard playerGameBoard) {
         if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
             playerGameBoard.reset();
         }

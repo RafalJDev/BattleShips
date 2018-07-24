@@ -13,7 +13,6 @@ import pl.krkteam.battleships.shooting.dto.result.NotYourTurnDTO;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 
-
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShootingController {
@@ -29,9 +28,9 @@ public class ShootingController {
     @PostMapping(value = "/game/player/shot")
     public String validateShot(@RequestBody String shotJson, @RequestParam String playerName) {
         final Player shootingPlayer = new Player(playerName);
-        Gson gson = new Gson();
 
-        if(!game.getTurnHolder().isTurnOfPlayer(shootingPlayer)) {
+        Gson gson = new Gson();
+        if (!game.getTurnHolder().isTurnOfPlayer(shootingPlayer)) {
             return gson.toJson(new NotYourTurnDTO());
         }
 
@@ -39,11 +38,14 @@ public class ShootingController {
         ShotDTO shotDTO = convertToShotDTO(shotJson);
 
         final ShotResultDTO shotResultDTO = getShotResult(opponentPlayer, shotDTO);
-        setResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer);
-        game.getTurnHolder().addShotResult(shootingPlayer, shotResultDTO);
+        sendResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer);
+        calculateTurn(shootingPlayer, shotResultDTO);
         return gson.toJson(shotResultDTO);
     }
-
+    
+    private void calculateTurn(Player shootingPlayer, ShotResultDTO shotResultDTO) {
+        game.getTurnHolder().addShotResult(shootingPlayer, shotResultDTO);
+    }
 
     private ShotDTO convertToShotDTO(String shotJson) {
         Gson gson = new Gson();
@@ -60,14 +62,13 @@ public class ShootingController {
         final GameBoard opponentGameBoard = gameBoardHolder.getGameBoard(opponentPlayer);
         return shotResultCheckerService.checkShotResult(shotDTO, opponentGameBoard);
     }
-
-    private void setResponseToOpponentPlayer(ShotResultDTO shotResultDTO, ShotDTO shotDTO, Player opponentPlayer) {
+    
+    private void sendResponseToOpponentPlayer(ShotResultDTO shotResultDTO, ShotDTO shotDTO, Player opponentPlayer) {
         CoordinateDTO shotCoordinates = shotDTO.getShotCoordinate();
 
         OpponentShotResult opponentShotResult = shotResultDTO
-                .getOpponentShotResult(shotCoordinates.getY(),
-                        shotCoordinates.getX());
-
-        game.getShotResultQueueHolder().getShotResultQueue(opponentPlayer).addShotResult(opponentShotResult);
+            .getOpponentShotResult(shotCoordinates.getX(), shotCoordinates.getY());
+        
+        game.addShotResultToQueue(opponentPlayer, opponentShotResult);
     }
 }

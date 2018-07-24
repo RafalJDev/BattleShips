@@ -2,7 +2,6 @@ import {Component} from "@angular/core";
 import {Player} from "../../models/player";
 import {LoginRequestSender} from "../../rest/post/login-request";
 import {PlayersService} from "../../services/players-service.service";
-import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -16,20 +15,12 @@ export class ConfigurationScreenComponent {
   
   selectedLanguage: string;
   
+  beforeResponse: boolean = true;
+  
   constructor(public loginRequestExecutor: LoginRequestSender,
               private playersService: PlayersService,
-              private translate: TranslateService,
               private route: ActivatedRoute) {
     this.player = new Player('sth');
-    
-    let pathname = window.location.pathname.toString();
-    
-    console.log("in configuration construcor length: " + pathname.toString());
-    
-    this.selectedLanguage = pathname.split("/")[2];
-    this.translate.use(this.selectedLanguage);
-    
-    console.log("after configuration construcor ");
   }
   
   login() {
@@ -40,11 +31,12 @@ export class ConfigurationScreenComponent {
           this.player.token = result['result'];
   
           console.log("Value in post: " + this.player.token);
+          this.beforeResponse = false;
         });
   }
   
   isThereInputFromPlayer(): boolean {
-    return this.player.name != "sth";
+    return this.player.name != "sth" && this.beforeResponse;
   }
   
   isThereResponseFromBackend(): boolean {

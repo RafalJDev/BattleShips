@@ -36,8 +36,6 @@ public class GameBoardHolder {
         Set<Player> playerSet = playerGameBoardMap.keySet();
         List<Player> playerList = new ArrayList<>(playerSet);
         playerList.remove(player);
-
         return playerList.get(0);
-
     }
 }
