@@ -9,14 +9,13 @@ import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 import pl.krkteam.battleships.shooting.dto.ShotDTO;
+import pl.krkteam.battleships.shooting.dto.result.NotYourTurnDTO;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
-
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShootingController {
-
 
     private final ShotResultCheckerService shotResultCheckerService;
     private final Game game;
@@ -29,16 +28,24 @@ public class ShootingController {
     @PostMapping(value = "/game/player/shot")
     public String validateShot(@RequestBody String shotJson, @RequestParam String playerName) {
         final Player shootingPlayer = new Player(playerName);
+
+        Gson gson = new Gson();
+        if (!game.getTurnHolder().isTurnOfPlayer(shootingPlayer)) {
+            return gson.toJson(new NotYourTurnDTO());
+        }
+
         final Player opponentPlayer = getOpponentPlayer(shootingPlayer);
         ShotDTO shotDTO = convertToShotDTO(shotJson);
 
         final ShotResultDTO shotResultDTO = getShotResult(opponentPlayer, shotDTO);
         sendResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer);
-
-        Gson gson = new Gson();
+        calculateTurn(shootingPlayer, shotResultDTO);
         return gson.toJson(shotResultDTO);
     }
 
+    private void calculateTurn(Player shootingPlayer, ShotResultDTO shotResultDTO) {
+        game.getTurnHolder().addShotResult(shootingPlayer, shotResultDTO);
+    }
 
     private ShotDTO convertToShotDTO(String shotJson) {
         Gson gson = new Gson();

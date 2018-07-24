@@ -6,6 +6,10 @@ public abstract class ShotResultDTO {
 
     String resultMessage;
 
+    public String getMessage() {
+        return resultMessage;
+    }
+
    public abstract OpponentShotResult getOpponentShotResult(int x, int y);
 
 }
