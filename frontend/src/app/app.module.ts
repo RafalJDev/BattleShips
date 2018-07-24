@@ -25,14 +25,14 @@ import {LoginRequestSender} from "./rest/post/login-request";
 import {PlayersService} from "./services/players-service.service";
 import {RegisteredPlayers} from "./rest/get/registered-players";
 import {OpponentAsker} from "./rest/get/opponent-asker";
-import {FirstTurnAsker} from "./rest/get/first-turn-asker";
+import {FirstRoundAsker} from "./rest/get/first-round-asker.service";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 const appRoutes: Routes = [
-  {path: 'configuration', component: ConfigurationScreenComponent},
-  {path: 'configuration/board', component: GameComponent},
-  {path: 'players/registered', component: RegisteredPlayersComponent},
+  {path: 'configuration/:lang', component: ConfigurationScreenComponent},
+  {path: 'game/board/:lang', component: GameComponent},
+  {path: 'players/registered/:lang', component: RegisteredPlayersComponent},
 ];
 
 // AoT requires an exported function for factories
@@ -82,7 +82,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               PlayersService,
               RegisteredPlayers,
               OpponentAsker,
-              FirstTurnAsker,
+              FirstRoundAsker,
             ],
             bootstrap: [AppComponent]
           })

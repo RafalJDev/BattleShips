@@ -31,6 +31,8 @@ export class OpponentBoardHandler {
       this.round.waitForShotResult();
       
       let shotJson = ShotDTO.ofDOMCellToJson(domCell);
+  
+      console.log("shotJson" + shotJson);
       
       this.shotSender.postShot(shotJson)
           .then(shotResponseJson => {

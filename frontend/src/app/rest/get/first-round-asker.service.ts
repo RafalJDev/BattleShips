@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class FirstTurnAsker extends GetRequestExecutor {
+export class FirstRoundAsker extends GetRequestExecutor {
   
   hostUrl: string = GetRequestExecutor.getHostString();
   
@@ -12,7 +12,8 @@ export class FirstTurnAsker extends GetRequestExecutor {
     super(httpClient);
   }
   
-  public getOpponentResult() {
+  public getFirstRoundResult() {
+    //todo REST API turn to round
     return this.get(this.hostUrl + "/game/player/isTurn?playerName=" + this.playersService.whoami.name);
     
   }

@@ -2,10 +2,10 @@ import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
 import {Component, Input} from "@angular/core";
 import {OpponentBoardHandler} from "../../../services/shooting/player/click-handler/opponent-board-handler.service";
 import {Round} from "../../../models/domain/player-turn/round";
-import {ShotSender} from "../../../rest/post/shot-sender";
 import {DOMCell} from "../../../services/DOM/dom-cell";
+import {FirstRoundAsker} from "../../../rest/get/first-round-asker.service";
 import {OpponentAsker} from "../../../rest/get/opponent-asker";
-import {FirstTurnAsker} from "../../../rest/get/first-turn-asker";
+import {ShotSender} from "../../../rest/post/shot-sender";
 
 @Component({
              selector: 'app-opponent-board',
@@ -16,8 +16,6 @@ export class OpponentBoardComponent {
   
   opponentBoard: BoardOfCells;
   
-  shotsArray: Array<Array<string>> = [];
-  
   round: Round;
   
   opponentBoardHandler: OpponentBoardHandler;
@@ -27,30 +25,19 @@ export class OpponentBoardComponent {
   
   calledFunction;
   
-  constructor(public shotSender: ShotSender, public opponentAsker: OpponentAsker,
-              public firstTurnAsker: FirstTurnAsker) {
+  private firstTurnRequestDone = false;
+  
+  constructor(private firstRoundAsker: FirstRoundAsker, private shotSender: ShotSender,
+              private opponentAsker: OpponentAsker) {
     
     this.opponentBoard = new BoardOfCells();
-    let firstTurnRequestDone = false;
     
-    this.firstTurnAsker.getOpponentResult()
-        .then(result => {
-      
-          let firstTurn = result['message'];
-          console.log("FirstTurn:" + firstTurn);
-          this.round = Round.ofNewGame(firstTurn);
-      
-          this.opponentBoardHandler = new OpponentBoardHandler(shotSender, opponentAsker, this.round);
-      
-          this.generateOpponentBoardWithWater();
-      
-          firstTurnRequestDone = true;
-        });
+    this.askWhichPlayerIsFirst(shotSender, opponentAsker);
     
     this.calledFunction = setInterval(() => {
       console.log("Callback my dear");
   
-      if (this.playerBoardDiv != null && firstTurnRequestDone) {
+      if (this.isBoardAndRequestDone()) {
         
         this.opponentBoardHandler.setPlayerBoardDiv(this.playerBoardDiv);
     
@@ -60,8 +47,27 @@ export class OpponentBoardComponent {
           + " ,field value: " + this.round.playerRoundBoolean);
         this.opponentBoardHandler.handleOpponentResult();
       }
-  
     }, 500);
+  }
+  
+  askWhichPlayerIsFirst(shotSender: ShotSender, opponentAsker: OpponentAsker) {
+    this.firstRoundAsker.getFirstRoundResult()
+        .then(result => {
+      
+          let firstRound = result['message'];
+          console.log("FirstTurn:" + firstRound);
+          this.round = Round.ofNewGame(firstRound);
+      
+          this.opponentBoardHandler = new OpponentBoardHandler(shotSender, opponentAsker, this.round);
+      
+          this.generateOpponentBoardWithWater();
+      
+          this.firstTurnRequestDone = true;
+        });
+  }
+  
+  private isBoardAndRequestDone() {
+    return this.playerBoardDiv != null && this.firstTurnRequestDone;
   }
   
   generateOpponentBoardWithWater(): BoardOfCells {
@@ -73,27 +79,6 @@ export class OpponentBoardComponent {
     if (this.round.isPlayerRound() && this.round.isNotWaitingForShotResult()) {
       let domCell = DOMCell.ofBoardAndIndexes(boardDiv, rowIndex, columnIndex);
       this.opponentBoardHandler.handleShotClick(domCell);
-    }
-  }
-  
-  printBoard() {
-    console.log("print");
-    this.shotsArray.forEach(rowArray => {
-      let roww = "";
-      rowArray.forEach(cell => {
-        roww += cell.toString();
-      });
-      console.log(roww);
-    });
-    console.log("print");
-  }
-  
-  fillArrayWithEmpty() {
-    for (let i = 0; i < 10; i++) {
-      this.shotsArray[i] = [];
-      for (let j = 0; j < 10; j++) {
-        this.shotsArray[i][j] = "O";
-      }
     }
   }
   

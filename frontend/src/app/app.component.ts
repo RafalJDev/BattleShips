@@ -18,13 +18,13 @@ export class AppComponent implements OnInit {
   
   selectedLanguage: string = "en";
   
-  constructor(private httpClient: HttpClient, public translate: TranslateService) {
+  constructor(private httpClient: HttpClient, private translate: TranslateService) {
     
-    translate.addLangs(['en', 'fr']);
+    translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
     
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+    translate.use(browserLang.match(/en|pl/) ? browserLang : 'en');
   }
   
   languageChange(languageValue) {
