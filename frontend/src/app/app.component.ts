@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   
   selectedLanguage: string = "en";
   
-  constructor(private httpClient: HttpClient, private translate: TranslateService) {
+  constructor(private httpClient: HttpClient, public translate: TranslateService) {
     
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
