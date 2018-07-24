@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.player.Player;
@@ -27,7 +27,7 @@ public class TurnHolderTest {
     Player player3;
 
     @BeforeClass
-    @BeforeMethod
+    @BeforeTest
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
@@ -35,42 +35,42 @@ public class TurnHolderTest {
     @DataProvider(name = "illegalPlayers")
     public Object[][] illegalPlayers() {
         Object[][] result = new Object[3][2];
-        result[0] = new Object[] {player1, null};
-        result[1] = new Object[] {null, player2};
-        result[2] = new Object[] {null, null};
+        result[0] = new Object[]{player1, null};
+        result[1] = new Object[]{null, player2};
+        result[2] = new Object[]{null, null};
         return result;
     }
 
     @DataProvider(name = "oneProperPlayer")
     public Object[][] oneProperPlayer() {
         Object[][] result = new Object[3][1];
-        result[0] = new Object[] {player1};
-        result[1] = new Object[] {player2};
-        result[2] = new Object[] {player3};
+        result[0] = new Object[]{player1};
+        result[1] = new Object[]{player2};
+        result[2] = new Object[]{player3};
         return result;
     }
 
     @DataProvider(name = "threeProperPlayers")
     public Object[][] threeProperPlayers() {
         Object[][] result = new Object[6][3];
-        result[0] = new Object[] {player1, player2, player3};
-        result[1] = new Object[] {player2, player1, player3};
-        result[2] = new Object[] {player2, player3, player1};
-        result[3] = new Object[] {player1, player3, player2};
-        result[4] = new Object[] {player3, player1, player2};
-        result[5] = new Object[] {player3, player2, player1};
+        result[0] = new Object[]{player1, player2, player3};
+        result[1] = new Object[]{player2, player1, player3};
+        result[2] = new Object[]{player2, player3, player1};
+        result[3] = new Object[]{player1, player3, player2};
+        result[4] = new Object[]{player3, player1, player2};
+        result[5] = new Object[]{player3, player2, player1};
         return result;
     }
 
     @DataProvider(name = "twoProperPlayers")
     public Object[][] twoProperPlayers() {
         Object[][] result = new Object[6][2];
-        result[0] = new Object[] {player1, player2};
-        result[1] = new Object[] {player1, player3};
-        result[2] = new Object[] {player2, player1};
-        result[3] = new Object[] {player2, player3};
-        result[4] = new Object[] {player3, player1};
-        result[5] = new Object[] {player3, player2};
+        result[0] = new Object[]{player1, player2};
+        result[1] = new Object[]{player1, player3};
+        result[2] = new Object[]{player2, player1};
+        result[3] = new Object[]{player2, player3};
+        result[4] = new Object[]{player3, player1};
+        result[5] = new Object[]{player3, player2};
         return result;
     }
 
@@ -122,7 +122,6 @@ public class TurnHolderTest {
         Assert.assertEquals(turnHolder.getCurrentPlayer(), playerOne);
         Assert.assertTrue(turnHolder.isTurnOfPlayer(playerOne));
     }
-
 
     @Test(expectedExceptions = NoSuchElementException.class, dataProvider = "threeProperPlayers")
     public void shouldThrowExceptionWhenGivenPlayerTo_isTurnOfPlayer_DoesNotBelongToHolder(Player playerOne, Player playerTwo, Player playerThree) {
@@ -188,7 +187,7 @@ public class TurnHolderTest {
         Assert.assertTrue(turnHolder.isTurnOfPlayer(playerOne));
     }
 
-    @Test(expectedExceptions = IllegalStateException.class,dataProvider = "twoProperPlayers")
+    @Test(expectedExceptions = IllegalStateException.class, dataProvider = "twoProperPlayers")
     public void shouldThrowExceptionOn_choseFirst_WhenGameHasBeenStarted(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
@@ -198,13 +197,12 @@ public class TurnHolderTest {
         turnHolder.choseFirst(playerTwo);
     }
 
-    @Test(expectedExceptions = NoSuchElementException.class,dataProvider = "threeProperPlayers")
+    @Test(expectedExceptions = NoSuchElementException.class, dataProvider = "threeProperPlayers")
     public void shouldThrowExceptionOn_addShotResult_WhenPlayerDoesNotExistInHolder(Player playerOne, Player playerTwo, Player playerThree) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when - then
         turnHolder.addShotResult(playerThree, new ResultSunkDTO());
     }
-
 
 }
