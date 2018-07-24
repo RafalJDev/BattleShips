@@ -9,7 +9,7 @@ public abstract class ShotResultDTO {
     public String getMessage() {
         return resultMessage;
     }
-
-   public abstract OpponentShotResult getOpponentShotResult(int x, int y);
+    
+    public abstract OpponentShotResult getOpponentShotResult(int y, int x);
 
 }

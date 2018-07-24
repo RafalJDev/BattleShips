@@ -8,7 +8,7 @@ public class CoordinateDTOTest {
 
     @Test
     public void testToString() {
-        CoordinateDTO coordinateDTO = new CoordinateDTO(2, 3);
+        CoordinateDTO coordinateDTO = new CoordinateDTO(3, 2);
 
         assertEquals(coordinateDTO.toString(), "CoordinateDTOS{" +
                 "x=" + 2 +
@@ -18,14 +18,14 @@ public class CoordinateDTOTest {
 
     @Test
     public void testGetX() {
-        CoordinateDTO coordinateDTO = new CoordinateDTO(2, 3);
+        CoordinateDTO coordinateDTO = new CoordinateDTO(3, 2);
 
         assertEquals(coordinateDTO.getX(), 2);
     }
 
     @Test
     public void testGetY() {
-        CoordinateDTO coordinateDTO = new CoordinateDTO(2, 3);
+        CoordinateDTO coordinateDTO = new CoordinateDTO(3, 2);
 
         assertEquals(coordinateDTO.getY(), 3);
     }

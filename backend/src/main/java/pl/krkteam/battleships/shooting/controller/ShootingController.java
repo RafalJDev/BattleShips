@@ -67,7 +67,7 @@ public class ShootingController {
         CoordinateDTO shotCoordinates = shotDTO.getShotCoordinate();
 
         OpponentShotResult opponentShotResult = shotResultDTO
-            .getOpponentShotResult(shotCoordinates.getX(), shotCoordinates.getY());
+            .getOpponentShotResult(shotCoordinates.getY(), shotCoordinates.getX());
         
         game.addShotResultToQueue(opponentPlayer, opponentShotResult);
     }
