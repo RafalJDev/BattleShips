@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 
 import {AppComponent} from "./app.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ConfigurationScreenComponent} from "./views/configuration-screen/configuration-screen.component";
 import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
@@ -26,13 +26,19 @@ import {PlayersService} from "./services/players-service.service";
 import {RegisteredPlayers} from "./rest/get/registered-players";
 import {OpponentAsker} from "./rest/get/opponent-asker";
 import {FirstTurnAsker} from "./rest/get/first-turn-asker";
-import {WindowRef} from "./WindowRef";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 const appRoutes: Routes = [
   {path: 'configuration', component: ConfigurationScreenComponent},
   {path: 'configuration/board', component: GameComponent},
   {path: 'players/registered', component: RegisteredPlayersComponent},
 ];
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
             declarations: [
@@ -56,6 +62,14 @@ const appRoutes: Routes = [
               MatInputModule,
               MatButtonModule,
               MatButtonToggleModule,
+              HttpClientModule,
+              TranslateModule.forRoot({
+                                        loader: {
+                                          provide: TranslateLoader,
+                                          useFactory: HttpLoaderFactory,
+                                          deps: [HttpClient]
+                                        }
+                                      })
             ],
             providers: [
               DragShipService,
@@ -69,14 +83,9 @@ const appRoutes: Routes = [
               RegisteredPlayers,
               OpponentAsker,
               FirstTurnAsker,
-              WindowRef,
             ],
             bootstrap: [AppComponent]
           })
 export class AppModule {
-  
-  constructor(private winRef: WindowRef) {
-    winRef.nativeWindow.document.locale = 'fr';
-    
-  }
+
 }

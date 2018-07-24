@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {ShipArray} from "./models/domain/ship/ship-array";
 import {ShipsDaoService} from "./models/dto/ships/ships-dao.service";
-import {WindowRef} from "./WindowRef";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
              selector: 'app-root',
@@ -16,11 +16,21 @@ export class AppComponent implements OnInit {
   data1: string;
   data2: string;
   
-  title: string = "Battle Ships";
+  selectedLanguage: string = "en";
   
-  constructor(private httpClient: HttpClient, private winRef: WindowRef) {
-    console.log("called pl");
-    winRef.nativeWindow.document.locale = "pl";
+  constructor(private httpClient: HttpClient, public translate: TranslateService) {
+    
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang('en');
+    
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+  }
+  
+  languageChange(languageValue) {
+    this.translate.use(languageValue);
+    
+    this.selectedLanguage = languageValue;
   }
   
   ngOnInit(): void {
@@ -38,7 +48,7 @@ export class AppComponent implements OnInit {
     this.httpClient.get(hostUrl + "/hello")
         .subscribe(data => {
           console.log('DATA', data);
-    
+  
           this.data1 = data['message'];
           this.message = "Get:" + this.data1;
         });
