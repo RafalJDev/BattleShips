@@ -1,13 +1,11 @@
 package pl.krkteam.battleships.common.domain;
 
-import org.springframework.stereotype.Component;
-import pl.krkteam.battleships.common.domain.cell.mastState.PresentMast;
+import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.ship.Ship;
 import pl.krkteam.battleships.common.domain.ship.ShipHolder;
 
 import java.util.List;
 
-@Component
 public class GameBoard {
     private Board board = new Board(new BoardSize(10));
     private ShipHolder shipHolder = new ShipHolder();
@@ -22,14 +20,20 @@ public class GameBoard {
     }
 
     public Ship createShip(List<Coordinates> coordinates) {
-        Ship ship = new Ship();
-        coordinates.forEach(coor -> {
-            PresentMast presentMast = new PresentMast();
-            ship.addMast(presentMast);
-            board.putCoordinatesAndCell(coor, presentMast);
-
-        });
-        shipHolder.addShip(ship);
+        Ship ship = new Ship(shipHolder);
+        putMastsOnBoard(coordinates, ship);
         return ship;
+    }
+
+    public void reset() {
+        board = new Board(new BoardSize(10));
+        shipHolder = new ShipHolder();
+    }
+
+    private void putMastsOnBoard(List<Coordinates> coordinates, Ship ship) {
+        coordinates.forEach(coor -> {
+            Mast mast = new Mast(ship);
+            board.putCoordinatesAndCell(coor, mast);
+        });
     }
 }

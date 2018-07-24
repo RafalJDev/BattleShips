@@ -19,11 +19,15 @@ public class Board {
         return coordinatesCellMap.put(coordinates, cell);
     }
 
-    public BoardSize getBoardSize() {
-        return boardSize;
+    public Cell getCell(Coordinates coordinates) {
+        return coordinatesCellMap.get(coordinates);
     }
 
-    public Map<Coordinates, Cell> getCoordinatesCellMap() {
+    public BoardSize getBoardSize() {
+        return new BoardSize(boardSize.getDimensions());
+    }
+
+    Map<Coordinates, Cell> getCoordinatesCellMap() {
         return Collections.unmodifiableMap(coordinatesCellMap);
     }
 

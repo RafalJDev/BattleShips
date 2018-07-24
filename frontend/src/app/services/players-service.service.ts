@@ -3,13 +3,14 @@ import {Observable} from "rxjs/Observable";
 import {Player} from "../models/player";
 import {RegisteredPlayers} from "../rest/get/registered-players";
 import {of} from "rxjs/observable/of";
-import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class PlayersService {
 
-  constructor(private registeredPlayers: RegisteredPlayers,
-              private httpClient: HttpClient) {
+  whoami:Player;
+
+  constructor(private registeredPlayers: RegisteredPlayers) {
+    this.whoami = new Player("sth");
   }
 
   public getPlayers(): Observable<Player[]> {

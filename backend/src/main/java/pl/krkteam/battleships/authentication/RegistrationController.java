@@ -1,33 +1,37 @@
 package pl.krkteam.battleships.authentication;
 
 import com.google.gson.Gson;
+import org.springframework.web.bind.annotation.*;
+import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlayerDTO;
-import org.springframework.web.bind.annotation.*;
+
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class RegistrationController {
 
-    PlayerHolder playerHolder = new PlayerHolder();
+    private final Game game;
+    private final PlayerHolder playerHolder;
+
+    public RegistrationController(Game game, PlayerHolder playerHolder) {
+        this.game = game;
+        this.playerHolder = playerHolder;
+    }
 
     @PostMapping(value = "/login")
     public String signPlayer(@RequestBody String post) {
-        System.out.println(post);
 
         Gson gson = new Gson();
-
         PlayerDTO playerDTO = gson.fromJson(post, PlayerDTO.class);
-
-        System.out.println(playerDTO);
-
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
 
-        boolean result = playerHolder.addPlayer(player);
+        PlayerResultAdderDTO playerResultAdderDTO = playerHolder.addPlayer(player);
+        game.addPlayer(player);
 
-        String send = "{\"result\":" + "\"" + result + "\"" + " }";
-        return send;
+        String addResultJson = gson.toJson(playerResultAdderDTO);
+        return addResultJson;
     }
 
     @GetMapping(value = "/registered")
