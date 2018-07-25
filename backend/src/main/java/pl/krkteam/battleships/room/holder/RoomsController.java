@@ -1,13 +1,12 @@
 package pl.krkteam.battleships.room.holder;
 
 import com.google.gson.Gson;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.room.holder.converters.RoomHolderToRoomListDTO;
+import pl.krkteam.battleships.room.holder.dto.create.room.CreateResultDTO;
 import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultDTO;
+import pl.krkteam.battleships.room.holder.dto.room.list.RoomDTO;
 import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -38,12 +37,24 @@ public class RoomsController {
     public String joinRoom(@RequestParam String playerName, @RequestParam String roomName) {
         Gson gson = new Gson();
 
-
         Player joiningPlayer = new Player(playerName);
 
         JoinResultDTO joinResultDTO = roomHolder.joinPlayer(roomName, joiningPlayer);
 
         return gson.toJson(joinResultDTO);
+    }
+
+    @PostMapping(value = "room/create")
+    public String createRoom(@RequestBody String roomJson, @RequestParam String playerName) {
+        Gson gson = new Gson();
+
+        RoomDTO roomDTO = gson.fromJson(roomJson, RoomDTO.class);
+        Player roomCreatorPlayer = new Player(playerName);
+
+        final String roomName = roomDTO.getRoomName();
+        CreateResultDTO createResultDTO = roomHolder.createRoom(roomCreatorPlayer, roomName);
+
+        return gson.toJson(createResultDTO);
     }
 
 

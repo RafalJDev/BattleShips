@@ -17,6 +17,9 @@ public class Room {
     private Game game = new Game();
     private Set<Player> playerSet = new HashSet<>(2);
 
+    public Room(String roomName) {
+        this.roomName = roomName;
+    }
 
     public String getRoomName() {
         return roomName;

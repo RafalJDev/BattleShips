@@ -2,6 +2,9 @@ package pl.krkteam.battleships.room.holder;
 
 import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
+import pl.krkteam.battleships.room.holder.dto.create.room.CreateResultDTO;
+import pl.krkteam.battleships.room.holder.dto.create.room.CreateRoomOkDTO;
+import pl.krkteam.battleships.room.holder.dto.create.room.CreateRoomWrongDTO;
 import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultDTO;
 import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
@@ -35,4 +38,15 @@ public class RoomHolder {
     }
 
 
+    public CreateResultDTO createRoom(Player player, String roomName) {
+        if (roomMap.containsKey(roomName)) {
+            return new CreateRoomWrongDTO();
+        }
+
+        Room room = new Room(roomName);
+        roomMap.put(roomName, room);
+
+        room.joinPlayer(player);
+        return new CreateRoomOkDTO();
+    }
 }
