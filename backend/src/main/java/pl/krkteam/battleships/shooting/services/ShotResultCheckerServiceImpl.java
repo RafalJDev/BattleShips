@@ -1,5 +1,7 @@
 package pl.krkteam.battleships.shooting.services;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import pl.krkteam.battleships.common.domain.Board;
 import pl.krkteam.battleships.common.domain.Coordinates;
@@ -11,6 +13,9 @@ import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 @Service
 public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {
+
+    private static final Logger logger = LogManager.getLogger(ShotResultCheckerServiceImpl.class);
+
     private final CoordinateDTOtoCoordinates coordinateDTOtoCoordinates;
     
     public ShotResultCheckerServiceImpl(
@@ -28,7 +33,7 @@ public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {
         try {
             return chainOfShotResult.getShotResult(shotCoor, board);
         } catch (UnexpectedShotResultException e) {
-            System.out.println(e.getMessage());
+            logger.info("Exception message: :" + e.getMessage());
             return new ResultWrongShotDTO();
         }
     }
