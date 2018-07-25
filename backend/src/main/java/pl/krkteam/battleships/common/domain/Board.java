@@ -18,7 +18,7 @@ public class Board {
     public Cell putCoordinatesAndCell(Coordinates coordinates, Cell cell) {
         return coordinatesCellMap.put(coordinates, cell);
     }
-    
+
     public Cell getCell(Coordinates coordinates) {
         return coordinatesCellMap.get(coordinates);
     }

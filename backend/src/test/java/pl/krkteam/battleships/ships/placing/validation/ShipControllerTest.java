@@ -86,7 +86,7 @@ public class ShipControllerTest {
         when(shipsToShipHolder.convert(any())).thenReturn(shipHolderFromJson);
         when(shipsLocationValidatorService.validateShipLocation(any(), any())).thenReturn(
                 new PlacingValidationResultDTO(PlacingValidationResultDTO.Result.OK));
-    
+
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         Player player = new Player("SomePlayer");
         gameBoardHolder.addPlayer(player, new GameBoard());
@@ -96,8 +96,11 @@ public class ShipControllerTest {
         Gson gson = new Gson();
         final String shipsJson = gson.toJson(shipHolderDTO);
 
-        mockMvc.perform(post("/ships").content(shipsJson).param("playerName", "SomePlayer"))
-                .andExpect(status().is2xxSuccessful());
+        mockMvc.perform(post("/ships")
+                .content(shipsJson)
+                .param("playerName", "SomePlayer"))
+                .andExpect(status()
+                        .is2xxSuccessful());
     }
 
 }

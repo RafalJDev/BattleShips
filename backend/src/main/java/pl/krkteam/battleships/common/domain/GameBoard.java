@@ -24,12 +24,12 @@ public class GameBoard {
         putMastsOnBoard(coordinates, ship);
         return ship;
     }
-    
+
     public void reset() {
         board = new Board(new BoardSize(10));
         shipHolder = new ShipHolder();
     }
-    
+
     private void putMastsOnBoard(List<Coordinates> coordinates, Ship ship) {
         coordinates.forEach(coor -> {
             Mast mast = new Mast(ship);

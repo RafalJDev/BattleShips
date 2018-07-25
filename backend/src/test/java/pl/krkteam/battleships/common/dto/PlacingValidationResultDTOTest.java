@@ -11,7 +11,7 @@ public class PlacingValidationResultDTOTest {
         PlacingValidationResultDTO placingValidationResultDTO = new PlacingValidationResultDTO(
                 PlacingValidationResultDTO.Result.OK);
 
-        assertEquals(placingValidationResultDTO.getResult(),PlacingValidationResultDTO.Result.OK);
+        assertEquals(placingValidationResultDTO.getResult(), PlacingValidationResultDTO.Result.OK);
 
     }
 }

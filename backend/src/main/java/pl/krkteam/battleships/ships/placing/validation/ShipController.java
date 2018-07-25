@@ -51,7 +51,7 @@ public class ShipController {
 
         final PlacingValidationResultDTO placingValidationResultDTO =
                 shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
-    
+
         resetGameBoardIfValidationFailed(placingValidationResultDTO, playerGameBoard);
 
         Gson gson = new Gson();
@@ -71,7 +71,7 @@ public class ShipController {
         playerGameBoard.reset();
         return playerGameBoard;
     }
-    
+
     private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
                                                   GameBoard playerGameBoard) {
         if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {

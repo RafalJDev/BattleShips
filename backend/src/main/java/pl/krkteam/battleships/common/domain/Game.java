@@ -23,21 +23,21 @@ public class Game {
     public ShotResultQueueHolder getShotResultQueueHolder() {
         return shotResultQueueHolder;
     }
-    
+
     public TurnHolder getTurnHolder() {
         return turnHolder;
     }
-    
+
     public void addShotResultToQueue(Player opponentPlayer, OpponentShotResult opponentShotResult) {
         final ShotResultQueue shotResultQueue = shotResultQueueHolder.getShotResultQueue(opponentPlayer);
         shotResultQueue.addShotResult(opponentShotResult);
     }
-    
+
     public OpponentShotResult getShotResultFromQueue(Player opponentPlayer) {
         final ShotResultQueue shotResultQueue = shotResultQueueHolder.getShotResultQueue(opponentPlayer);
         return shotResultQueue.getOpponentShotResult();
     }
-    
+
     public void addPlayer(Player player) {
         gameBoardHolder.addPlayer(player, new GameBoard());
         shotResultQueueHolder.addPlayer(player);

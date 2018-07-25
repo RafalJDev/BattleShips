@@ -13,31 +13,31 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ShootingControllerTest {
-    
+
     ShootingController shootingController;
-    
+
     @Mock
     ShotResultCheckerService shotResultCheckerService;
-    
+
     @Mock
     Game game;
-    
+
     MockMvc mockMvc;
-    
+
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        
+
         shootingController = new ShootingController(shotResultCheckerService, game);
-        
+
         mockMvc = MockMvcBuilders.standaloneSetup(shootingController).build();
-        
+
     }
-    
+
     @Test
     public void testValidateShotAndExpectClientError() throws Exception {
         mockMvc.perform(post("/game/player/shot").content("").param("playerName", "SomePlayer"))
-               .andExpect(status().is4xxClientError());
-        
+                .andExpect(status().is4xxClientError());
+
     }
 }

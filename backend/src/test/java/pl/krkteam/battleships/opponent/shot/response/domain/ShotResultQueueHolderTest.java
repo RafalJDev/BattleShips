@@ -34,21 +34,21 @@ public class ShotResultQueueHolderTest {
     @DataProvider(name = "illegalPlayers")
     Object[][] illegalPlayers() {
         Object[][] result = new Object[3][2];
-        result[0] = new Object[] {player1, null};
-        result[1] = new Object[] {null, player2};
-        result[2] = new Object[] {null, null};
+        result[0] = new Object[]{player1, null};
+        result[1] = new Object[]{null, player2};
+        result[2] = new Object[]{null, null};
         return result;
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "illegalPlayers")
     public void shouldThrowExceptionWhenAtLeastOneGivenPlayerIsNull(Player player1, Player player2) {
-        new ShotResultQueueHolder(player1,player2);
+        new ShotResultQueueHolder(player1, player2);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenGivenPlayerToGetQueueIsNull() {
         // given
-        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1,player2);
+        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1, player2);
         // when - then
         shotResultQueueHolder.getShotResultQueue(null);
     }
@@ -56,7 +56,7 @@ public class ShotResultQueueHolderTest {
     @Test(expectedExceptions = NoSuchElementException.class)
     public void shouldThrowExceptionWhenGivenPlayerDoesNotBelongToCurrentHolder() {
         // given
-        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1,player2);
+        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1, player2);
         // when - then
         shotResultQueueHolder.getShotResultQueue(player3);
     }
@@ -70,7 +70,7 @@ public class ShotResultQueueHolderTest {
     @Test
     public void shouldReturnProperQueueConnectedWithGivenPlayer() {
         // given
-        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1,player2);
+        ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1, player2);
         when(opponentShotResult1.getMessage()).thenReturn("Missed");
         when(opponentShotResult2.getMessage()).thenReturn("Hit");
         // when

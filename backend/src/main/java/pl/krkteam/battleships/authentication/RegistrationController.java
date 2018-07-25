@@ -11,10 +11,10 @@ import java.util.Set;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class RegistrationController {
-    
+
     private final Game game;
     private final PlayerHolder playerHolder;
-    
+
     public RegistrationController(Game game, PlayerHolder playerHolder) {
         this.game = game;
         this.playerHolder = playerHolder;
@@ -26,10 +26,10 @@ public class RegistrationController {
         Gson gson = new Gson();
         PlayerDTO playerDTO = gson.fromJson(post, PlayerDTO.class);
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
-    
+
         PlayerResultAdderDTO playerResultAdderDTO = playerHolder.addPlayer(player);
         game.addPlayer(player);
-    
+
         String addResultJson = gson.toJson(playerResultAdderDTO);
         return addResultJson;
     }

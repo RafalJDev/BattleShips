@@ -18,7 +18,12 @@ public class ShipHolder {
 
     void notifyShipChangeState() {
         final Optional<Ship> anyFloatingShip =
-            shipList.stream().filter(mast -> mast.getShipState().equals(ShipState.FLOATING)).findAny();
+                shipList
+                        .stream()
+                        .filter(mast -> mast
+                                .getShipState()
+                                .equals(ShipState.FLOATING))
+                        .findAny();
         if (!anyFloatingShip.isPresent()) {
             fleetState = FleetState.FLEET_SUNK;
         }
