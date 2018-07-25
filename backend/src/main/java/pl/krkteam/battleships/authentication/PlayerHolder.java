@@ -1,5 +1,8 @@
 package pl.krkteam.battleships.authentication;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
 
 import java.util.Collections;

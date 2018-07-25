@@ -1,6 +1,8 @@
 package pl.krkteam.battleships.authentication;
 
 import com.google.gson.Gson;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.player.Player;
@@ -15,9 +17,6 @@ public class RegistrationController {
     private final Game game;
     private final PlayerHolder playerHolder;
     private static final Logger logger = LogManager.getLogger(RegistrationController.class);
-
-    @Autowired
-    Game game;
 
     public RegistrationController(Game game, PlayerHolder playerHolder) {
         this.game = game;

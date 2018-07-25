@@ -1,6 +1,8 @@
 package pl.krkteam.battleships.ships.placing.validation;
 
 import com.google.gson.Gson;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
@@ -56,6 +58,8 @@ public class ShipController {
 
         resetGameBoardIfValidationFailed(placingValidationResultDTO, playerGameBoard);
 
+        logger.info("Validation shot result from player " + playerName + ": " + placingValidationResultDTO.getResult());
+
         Gson gson = new Gson();
         return gson.toJson(placingValidationResultDTO);
     }
@@ -80,9 +84,5 @@ public class ShipController {
             playerGameBoard.reset();
             logger.error("Validation WRONG");
         }
-
-        logger.info("Validation shot result from player " + playerName + ": " + placingValidationResultDTO.getResult());
-
-        return gson.toJson(placingValidationResultDTO);
     }
 }
