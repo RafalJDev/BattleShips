@@ -1,7 +1,6 @@
 package pl.krkteam.battleships.turns.holding;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeTest;
@@ -26,7 +25,6 @@ public class TurnHolderTest {
     @Mock
     Player player3;
 
-    @BeforeClass
     @BeforeTest
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -146,7 +144,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldChangeCurrentPlayerWhenHeMissed(Player playerOne, Player playerTwo) {
+    public void shouldChangeCurrentPlayerWhenMissed(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -157,7 +155,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldChangeCurrentPlayerWhenHeMadeWrongShot(Player playerOne, Player playerTwo) {
+    public void shouldChangeCurrentPlayerWhenMadeWrongShot(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -168,7 +166,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldStayCurrentPlayerWhenHeHit(Player playerOne, Player playerTwo) {
+    public void shouldStayCurrentPlayerWhenHit(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -179,7 +177,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldStayCurrentPlayerWhenHeSunk(Player playerOne, Player playerTwo) {
+    public void shouldStayCurrentPlayerWhenSunk(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when

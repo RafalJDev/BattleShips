@@ -4,6 +4,7 @@ import pl.krkteam.battleships.common.domain.cell.Mast;
 import pl.krkteam.battleships.common.domain.cell.MastState;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class Ship {
     }
 
     public List<Mast> getMastList() {
-        return mastList;
+        return Collections.unmodifiableList(mastList);
     }
 
     public void notifyMastChangeState() {

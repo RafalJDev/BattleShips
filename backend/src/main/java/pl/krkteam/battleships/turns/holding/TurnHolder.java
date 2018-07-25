@@ -10,11 +10,8 @@ import java.util.NoSuchElementException;
 public class TurnHolder {
 
     private volatile Player currentPlayer;
-
     private volatile Player firstPlayer;
-
     private volatile Player secondPlayer;
-
     private volatile boolean gameHasBeenStarted = false;
 
     public TurnHolder() {
