@@ -17,6 +17,8 @@ import pl.krkteam.battleships.ships.placing.validation.services.ShipsPlacingVali
 @RestController
 public class ShipController {
 
+    private static final Logger logger = LogManager.getLogger(ShipController.class);
+
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
     private final Game game;
@@ -37,7 +39,7 @@ public class ShipController {
 
         ShipFromFronted shipFromFronted = gson.fromJson(post, ShipFromFronted.class);
 
-        System.out.println(shipFromFronted);
+        logger.info("One ship has been posted: " + shipFromFronted);
 
         return "{\"message\": \"Cry Germoney!\"}";
     }
@@ -76,6 +78,11 @@ public class ShipController {
                                                   GameBoard playerGameBoard) {
         if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
             playerGameBoard.reset();
+            logger.error("Validation WRONG");
         }
+
+        logger.info("Validation shot result from player " + playerName + ": " + placingValidationResultDTO.getResult());
+
+        return gson.toJson(placingValidationResultDTO);
     }
 }

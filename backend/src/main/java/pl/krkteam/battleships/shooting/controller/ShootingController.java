@@ -18,6 +18,8 @@ import pl.krkteam.battleships.turns.holding.TurnHolder;
 @RestController
 public class ShootingController {
 
+    private static final Logger logger = LogManager.getLogger(ShootingController.class);
+
     private final ShotResultCheckerService shotResultCheckerService;
     private final Game game;
 
@@ -28,6 +30,8 @@ public class ShootingController {
 
     @PostMapping(value = "/game/player/shot")
     public String validateShot(@RequestBody String shotJson, @RequestParam String playerName) {
+        logger.debug("Post body: " + post);
+
         final Player shootingPlayer = new Player(playerName);
         Gson gson = new Gson();
 
@@ -38,6 +42,7 @@ public class ShootingController {
 
         final Player opponentPlayer = getOpponentPlayer(shootingPlayer);
         ShotDTO shotDTO = convertToShotDTO(shotJson);
+        logger.info("Shot from frontend:" + shotDTO);
 
         final ShotResultDTO shotResultDTO = getShotResult(opponentPlayer, shotDTO);
         sendResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer);

@@ -14,6 +14,10 @@ public class RegistrationController {
 
     private final Game game;
     private final PlayerHolder playerHolder;
+    private static final Logger logger = LogManager.getLogger(RegistrationController.class);
+
+    @Autowired
+    Game game;
 
     public RegistrationController(Game game, PlayerHolder playerHolder) {
         this.game = game;
@@ -22,9 +26,13 @@ public class RegistrationController {
 
     @PostMapping(value = "/login")
     public String signPlayer(@RequestBody String post) {
+        logger.debug("Post body: " + post);
 
         Gson gson = new Gson();
         PlayerDTO playerDTO = gson.fromJson(post, PlayerDTO.class);
+
+        logger.debug("PlayerDTO: " + playerDTO);
+
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
 
         PlayerResultAdderDTO playerResultAdderDTO = playerHolder.addPlayer(player);
@@ -41,7 +49,7 @@ public class RegistrationController {
 
         Gson gson = new Gson();
         String result = gson.toJson(playerDTOs);
-        System.out.println(result);
+
         return result;
     }
 
