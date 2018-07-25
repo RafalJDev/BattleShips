@@ -1,11 +1,11 @@
-package pl.krkteam.battleships.room.holder.domain.dto;
+package pl.krkteam.battleships.room.holder.domain.dto.room.list;
 
 import java.util.Arrays;
 
 public class RoomListDTO {
-    private String[] roomName;
+    private RoomDTO[] roomName;
 
-    public RoomListDTO(String[] roomName) {
+    public RoomListDTO(RoomDTO[] roomName) {
         this.roomName = roomName;
     }
 

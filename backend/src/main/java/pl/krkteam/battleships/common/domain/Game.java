@@ -10,6 +10,11 @@ import pl.krkteam.battleships.turns.holding.TurnHolder;
 @Component
 public class Game {
 
+    public void initializeGame(Player playerA, Player playerB){
+        addPlayer(playerA);
+        addPlayer(playerB);
+    }
+
     private GameBoardHolder gameBoardHolder = new GameBoardHolder();
 
     private ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();

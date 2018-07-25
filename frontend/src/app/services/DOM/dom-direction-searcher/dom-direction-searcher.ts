@@ -19,7 +19,7 @@ export class DomDirectionSearcher {
       return CoordinateDirection.ofEastDirection();
     } else {
       new Error("No before shot class around ! " +
-        "Maybe the response (sunk) from backend is bad ?");
+        "Maybe the result (sunk) from backend is bad ?");
     }
   }
   

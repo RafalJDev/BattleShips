@@ -28,7 +28,7 @@ public class RegistrationController {
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
 
         PlayerResultAdderDTO playerResultAdderDTO = playerHolder.addPlayer(player);
-        game.addPlayer(player);
+//        game.addPlayer(player);
 
         String addResultJson = gson.toJson(playerResultAdderDTO);
         return addResultJson;
