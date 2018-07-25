@@ -1,6 +1,38 @@
 {
   "HOME": {
-    "TITLE": "Hello Angular with ngx-translate!",
+    "TITLE": "Welcome to Battle Ships!",
     "SELECT": "Change language"
+  },
+  "COMMON": {
+    "WORKS": "works !"
+  },
+
+  "CONFIGURATION":{
+    "PLAYER-NAME":{
+      "BUTTON": "Apply name and go to screen with rooms"
+    },
+    "ROOM":{
+      "BUTTON": "Create room"
+    }
+  },
+
+  "FLEET-PLACING":{
+    "BUTTON": "Go to waiting room, to wait till opponent will place fleet!"
+  },
+  "PLACING-BOARD":{
+    "BUTTON": "Click to generate radnom fleet"
+  },
+
+  "WAITING":{
+    "OPPONENT-REGISTER": {
+      "BUTTON": "Go to fleet placement screen my friend"
+    },
+    "OPPONENT-FLEET": {
+      "BUTTON": "Go to game board and start playi! Good luck"
+    }
+  },
+
+  "REGISTERED-PLAYERS": {
+    "TITLE": "Registered players"
   }
 }

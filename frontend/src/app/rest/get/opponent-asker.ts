@@ -14,6 +14,5 @@ export class OpponentAsker extends GetRequestExecutor {
 
   public getOpponentResult() {
     return this.get(this.hostUrl + "/game/opponent/result?playerName=" + this.playersService.whoami.name);
-
   }
 }

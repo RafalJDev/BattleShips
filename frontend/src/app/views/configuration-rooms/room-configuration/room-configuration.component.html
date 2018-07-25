@@ -1,0 +1,16 @@
+<p>
+  room-configuration {{ 'COMMON.WORKS' | translate }}
+</p>
+
+<mat-list>
+  <mat-list-item *ngFor="let room of rooms.roomArray; let roomNumber = index">
+    <p>{{roomNumber}}:{{room.name}}</p>
+  </mat-list-item>
+</mat-list>
+
+<mat-button-toggle class="col-12"
+                   *ngIf="isThereRooms()"
+                   routerLink="/waiting/opponent/register"
+>
+  {{ 'CONFIGURATION.ROOM.BUTTON' | translate }}
+</mat-button-toggle>

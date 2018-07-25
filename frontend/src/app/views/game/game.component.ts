@@ -17,6 +17,6 @@ export class GameComponent implements OnInit {
   
   capturePlayerBoardDiv(event) {
     this.playerBoardDiv = event;
-    console.log("capture gamecomponent" + this.playerBoardDiv);
+    console.log("Capture gamecomponent" + this.playerBoardDiv);
   }
 }
