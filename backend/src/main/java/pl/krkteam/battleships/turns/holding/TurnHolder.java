@@ -17,7 +17,8 @@ public class TurnHolder {
 
     private volatile boolean gameHasBeenStarted = false;
 
-    public TurnHolder() {}
+    public TurnHolder() {
+    }
 
     public TurnHolder(Player initialPlayer, Player opponent) {
         if (initialPlayer == null || opponent == null) {
