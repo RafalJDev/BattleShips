@@ -19,7 +19,8 @@ public class CheckHitTest {
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
         final Coordinates coordinates4 = new Coordinates(6, 4);
-        List<Coordinates> coordinatesListA = Arrays.asList(coordinates1, coordinates2, coordinates3, coordinates4);
+        List<Coordinates> coordinatesListA = Arrays.asList(coordinates1, coordinates2,
+                coordinates3, coordinates4);
 
         GameBoard gameBoard = new GameBoard();
         gameBoard.createShip(coordinatesListA);
