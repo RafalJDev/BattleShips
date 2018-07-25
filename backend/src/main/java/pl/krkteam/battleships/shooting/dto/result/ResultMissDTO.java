@@ -10,7 +10,7 @@ public class ResultMissDTO extends ShotResultDTO {
     }
 
     @Override
-    public OpponentShotResult getOpponentShotResult(int x, int y) {
+    public OpponentShotResult getOpponentShotResult(int y, int x) {
         return new OpponentShotMiss(y, x);
     }
 }

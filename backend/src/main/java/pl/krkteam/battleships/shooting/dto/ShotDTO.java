@@ -10,7 +10,6 @@ public class ShotDTO {
         this.shotCoordinate = shotCoordinate;
     }
 
-
     public CoordinateDTO getShotCoordinate() {
         return shotCoordinate;
     }

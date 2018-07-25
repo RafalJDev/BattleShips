@@ -16,7 +16,6 @@ export class OpponentBoardHandler {
   opponentAsker: OpponentAsker;
   round: Round;
   
-  playerBoardDiv: Element;
   opponentResponseHandler: OpponentResponseHandler;
   
   constructor(shotSender: ShotSender, opponentAsker: OpponentAsker, round: Round) {
@@ -29,9 +28,11 @@ export class OpponentBoardHandler {
     console.log("click!");
     
     if (this.isThisCellShootAble(domCell)) {
-      this.waitForShotResponse();
+      this.round.waitForShotResult();
       
       let shotJson = ShotDTO.ofDOMCellToJson(domCell);
+  
+      console.log("shotJson" + shotJson);
       
       this.shotSender.postShot(shotJson)
           .then(shotResponseJson => {
@@ -44,10 +45,14 @@ export class OpponentBoardHandler {
             console.log("shotStrategy: " + shotStrategy.resultNameJustForTesting());
         
             shotStrategy.handleResult(this.round, domCell);
-        
-            this.opponentResponseHandler.handleOpponentResult();
+  
+            this.handleOpponentResult();
           });
     }
+  }
+  
+  handleOpponentResult() {
+    this.opponentResponseHandler.handleOpponentResult();
   }
   
   setPlayerBoardDiv(playerBoardDiv: Element) {
@@ -62,10 +67,6 @@ export class OpponentBoardHandler {
   
   private canPlayerMakeShot(): boolean {
     return this.round.isPlayerRound() && this.round.isNotWaitingForShotResult();
-  }
-  
-  private waitForShotResponse() {
-    this.round.waitForShotResult();
   }
   
 }

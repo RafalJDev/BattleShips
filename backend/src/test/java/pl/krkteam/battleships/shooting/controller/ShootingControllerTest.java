@@ -38,9 +38,9 @@ public class ShootingControllerTest {
     public void testValidateShotAndExpectClientError() throws Exception {
         mockMvc.perform(post("/game/player/shot")
                 .content("")
-                .param("playerName", "SomePlayer")
-        )
-                .andExpect(status().is4xxClientError());
+                .param("playerName", "SomePlayer"))
+                .andExpect(status()
+                        .is4xxClientError());
 
     }
 }

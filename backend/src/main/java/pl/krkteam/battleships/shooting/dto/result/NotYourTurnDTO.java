@@ -3,10 +3,10 @@ package pl.krkteam.battleships.shooting.dto.result;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentNoShot;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 
-public class ResultWrongShotDTO extends ShotResultDTO {
+public class NotYourTurnDTO extends ShotResultDTO {
 
-    public ResultWrongShotDTO() {
-        this.resultMessage = "WrongShot";
+    public NotYourTurnDTO() {
+        resultMessage = "ItIsNotYourTurn";
     }
 
     @Override
@@ -14,3 +14,4 @@ public class ResultWrongShotDTO extends ShotResultDTO {
         return new OpponentNoShot();
     }
 }
+

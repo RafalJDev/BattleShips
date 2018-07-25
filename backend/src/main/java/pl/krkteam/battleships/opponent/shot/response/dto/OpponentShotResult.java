@@ -18,7 +18,7 @@ public abstract class OpponentShotResult {
 
     private void createOpponentShotResult(String opponentShotResult, int rowIndex, int columnIndex) {
         this.opponentShotResult = opponentShotResult;
-        final CoordinateDTO shotCoordinate = new CoordinateDTO(columnIndex, rowIndex);
+        final CoordinateDTO shotCoordinate = new CoordinateDTO(rowIndex, columnIndex);
         this.opponentShotDTO = new ShotDTO(shotCoordinate);
     }
 }

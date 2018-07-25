@@ -6,6 +6,7 @@ import {DomManipulator} from "../../../../DOM/dom-manipulator";
 import {DomBufferCreator} from "../../../../DOM/dom-buffer-creator";
 
 export class StrategyPlayerWin implements StrategyShotResult {
+  
   handleResult(round: Round, domCell: DOMCell) {
     DomManipulator.colorCell(domCell, "darkred", "hit-locator");
     DomManipulator.setShip(domCell);
@@ -13,6 +14,8 @@ export class StrategyPlayerWin implements StrategyShotResult {
     DomBufferCreator.setBufferOnCellDiagonals(domCell);
     DomClick.setCellNotClickable(domCell);
     
+    DomBufferCreator.setBufferOnShipHeadAndTail(domCell);
+  
     round.nextRoundIsPlayerRound();
     
     console.log('PLAYER WIN !!!!!!!!');

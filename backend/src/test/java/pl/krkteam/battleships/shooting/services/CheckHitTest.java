@@ -5,12 +5,11 @@ import pl.krkteam.battleships.common.domain.Board;
 import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.shooting.dto.result.ResultHitDTO;
-import pl.krkteam.battleships.shooting.dto.result.ResultSunkDTO;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class CheckHitTest {
 
@@ -29,7 +28,7 @@ public class CheckHitTest {
         final Board board = gameBoard.getBoard();
 
         Coordinates shotCoor = new Coordinates(3, 4);
-        ChainOfShotResult chainOfShotResult=new CheckMiss();
+        ChainOfShotResult chainOfShotResult = new CheckMiss();
 
         assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultHitDTO.class);
 

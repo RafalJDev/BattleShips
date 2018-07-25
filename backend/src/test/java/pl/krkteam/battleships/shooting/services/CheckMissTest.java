@@ -2,7 +2,6 @@ package pl.krkteam.battleships.shooting.services;
 
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.Board;
-import pl.krkteam.battleships.common.domain.BoardSize;
 import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.shooting.dto.result.ResultMissDTO;
@@ -10,7 +9,8 @@ import pl.krkteam.battleships.shooting.dto.result.ResultMissDTO;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class CheckMissTest {
 
@@ -23,16 +23,16 @@ public class CheckMissTest {
         List<Coordinates> coordinatesList = Arrays.asList(coordinates1, coordinates2,
                 coordinates3, coordinates4);
 
-        GameBoard gameBoard=new GameBoard();
+        GameBoard gameBoard = new GameBoard();
         gameBoard.createShip(coordinatesList);
 
         final Board board = gameBoard.getBoard();
 
-        Coordinates shotCoor=new Coordinates(7,2);
+        Coordinates shotCoor = new Coordinates(7, 2);
 
-        ChainOfShotResult chainOfShotResult=new CheckMiss();
+        ChainOfShotResult chainOfShotResult = new CheckMiss();
 
-        assertEquals(chainOfShotResult.getShotResult(shotCoor,board).getClass(),ResultMissDTO.class);
+        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultMissDTO.class);
     }
 
     @Test
@@ -44,15 +44,15 @@ public class CheckMissTest {
         List<Coordinates> coordinatesList = Arrays.asList(coordinates1, coordinates2,
                 coordinates3, coordinates4);
 
-        GameBoard gameBoard=new GameBoard();
+        GameBoard gameBoard = new GameBoard();
         gameBoard.createShip(coordinatesList);
 
         final Board board = gameBoard.getBoard();
 
-        Coordinates shotCoor=new Coordinates(4,4);
+        Coordinates shotCoor = new Coordinates(4, 4);
 
-        ChainOfShotResult chainOfShotResult=new CheckMiss();
+        ChainOfShotResult chainOfShotResult = new CheckMiss();
 
-        assertNotEquals(chainOfShotResult.getShotResult(shotCoor,board).getClass(),ResultMissDTO.class);
+        assertNotEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultMissDTO.class);
     }
 }

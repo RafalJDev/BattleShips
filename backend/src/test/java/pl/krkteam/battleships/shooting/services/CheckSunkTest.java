@@ -22,14 +22,12 @@ public class CheckSunkTest {
         List<Coordinates> coordinatesListA = Arrays.asList(coordinates1, coordinates2,
                 coordinates3, coordinates4);
 
-
         final Coordinates coordinatesB1 = new Coordinates(8, 4);
         List<Coordinates> coordinatesListB = Arrays.asList(coordinatesB1);
 
         GameBoard gameBoard = new GameBoard();
         gameBoard.createShip(coordinatesListA);
         gameBoard.createShip(coordinatesListB);
-
 
         final Board board = gameBoard.getBoard();
         ChainOfShotResult chainOfShotResult = new CheckMiss();
@@ -40,7 +38,6 @@ public class CheckSunkTest {
         assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultSunkDTO.class);
     }
 
-
     @Test
     public void testGetShotResultAndExpectSunkTwoMastShip() throws UnexpectedShotResultException {
         final Coordinates coordinates1 = new Coordinates(3, 4);
@@ -50,7 +47,6 @@ public class CheckSunkTest {
         List<Coordinates> coordinatesListA = Arrays.asList(coordinates1, coordinates2,
                 coordinates3, coordinates4);
 
-
         final Coordinates coordinatesB1 = new Coordinates(8, 4);
         final Coordinates coordinatesB2 = new Coordinates(8, 5);
         List<Coordinates> coordinatesListB = Arrays.asList(coordinatesB1, coordinatesB2);
@@ -58,7 +54,6 @@ public class CheckSunkTest {
         GameBoard gameBoard = new GameBoard();
         gameBoard.createShip(coordinatesListA);
         gameBoard.createShip(coordinatesListB);
-
 
         final Board board = gameBoard.getBoard();
         ChainOfShotResult chainOfShotResult = new CheckMiss();

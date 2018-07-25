@@ -2,6 +2,9 @@
   <p class="col-12">
     configuration-screen works!
   </p>
+  <p>
+    {{ 'HOME.TITLE' | translate }}
+  </p>
 
   <mat-input-container class="col-12">
     <input type="text" matInput [(ngModel)]="player.name" placeholder="Player name:">
@@ -10,13 +13,18 @@
   <mat-button-toggle class="col-12"
                      (click)="login()"
                      *ngIf="isThereInputFromPlayer()"
-                     routerLink="/configuration/board"
   >
-    Go to board!
+    Check if you can play with this name!
 
   </mat-button-toggle>
 
+  <mat-button-toggle class="col-12"
+                     *ngIf="isThereResponseFromBackend()"
+                     routerLink="/game/board"
+  >
+    Hi {{player.name}}! Go to next board
 
+  </mat-button-toggle>
 
   <p>{{player.name}}</p>
 </div>

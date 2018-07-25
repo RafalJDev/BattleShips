@@ -28,11 +28,12 @@ public class Ship {
     }
 
     public void notifyMastChangeState() {
-        final Optional<Mast> anyPresentMast = mastList
-                .stream()
-                .filter(
-                        mast -> mast.getMastState()
-                                .equals(MastState.MAST_PRESENT)).findAny();
+        final Optional<Mast> anyPresentMast =
+                mastList
+                        .stream()
+                        .filter(mast -> mast.getMastState()
+                                .equals(MastState.MAST_PRESENT))
+                        .findAny();
         if (!anyPresentMast.isPresent()) {
             shipState = ShipState.DESTROYED;
             shipHolder.notifyShipChangeState();

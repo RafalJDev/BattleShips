@@ -17,11 +17,13 @@ public class ShipHolder {
     }
 
     void notifyShipChangeState() {
-        final Optional<Ship> anyFloatingShip = shipList
-                .stream()
-                .filter(
-                        mast -> mast.getShipState()
-                                .equals(ShipState.FLOATING)).findAny();
+        final Optional<Ship> anyFloatingShip =
+                shipList
+                        .stream()
+                        .filter(mast -> mast
+                                .getShipState()
+                                .equals(ShipState.FLOATING))
+                        .findAny();
         if (!anyFloatingShip.isPresent()) {
             fleetState = FleetState.FLEET_SUNK;
         }

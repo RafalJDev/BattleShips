@@ -11,6 +11,7 @@ export class StrategyOpponentMiss extends StrategyOpponentShotResult {
   
   handleResult(round: Round, playerDomCell: DOMCell) {
     DomManipulator.colorCell(playerDomCell, "dimgray", "miss-locator");
+  
     round.nextRoundIsPlayerRound();
     
     console.log("In Opponent MISS handleResult!!!");

@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 
 import {AppComponent} from "./app.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ConfigurationScreenComponent} from "./views/configuration-screen/configuration-screen.component";
 import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
@@ -18,7 +18,6 @@ import {StartGameButtonComponent} from "./views/game/start-game-button/start-gam
 import {PlayerBoardComponent} from './views/boards/player-board/player-board.component';
 import {OpponentBoardComponent} from './views/boards/opponent-board/opponent-board.component';
 import {RequestExecutor} from "./rest/request-executor";
-import {OpponentBoardHandler} from "./services/click-handler/oppent-board-handler.service";
 import {ShotSender} from "./rest/post/shot-sender";
 import {RegisteredPlayersComponent} from "./views/registered-players/registered-players.component";
 import {OpponentInfoComponent} from "./views/opponent-info/opponent-info.component";
@@ -26,12 +25,20 @@ import {LoginRequestSender} from "./rest/post/login-request";
 import {PlayersService} from "./services/players-service.service";
 import {RegisteredPlayers} from "./rest/get/registered-players";
 import {OpponentAsker} from "./rest/get/opponent-asker";
+import {FirstRoundAsker} from "./rest/get/first-round-asker.service";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 const appRoutes: Routes = [
   {path: 'configuration', component: ConfigurationScreenComponent},
-  {path: 'configuration/board', component: GameComponent},
+  {path: 'game/board', component: GameComponent},
   {path: 'players/registered', component: RegisteredPlayersComponent},
 ];
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
             declarations: [
@@ -55,6 +62,14 @@ const appRoutes: Routes = [
               MatInputModule,
               MatButtonModule,
               MatButtonToggleModule,
+              HttpClientModule,
+              TranslateModule.forRoot({
+                                        loader: {
+                                          provide: TranslateLoader,
+                                          useFactory: HttpLoaderFactory,
+                                          deps: [HttpClient]
+                                        }
+                                      })
             ],
             providers: [
               DragShipService,
@@ -62,14 +77,15 @@ const appRoutes: Routes = [
               ShipGenerator,
               ShipSender,
               RequestExecutor,
-              OpponentBoardHandler,
               ShotSender,
               LoginRequestSender,
               PlayersService,
               RegisteredPlayers,
-              OpponentAsker
+              OpponentAsker,
+              FirstRoundAsker,
             ],
             bootstrap: [AppComponent]
           })
 export class AppModule {
+
 }

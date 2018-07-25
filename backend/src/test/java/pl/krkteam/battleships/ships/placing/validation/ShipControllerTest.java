@@ -98,9 +98,9 @@ public class ShipControllerTest {
 
         mockMvc.perform(post("/ships")
                 .content(shipsJson)
-                .param("playerName", "SomePlayer")
-        )
-                .andExpect(status().is2xxSuccessful());
+                .param("playerName", "SomePlayer"))
+                .andExpect(status()
+                        .is2xxSuccessful());
     }
 
 }

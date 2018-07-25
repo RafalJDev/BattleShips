@@ -5,17 +5,14 @@ public class CoordinateDTO {
     private int columnIndex;
     private int rowIndex;
 
-    public CoordinateDTO(int x, int y) {
+    public CoordinateDTO(int y, int x) {
         this.columnIndex = x;
         this.rowIndex = y;
     }
 
     @Override
     public String toString() {
-        return "CoordinateDTOS{" +
-                "x=" + columnIndex +
-                ", y=" + rowIndex +
-                '}';
+        return "CoordinateDTOS{" + "x=" + columnIndex + ", y=" + rowIndex + '}';
     }
 
     @Override

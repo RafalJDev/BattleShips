@@ -9,7 +9,7 @@ public class ResultPlayerWonDTO extends ShotResultDTO {
     }
 
     @Override
-    public OpponentShotResult getOpponentShotResult(int x, int y) {
+    public OpponentShotResult getOpponentShotResult(int y, int x) {
         return new OpponentShotPlayerLoose(y, x);
     }
 }

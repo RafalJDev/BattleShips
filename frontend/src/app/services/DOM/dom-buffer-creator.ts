@@ -13,9 +13,25 @@ export class DomBufferCreator {
   static setBufferOnShipHeadAndTail(domCell: DOMCell) {
     
     let coordinateDirection = DomDirectionSearcher.searchForDirection(domCell);
+  
+    if (this.checkIfThisIsOneMast(coordinateDirection)) {
+      coordinateDirection = CoordinateDirection.ofNorthDirection();
     
-    this.setBufferOnHeadCoordinate(domCell, coordinateDirection);
-    this.setBufferOnTailCoordinate(domCell, coordinateDirection);
+      this.setBufferOnHeadCoordinate(domCell, coordinateDirection);
+      this.setBufferOnTailCoordinate(domCell, coordinateDirection);
+    
+      coordinateDirection = CoordinateDirection.ofWestDirection();
+    
+      this.setBufferOnHeadCoordinate(domCell, coordinateDirection);
+      this.setBufferOnTailCoordinate(domCell, coordinateDirection);
+    } else {
+      this.setBufferOnHeadCoordinate(domCell, coordinateDirection);
+      this.setBufferOnTailCoordinate(domCell, coordinateDirection);
+    }
+  }
+  
+  private static checkIfThisIsOneMast(coordinateDirection: CoordinateDirection): boolean {
+    return coordinateDirection == null;
   }
   
   static setBufferOnCellDiagonals(domCell: DOMCell) {

@@ -1,44 +1,21 @@
 export class Round {
   
-  private playerRoundBoolean: boolean;
+  playerRoundBoolean: boolean;
   
-  private waitingForShotResult: boolean;
+  waitingForShotResult: boolean;
   
-  constructor() {
-    this.playerRoundBoolean = true;
-    this.waitingForShotResult = false;
+  constructor(playerRoundBoolean) {
+    if (playerRoundBoolean === 'true') {
+      this.playerRoundBoolean = true;
+      this.waitingForShotResult = false;
+    } else {
+      this.playerRoundBoolean = false;
+      this.waitingForShotResult = true;
+    }
   }
   
-  static ofNewGame(): Round {
-    return new Round();
-  }
-  
-  isPlayerRound(): boolean {
-    return this.playerRoundBoolean;
-  }
-  
-  nowIsPlayerTurn() {
-    this.playerRoundBoolean = true;
-  }
-  
-  nowIsOpponetTurn() {
-    this.playerRoundBoolean = false;
-  }
-  
-  isWaitingForShotResult(): boolean {
-    return this.waitingForShotResult;
-  }
-  
-  waitForShotResult() {
-    this.waitingForShotResult = true;
-  }
-  
-  endOfWaitingForShotResult() {
-    this.waitingForShotResult = false;
-  }
-  
-  isNotWaitingForShotResult(): boolean {
-    return !(this.waitingForShotResult);
+  static ofNewGame(playerRoundBoolean: boolean): Round {
+    return new Round(playerRoundBoolean);
   }
   
   nextRoundIsPlayerRound() {
@@ -47,11 +24,36 @@ export class Round {
   }
   
   nextRoundIsOpponentRound() {
-    this.nowIsOpponetTurn();
-    this.endOfWaitingForShotResult();
+    this.nowIsOpponentTurn();
+    this.waitForShotResult();
   }
   
-  isOpponentRound() {
-    return !this.isPlayerRound();
+  isPlayerRound(): boolean {
+    return this.playerRoundBoolean/*.toString() === 'true'*/;
+  }
+  
+  private nowIsPlayerTurn() {
+    this.playerRoundBoolean = true;
+  }
+  
+  waitForShotResult() {
+    console.log("i shouldnt be here at begining");
+    this.waitingForShotResult = true;
+  }
+  
+  private nowIsOpponentTurn() {
+    this.playerRoundBoolean = false;
+  }
+  
+  private endOfWaitingForShotResult() {
+    this.waitingForShotResult = false;
+  }
+  
+  isNotWaitingForShotResult(): boolean {
+    return !this.waitingForShotResult/*.toString() === 'false'*/;
+  }
+  
+  isOpponentRound(): boolean {
+    return !this.isPlayerRound()/*.toString() === 'false'*/;
   }
 }

@@ -30,17 +30,17 @@ public class CheckPlayerWonTest {
         ChainOfShotResult chainOfShotResult = new CheckMiss();
         Coordinates shotCoor = new Coordinates(3, 4);
         chainOfShotResult.getShotResult(shotCoor, board);
-        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(),ResultHitDTO.class);
+        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultHitDTO.class);
 
         shotCoor = new Coordinates(4, 4);
         chainOfShotResult.getShotResult(shotCoor, board);
-        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(),ResultHitDTO.class);
+        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultHitDTO.class);
 
         shotCoor = new Coordinates(5, 4);
         chainOfShotResult.getShotResult(shotCoor, board);
-        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(),ResultHitDTO.class);
+        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultHitDTO.class);
 
         shotCoor = new Coordinates(6, 4);
-        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(),ResultPlayerWonDTO.class);
+        assertEquals(chainOfShotResult.getShotResult(shotCoor, board).getClass(), ResultPlayerWonDTO.class);
     }
 }
