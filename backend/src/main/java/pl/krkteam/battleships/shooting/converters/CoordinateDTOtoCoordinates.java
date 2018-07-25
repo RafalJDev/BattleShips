@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.shooting.conventers;
+package pl.krkteam.battleships.shooting.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
