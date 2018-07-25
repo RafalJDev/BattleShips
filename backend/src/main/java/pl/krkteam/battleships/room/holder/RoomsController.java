@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.room.holder.domain;
+package pl.krkteam.battleships.room.holder;
 
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.krkteam.battleships.common.domain.player.Player;
-import pl.krkteam.battleships.room.holder.domain.converters.RoomHolderToRoomListDTO;
-import pl.krkteam.battleships.room.holder.domain.dto.room.list.RoomListDTO;
-import pl.krkteam.battleships.room.holder.domain.dto.join.result.JoinResultDTO;
-import pl.krkteam.battleships.room.holder.domain.dto.join.result.JoinResultWrongDTO;
+import pl.krkteam.battleships.room.holder.converters.RoomHolderToRoomListDTO;
+import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultDTO;
+import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultWrongDTO;
+import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController

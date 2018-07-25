@@ -1,10 +1,10 @@
-package pl.krkteam.battleships.room.holder.domain.converters;
+package pl.krkteam.battleships.room.holder.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import pl.krkteam.battleships.room.holder.domain.RoomHolder;
-import pl.krkteam.battleships.room.holder.domain.dto.room.list.RoomDTO;
-import pl.krkteam.battleships.room.holder.domain.dto.room.list.RoomListDTO;
+import pl.krkteam.battleships.room.holder.RoomHolder;
+import pl.krkteam.battleships.room.holder.dto.room.list.RoomDTO;
+import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 
 import java.util.ArrayList;
 import java.util.List;

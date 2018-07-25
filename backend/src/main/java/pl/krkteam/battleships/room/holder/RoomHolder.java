@@ -1,8 +1,10 @@
-package pl.krkteam.battleships.room.holder.domain;
+package pl.krkteam.battleships.room.holder;
 
 import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
-import pl.krkteam.battleships.room.holder.domain.dto.join.result.JoinResultDTO;
+import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultDTO;
+import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
+import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +21,15 @@ public class RoomHolder {
     public JoinResultDTO joinPlayer(int roomNumberInt, Player player) {
         final Room room = roomList.get(roomNumberInt);
         return room.joinPlayer(player);
-
     }
+
+    public WaiterResponseDTO isOpponentInRoom(int roomNumberInt, Player player){
+        final Room room = roomList.get(roomNumberInt);
+        if (room.isPlayerBelongToRoom(player)){
+            return new OpponentAbsentDTO();
+        }
+        return room.areBothPlayers();
+    }
+
+
 }

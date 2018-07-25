@@ -1,4 +1,4 @@
-package pl.krkteam.battleships.room.holder.domain.dto.room.list;
+package pl.krkteam.battleships.room.holder.dto.room.list;
 
 import java.util.Arrays;
 
