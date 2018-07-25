@@ -9,7 +9,9 @@ import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.OpponentPresentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Room {
@@ -33,12 +35,21 @@ public class Room {
         return new JoinResultWrongDTO();
     }
 
+    public Game getGame() {
+        return game;
+    }
 
     public synchronized WaiterResponseDTO areBothPlayers() {
         if (playerSet.size() == 2) {
+            initializeGame();
             return new OpponentPresentDTO();
         }
         return new OpponentAbsentDTO();
+    }
+
+    private void initializeGame() {
+        List<Player> playerList = new ArrayList<>(playerSet);
+        game.initializeGame(playerList.get(0), playerList.get(1));
     }
 
     public synchronized boolean isPlayerBelongToRoom(Player player) {

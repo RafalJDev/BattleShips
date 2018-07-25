@@ -8,6 +8,8 @@ import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
+import pl.krkteam.battleships.room.holder.Room;
+import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.shooting.dto.ShotDTO;
 import pl.krkteam.battleships.shooting.dto.result.NotYourTurnDTO;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
@@ -19,32 +21,40 @@ import pl.krkteam.battleships.turns.holding.TurnHolder;
 public class ShootingController {
 
     private final ShotResultCheckerService shotResultCheckerService;
-    private final Game game;
+    private final RoomHolder roomHolder;
 
-    public ShootingController(ShotResultCheckerService shotResultCheckerService, Game game) {
+    public ShootingController(ShotResultCheckerService shotResultCheckerService,
+                              RoomHolder roomHolder) {
         this.shotResultCheckerService = shotResultCheckerService;
-        this.game = game;
+        this.roomHolder = roomHolder;
     }
 
     @PostMapping(value = "/game/player/shot")
-    public String validateShot(@RequestBody String shotJson, @RequestParam String playerName) {
+    public String validateShot(@RequestBody String shotJson, @RequestParam String playerName,
+                               @RequestParam String roomName) {
         final Player shootingPlayer = new Player(playerName);
         Gson gson = new Gson();
 
+        final Game game = getGameForPlayer(roomName);
         final TurnHolder turnHolder = game.getTurnHolder();
         if (!turnHolder.isTurnOfPlayer(shootingPlayer)) {
             return gson.toJson(new NotYourTurnDTO());
         }
 
-        final Player opponentPlayer = getOpponentPlayer(shootingPlayer);
+        final Player opponentPlayer = getOpponentPlayer(shootingPlayer, game);
         ShotDTO shotDTO = convertToShotDTO(shotJson);
 
-        final ShotResultDTO shotResultDTO = getShotResult(opponentPlayer, shotDTO);
-        sendResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer);
+        final ShotResultDTO shotResultDTO = getShotResult(opponentPlayer, shotDTO, game);
+        sendResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer, game);
 
         calculateTurn(shootingPlayer, shotResultDTO, turnHolder);
 
         return gson.toJson(shotResultDTO);
+    }
+
+    private Game getGameForPlayer(String roomName) {
+        final Room room = roomHolder.getRoom(roomName);
+        return room.getGame();
     }
 
     private void calculateTurn(Player shootingPlayer, ShotResultDTO shotResultDTO, TurnHolder turnHolder) {
@@ -56,18 +66,20 @@ public class ShootingController {
         return gson.fromJson(shotJson, ShotDTO.class);
     }
 
-    private Player getOpponentPlayer(Player shootingPlayer) {
+    private Player getOpponentPlayer(Player shootingPlayer, Game game) {
         final GameBoardHolder gameBoardHolder = game.getGameBoardHolder();
         return gameBoardHolder.getOpponentPlayer(shootingPlayer);
     }
 
-    private ShotResultDTO getShotResult(Player opponentPlayer, ShotDTO shotDTO) {
+    private ShotResultDTO getShotResult(Player opponentPlayer, ShotDTO shotDTO,
+                                        Game game) {
         final GameBoardHolder gameBoardHolder = game.getGameBoardHolder();
         final GameBoard opponentGameBoard = gameBoardHolder.getGameBoard(opponentPlayer);
         return shotResultCheckerService.checkShotResult(shotDTO, opponentGameBoard);
     }
 
-    private void sendResponseToOpponentPlayer(ShotResultDTO shotResultDTO, ShotDTO shotDTO, Player opponentPlayer) {
+    private void sendResponseToOpponentPlayer(ShotResultDTO shotResultDTO, ShotDTO shotDTO,
+                                              Player opponentPlayer, Game game) {
         CoordinateDTO shotCoordinates = shotDTO.getShotCoordinate();
 
         OpponentShotResult opponentShotResult = shotResultDTO

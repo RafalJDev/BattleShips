@@ -9,10 +9,7 @@ import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultDTO;
 import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -35,6 +32,14 @@ public class RoomHolder {
             return new OpponentAbsentDTO();
         }
         return room.areBothPlayers();
+    }
+
+    public Room getRoom(String roomName) {
+        final Room room = roomMap.get(roomName);
+        if (null == room) {
+            throw new NoSuchElementException();
+        }
+        return room;
     }
 
 

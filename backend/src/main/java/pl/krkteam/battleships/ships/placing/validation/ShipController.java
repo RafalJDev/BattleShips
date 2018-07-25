@@ -9,6 +9,8 @@ import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
 import pl.krkteam.battleships.common.dto.ShipHolderDTO;
+import pl.krkteam.battleships.room.holder.Room;
+import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.ships.placing.validation.converters.ShipsToShipHolder;
 import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipHolderFromJson;
 import pl.krkteam.battleships.ships.placing.validation.services.ShipsPlacingValidatorService;
@@ -19,15 +21,15 @@ public class ShipController {
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
-    private final Game game;
+    private final RoomHolder roomHolder;
 
 
     public ShipController(
             ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder, Game game) {
+            ShipsToShipHolder shipsToShipHolder, RoomHolder roomHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
-        this.game = game;
+        this.roomHolder = roomHolder;
     }
 
     @PostMapping(value = "/post/ships")
@@ -43,9 +45,10 @@ public class ShipController {
     }
 
     @PostMapping(value = "/ships")
-    public String validateAndSaveShips(@RequestBody String shipsJson, @RequestParam String playerName) {
+    public String validateAndSaveShips(@RequestBody String shipsJson,
+                                       @RequestParam String playerName, @RequestParam String roomName) {
 
-        GameBoard playerGameBoard = prepareGameBoard(playerName);
+        GameBoard playerGameBoard = prepareGameBoard(playerName, roomName);
 
         final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(shipsJson);
 
@@ -64,12 +67,20 @@ public class ShipController {
         return shipsToShipHolder.convert(shipHolderDTO);
     }
 
-    private GameBoard prepareGameBoard(String playerName) {
-        Player player = new Player(playerName);
+    private GameBoard prepareGameBoard(String playerName, String roomName) {
+
+        final Game game = getGameForPlayer(roomName);
         final GameBoardHolder gameBoardHolder = game.getGameBoardHolder();
+
+        Player player = new Player(playerName);
         GameBoard playerGameBoard = gameBoardHolder.getGameBoard(player);
         playerGameBoard.reset();
         return playerGameBoard;
+    }
+
+    private Game getGameForPlayer(String roomName) {
+        final Room room = roomHolder.getRoom(roomName);
+        return room.getGame();
     }
 
     private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
