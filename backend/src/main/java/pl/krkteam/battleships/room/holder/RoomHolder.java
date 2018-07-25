@@ -9,23 +9,26 @@ import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class RoomHolder {
-    private List<Room> roomList = new ArrayList<>();
+    private Map<String, Room> roomMap = new ConcurrentHashMap<>();
 
     public List<Room> getRoomList() {
+        List<Room> roomList = new ArrayList<>(roomMap.values());
         return Collections.unmodifiableList(roomList);
     }
 
-    public JoinResultDTO joinPlayer(int roomNumberInt, Player player) {
-        final Room room = roomList.get(roomNumberInt);
+    public JoinResultDTO joinPlayer(String roomName, Player player) {
+        final Room room = roomMap.get(roomName);
         return room.joinPlayer(player);
     }
 
-    public WaiterResponseDTO isOpponentInRoom(int roomNumberInt, Player player){
-        final Room room = roomList.get(roomNumberInt);
-        if (room.isPlayerBelongToRoom(player)){
+    public WaiterResponseDTO isOpponentInRoom(String roomName, Player player) {
+        final Room room = roomMap.get(roomName);
+        if (room.isPlayerBelongToRoom(player)) {
             return new OpponentAbsentDTO();
         }
         return room.areBothPlayers();

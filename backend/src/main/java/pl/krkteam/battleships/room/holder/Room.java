@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class Room {
     private String roomName;
-    private Game game=new Game();
+    private Game game = new Game();
     private Set<Player> playerSet = new HashSet<>(2);
 
 
@@ -22,23 +22,23 @@ public class Room {
         return roomName;
     }
 
-    public JoinResultDTO joinPlayer(Player player) {
-        if (playerSet.size() < 2){
+    public synchronized JoinResultDTO joinPlayer(Player player) {
+        if (playerSet.size() < 2) {
             playerSet.add(player);
             return new JoinResultOkDTO();
         }
-       return new JoinResultWrongDTO();
+        return new JoinResultWrongDTO();
     }
 
 
-    public WaiterResponseDTO areBothPlayers(){
-        if (playerSet.size()==2){
+    public synchronized WaiterResponseDTO areBothPlayers() {
+        if (playerSet.size() == 2) {
             return new OpponentPresentDTO();
         }
         return new OpponentAbsentDTO();
     }
 
-    public boolean isPlayerBelongToRoom(Player player){
-       return playerSet.contains(player);
+    public synchronized boolean isPlayerBelongToRoom(Player player) {
+        return playerSet.contains(player);
     }
 }

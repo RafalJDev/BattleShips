@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.room.holder.RoomHolder;
-import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 
 
@@ -21,21 +20,13 @@ public class WaitForOpponentController {
     }
 
     @PostMapping(value = "room/opponent/present")
-    public String isOpponentPresent(@RequestParam String playerName, @RequestParam String roomNumber) {
+    public String isOpponentPresent(@RequestParam String playerName, @RequestParam String roomName) {
 
         Gson gson = new Gson();
 
-        int roomNumberInt;
-        try {
-            roomNumberInt = Integer.valueOf(roomNumber);
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            return gson.toJson(new OpponentAbsentDTO());
-        }
-
         Player waitingPlayer = new Player(playerName);
 
-        final WaiterResponseDTO waiterResponseDTO = roomHolder.isOpponentInRoom(roomNumberInt, waitingPlayer);
+        final WaiterResponseDTO waiterResponseDTO = roomHolder.isOpponentInRoom(roomName, waitingPlayer);
 
         return gson.toJson(waiterResponseDTO);
     }

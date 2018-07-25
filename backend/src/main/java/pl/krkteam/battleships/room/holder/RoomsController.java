@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.room.holder.converters.RoomHolderToRoomListDTO;
 import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultDTO;
-import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultWrongDTO;
 import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -36,20 +35,13 @@ public class RoomsController {
     }
 
     @PostMapping(value = "room/join")
-    public String joinRoom(@RequestParam String playerName, @RequestParam String roomNumber) {
+    public String joinRoom(@RequestParam String playerName, @RequestParam String roomName) {
         Gson gson = new Gson();
 
-        int roomNumberInt;
-        try {
-            roomNumberInt = Integer.valueOf(roomNumber);
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            return gson.toJson(new JoinResultWrongDTO());
-        }
 
         Player joiningPlayer = new Player(playerName);
 
-        JoinResultDTO joinResultDTO = roomHolder.joinPlayer(roomNumberInt, joiningPlayer);
+        JoinResultDTO joinResultDTO = roomHolder.joinPlayer(roomName, joiningPlayer);
 
         return gson.toJson(joinResultDTO);
     }
