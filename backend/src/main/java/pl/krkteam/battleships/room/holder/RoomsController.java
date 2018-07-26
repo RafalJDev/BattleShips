@@ -23,7 +23,7 @@ public class RoomsController {
 
     }
 
-    @GetMapping(value = "room/list")
+    @GetMapping(value = "/room/list")
     public String getRoomList() {
 
         final RoomListDTO roomListDTO = roomHolderToRoomListDTO.convert(roomHolder);
@@ -32,7 +32,7 @@ public class RoomsController {
         return gson.toJson(roomListDTO);
     }
 
-    @GetMapping(value = "room/join")
+    @GetMapping(value = "/room/join")
     public String joinRoom(@RequestParam String playerName, @RequestParam String roomName) {
         Gson gson = new Gson();
 
@@ -43,7 +43,7 @@ public class RoomsController {
         return gson.toJson(joinResultDTO);
     }
 
-    @PostMapping(value = "room/create")
+    @PostMapping(value = "/room/create")
     public String createRoom(@RequestBody String roomJson, @RequestParam String playerName) {
         Gson gson = new Gson();
 

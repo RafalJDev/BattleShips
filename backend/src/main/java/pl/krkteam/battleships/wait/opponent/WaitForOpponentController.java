@@ -16,7 +16,7 @@ public class WaitForOpponentController {
         this.roomHolder = roomHolder;
     }
 
-    @GetMapping(value = "room/opponent/present")
+    @GetMapping(value = "/room/opponent/present")
     public String isOpponentPresent(@RequestParam String playerName, @RequestParam String roomName) {
         Gson gson = new Gson();
         Player waitingPlayer = new Player(playerName);
