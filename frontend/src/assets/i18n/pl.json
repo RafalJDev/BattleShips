@@ -1,6 +1,38 @@
 {
   "HOME": {
-    "TITLE": "Cześć Angular z ngx-translate !",
+    "TITLE": "Witojcie w grze w stotki !",
     "SELECT": "Zmień język"
+  },
+  "COMMON": {
+    "WORKS": "działa !"
+  },
+
+  "CONFIGURATION":{
+    "PLAYER-NAME":{
+      "BUTTON": "Zatwierdź imię i idź do ekranu wyboru pokoju"
+    },
+    "ROOM":{
+      "BUTTON": "Stwórz pokój"
+    }
+  },
+
+  "FLEET-PLACING":{
+    "BUTTON": "Przejdź do poczekalni, żeby poczekać na przeciwnika"
+  },
+  "PLACING-BOARD":{
+    "BUTTON": "Naciśnij, ażeby wytentegować nową flotę"
+  },
+
+  "WAITING":{
+    "OPPONENT-REGISTER": {
+      "BUTTON": "Przejdź do rozmieszaczania statków mordko"
+    },
+    "OPPONENT-FLEET": {
+      "BUTTON": "Idź do planszy i zacznij grać Hanysie! Aa no i powodzonka"
+    }
+  },
+
+  "REGISTERED-PLAYERS": {
+    "TITLE": "Zarejestrowani gracze"
   }
 }

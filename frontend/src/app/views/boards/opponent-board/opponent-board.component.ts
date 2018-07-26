@@ -1,5 +1,5 @@
 import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnDestroy} from "@angular/core"
 import {OpponentBoardHandler} from "../../../services/shooting/player/click-handler/opponent-board-handler.service";
 import {Round} from "../../../models/domain/player-turn/round";
 import {DOMCell} from "../../../services/DOM/dom-cell";
@@ -12,7 +12,7 @@ import {ShotSender} from "../../../rest/post/shot-sender";
              templateUrl: './opponent-board.component.html',
              styleUrls: ['./opponent-board.component.css']
            })
-export class OpponentBoardComponent {
+export class OpponentBoardComponent implements OnDestroy{
   
   opponentBoard: BoardOfCells;
   
@@ -23,7 +23,7 @@ export class OpponentBoardComponent {
   @Input()
   playerBoardDiv: Element;
   
-  calledFunction;
+  playerBoardWaiter;
   
   private firstTurnRequestDone = false;
   
@@ -34,20 +34,24 @@ export class OpponentBoardComponent {
     
     this.askWhichPlayerIsFirst(shotSender, opponentAsker);
     
-    this.calledFunction = setInterval(() => {
+    this.playerBoardWaiter = setInterval(() => {
       console.log("Callback my dear");
   
       if (this.isBoardAndRequestDone()) {
         
         this.opponentBoardHandler.setPlayerBoardDiv(this.playerBoardDiv);
     
-        clearInterval(this.calledFunction);
+        clearInterval(this.playerBoardWaiter);
     
         console.log("Inside opponent board:" + this.round.isOpponentRound()
           + " ,field value: " + this.round.playerRoundBoolean);
         this.opponentBoardHandler.handleOpponentResult();
       }
     }, 500);
+  }
+  
+  ngOnDestroy() {
+    clearInterval(this.playerBoardWaiter)
   }
   
   askWhichPlayerIsFirst(shotSender: ShotSender, opponentAsker: OpponentAsker) {
@@ -57,13 +61,13 @@ export class OpponentBoardComponent {
           console.log("done Ask Start");
           
           let firstRound = result['message'];
-          console.log("FirstTurn:" + firstRound);
+          console.log("Is player first turn:" + firstRound);
           this.round = Round.ofNewGame(firstRound);
       
           this.opponentBoardHandler = new OpponentBoardHandler(shotSender, opponentAsker, this.round);
-      
-          this.generateOpponentBoardWithWater();
-      
+  
+          this.opponentBoard.generateBoardWithWater(10);
+  
           this.firstTurnRequestDone = true;
   
           console.log("done Ask End");
@@ -72,11 +76,6 @@ export class OpponentBoardComponent {
   
   private isBoardAndRequestDone() {
     return this.playerBoardDiv != null && this.firstTurnRequestDone;
-  }
-  
-  generateOpponentBoardWithWater(): BoardOfCells {
-    this.opponentBoard.generateBoardWithWater(10);
-    return this.opponentBoard;
   }
   
   handleClick(boardDiv: Element, rowIndex, columnIndex) {

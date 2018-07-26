@@ -1,0 +1,42 @@
+<p>
+  UNDER CONSTRUCTION
+</p>
+
+<div class="container">
+  <div *ngFor="let ships of availableShips.shipsWithSomeMast"
+  >
+    Mast count: {{5-ships.length}}
+
+    <div
+      [style.width]="(5-ships.length)*130+'px'"
+    >
+
+      <div *ngFor="let ship of ships"
+
+           [ngStyle]="{'display':'flex','flex-direction': shipDirectionHorizontal ? 'row ': 'column',
+           'justify-content':'space-evenly'}"
+           [style.width]="(ship.mastCount+1)*35+'px'"
+      >
+        Ship:
+        <div draggable="true"
+             (dragstart)="dragShipService.dragStart($event, ships)"
+             (dragend)="dragShipService.dragEnd($event)"
+        >
+          <div *ngFor="let mast of ship.mastArray"
+          >
+            <div class="ship1"
+            >
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<mat-button-toggle class="col-12"
+                   (click)="changeShipsDirection()"
+>
+  TODO
+</mat-button-toggle>
