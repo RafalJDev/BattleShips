@@ -1,0 +1,23 @@
+<div>
+  <p>
+    fleet-placing {{ 'COMMON.WORKS' | translate }}
+  </p>
+  <app-placing-board
+    (shipResponseEmitter)="captureShipResponse($event)"
+  >
+
+  </app-placing-board>
+
+  <app-ships-to-place>
+
+  </app-ships-to-place>
+
+  <mat-button-toggle class="col-12"
+                     routerLink="/game/board"
+                     *ngIf="isThereShipsToSend()"
+                     (click)="sendShipsToValidateOnBackend()"
+  >
+    {{ 'FLEET-PLACING.BUTTON' | translate }}
+  </mat-button-toggle>
+
+</div>

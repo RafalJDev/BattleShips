@@ -1,0 +1,10 @@
+<p>
+  waiting-opponent-name {{ 'COMMON.WORKS' | translate }}
+</p>
+
+<mat-button-toggle class="col-12"
+                   *ngIf="isThereOpponent()"
+                   routerLink="/game/fleet/placing"
+>
+  {{ 'WAITING.OPPONENT-REGISTER.BUTTON' | translate }}
+</mat-button-toggle>

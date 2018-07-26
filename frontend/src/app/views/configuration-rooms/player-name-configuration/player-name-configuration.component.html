@@ -1,0 +1,20 @@
+<div class="container ">
+  <p class="col-12">
+    configuration-screen {{ 'COMMON.WORKS' | translate }}
+  </p>
+
+  <mat-input-container class="col-12">
+    <input type="text" matInput [(ngModel)]="player.name" placeholder="Player name:">
+  </mat-input-container>
+
+  <mat-button-toggle class="col-12"
+                     (click)="login()"
+                     *ngIf="isThereInputFromPlayer()"
+                     routerLink="/configuration/room"
+  >
+    {{ 'CONFIGURATION.PLAYER-NAME.BUTTON' | translate }}
+  </mat-button-toggle>
+
+  <p>{{player.name}}</p>
+</div>
+

@@ -1,56 +1,76 @@
-import {BrowserModule} from "@angular/platform-browser";
-import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser"
+import {NgModule} from "@angular/core"
 
-import {AppComponent} from "./app.component";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {ConfigurationScreenComponent} from "./views/configuration-screen/configuration-screen.component";
-import {FormsModule} from "@angular/forms";
-import {RouterModule, Routes} from "@angular/router";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatButtonModule, MatButtonToggleModule, MatCheckboxModule, MatInputModule} from "@angular/material";
-import {GameComponent} from "./views/game/game.component";
-import {ShipsToPlaceComponent} from "./views/game/ships-to-place/ships-to-place.component";
-import {DragShipService} from "./services/drag-ship/drag-ship.service";
-import {BoardOfCells} from "./models/domain/board/board-of-cells";
-import {ShipGenerator} from "./services/ship-generator/ship-generator.service";
-import {ShipSender} from "./rest/post/ship-sender";
-import {StartGameButtonComponent} from "./views/game/start-game-button/start-game-button.component";
-import {PlayerBoardComponent} from './views/boards/player-board/player-board.component';
-import {OpponentBoardComponent} from './views/boards/opponent-board/opponent-board.component';
-import {RequestExecutor} from "./rest/request-executor";
-import {ShotSender} from "./rest/post/shot-sender";
-import {RegisteredPlayersComponent} from "./views/registered-players/registered-players.component";
-import {OpponentInfoComponent} from "./views/opponent-info/opponent-info.component";
-import {LoginRequestSender} from "./rest/post/login-request";
-import {PlayersService} from "./services/players-service.service";
-import {RegisteredPlayers} from "./rest/get/registered-players";
-import {OpponentAsker} from "./rest/get/opponent-asker";
-import {FirstRoundAsker} from "./rest/get/first-round-asker.service";
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AppComponent} from "./app.component"
+import {HttpClient, HttpClientModule} from "@angular/common/http"
+import {PlayerNameConfiguration} from "./views/configuration-rooms/player-name-configuration/player-name-configuration.component"
+import {FormsModule} from "@angular/forms"
+import {RouterModule, Routes} from "@angular/router"
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+
+import {
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatListModule,
+} from "@angular/material"
+
+import {GameComponent} from "./views/game/game.component"
+import {ShipsToPlaceComponent} from "./views/fleet-placing/ships-to-place/ships-to-place.component"
+import {DragShipService} from "./services/drag-ship/drag-ship.service"
+import {BoardOfCells} from "./models/domain/board/board-of-cells"
+import {ShipGenerator} from "./services/ship-generator/ship-generator.service"
+import {ShipSender} from "./rest/post/ship-sender"
+import {PlayerBoardComponent} from './views/boards/player-board/player-board.component'
+import {OpponentBoardComponent} from './views/boards/opponent-board/opponent-board.component'
+import {RequestExecutor} from "./rest/request-executor"
+import {ShotSender} from "./rest/post/shot-sender"
+import {LoginRequestSender} from "./rest/post/login-request"
+import {PlayersService} from "./services/players-service.service"
+import {RegisteredPlayers} from "./rest/get/registered-players"
+import {OpponentAsker} from "./rest/get/opponent-asker"
+import {FirstRoundAsker} from "./rest/get/first-round-asker.service"
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core'
+import {TranslateHttpLoader} from '@ngx-translate/http-loader'
+import {RoomConfiguration} from './views/configuration-rooms/room-configuration/room-configuration.component'
+import {RegisteredPlayersComponent} from "./views/registered-players/registered-players.component"
+import {WaitingOpponentRegisterComponent} from "./views/waiting-rooms/waiting-opponent-register/waiting-opponent-register.component"
+import {WaitingOpponentFleetComponent} from './views/waiting-rooms/waiting-opponent-fleet/waiting-opponent-fleet.component'
+import {RoomListAsker} from "./rest/get/room-list-asker.service"
+import {FleetPlacingComponent} from './views/fleet-placing/fleet-placing.component'
+import {PlacingBoardComponent} from './views/fleet-placing/placing-board/placing-board.component'
 
 const appRoutes: Routes = [
-  {path: 'configuration', component: ConfigurationScreenComponent},
-  {path: 'game/board', component: GameComponent},
+  {path: '', redirectTo: 'configuration/player/name', pathMatch: 'full'},
   {path: 'players/registered', component: RegisteredPlayersComponent},
-];
+  {path: 'configuration/player/name', component: PlayerNameConfiguration},
+  {path: 'configuration/room', component: RoomConfiguration},
+  {path: 'waiting/opponent/register', component: WaitingOpponentRegisterComponent},
+  {path: 'game/fleet/placing', component: FleetPlacingComponent},
+  {path: 'waiting/opponent/fleet', component: WaitingOpponentFleetComponent},
+  {path: 'game/board', component: GameComponent},
+]
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
+  return new TranslateHttpLoader(httpClient)
 }
 
 @NgModule({
             declarations: [
               AppComponent,
-              ConfigurationScreenComponent,
+              PlayerNameConfiguration,
               GameComponent,
               ShipsToPlaceComponent,
-              StartGameButtonComponent,
               PlayerBoardComponent,
               OpponentBoardComponent,
               RegisteredPlayersComponent,
-              OpponentInfoComponent
+              RoomConfiguration,
+              WaitingOpponentRegisterComponent,
+              WaitingOpponentFleetComponent,
+              FleetPlacingComponent,
+              PlacingBoardComponent,
             ],
             imports: [
               BrowserModule,
@@ -62,14 +82,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               MatInputModule,
               MatButtonModule,
               MatButtonToggleModule,
+              MatListModule,
               HttpClientModule,
               TranslateModule.forRoot({
                                         loader: {
                                           provide: TranslateLoader,
                                           useFactory: HttpLoaderFactory,
-                                          deps: [HttpClient]
-                                        }
-                                      })
+                                          deps: [HttpClient],
+                                        },
+                                      }),
             ],
             providers: [
               DragShipService,
@@ -83,8 +104,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               RegisteredPlayers,
               OpponentAsker,
               FirstRoundAsker,
+              RoomListAsker,
             ],
-            bootstrap: [AppComponent]
+            bootstrap: [AppComponent],
           })
 export class AppModule {
 

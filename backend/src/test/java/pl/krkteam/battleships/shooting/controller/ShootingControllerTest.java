@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.Game;
+import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -20,7 +21,7 @@ public class ShootingControllerTest {
     ShotResultCheckerService shotResultCheckerService;
 
     @Mock
-    Game game;
+    RoomHolder roomHolder;
 
     MockMvc mockMvc;
 
@@ -28,7 +29,7 @@ public class ShootingControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        shootingController = new ShootingController(shotResultCheckerService, game);
+        shootingController = new ShootingController(shotResultCheckerService, roomHolder);
 
         mockMvc = MockMvcBuilders.standaloneSetup(shootingController).build();
 

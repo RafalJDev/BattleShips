@@ -1,20 +1,21 @@
 package pl.krkteam.battleships.common.domain;
 
-import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueue;
 import pl.krkteam.battleships.opponent.shot.response.domain.ShotResultQueueHolder;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 import pl.krkteam.battleships.turns.holding.TurnHolder;
 
-@Component
 public class Game {
 
     private GameBoardHolder gameBoardHolder = new GameBoardHolder();
-
     private ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
-
     private TurnHolder turnHolder = new TurnHolder();
+
+    public void initializeGame(Player playerA, Player playerB) {
+        addPlayer(playerA);
+        addPlayer(playerB);
+    }
 
     public GameBoardHolder getGameBoardHolder() {
         return gameBoardHolder;

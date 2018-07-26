@@ -5,7 +5,7 @@ import {Player} from "../../models/player";
 @Component({
   selector: 'app-registered-players',
   templateUrl: './registered-players.component.html',
-  styleUrls: ['./registered-players.component.scss']
+  styleUrls: ['./registered-players.component.css']
 })
 export class RegisteredPlayersComponent implements OnInit, OnDestroy {
 
@@ -32,7 +32,5 @@ export class RegisteredPlayersComponent implements OnInit, OnDestroy {
           this.players = playerArr;
         }), 2000);
   }
-
-
-
+  
 }

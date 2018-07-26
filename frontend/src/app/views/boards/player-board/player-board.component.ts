@@ -1,9 +1,9 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ShipGenerator} from "../../../services/ship-generator/ship-generator.service";
-import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
-import {ShipArray} from "../../../models/domain/ship/ship-array";
-import {ShipSender} from "../../../rest/post/ship-sender";
-import {DragShipService} from "../../../services/drag-ship/drag-ship.service";
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
+import {ShipGenerator} from "../../../services/ship-generator/ship-generator.service"
+import {BoardOfCells} from "../../../models/domain/board/board-of-cells"
+import {ShipSender} from "../../../rest/post/ship-sender"
+import {DragShipService} from "../../../services/drag-ship/drag-ship.service"
+import {BoardTransferSingelton} from "../../fleet-placing/transfer-class/board-transfer-singelton"
 
 @Component({
   selector: 'app-player-board',
@@ -29,40 +29,15 @@ export class PlayerBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generateRandomBoard();
-
+    //todo delete if singelton works
+    // this.generateRandomBoard();
+    let instance = BoardTransferSingelton.getInstance()
+    this.playerBoard = instance.placedBoard
+  
     console.log("tryClick");
     this.fakeDiv.nativeElement.click();
 
     this.boardDivEmitter.emit(this.boardDiv);
-  }
-
-  generateRandomBoard() {
-    this.playerBoard = new BoardOfCells();
-    this.playerBoard.generateBoardWithWater(10);
-
-    this.putShipsFromShipGenerator_random();
-  }
-
-  putShipsFromShipGenerator_random() {
-    const shipArray = this.shipGenerator.generateShipsRandomly(this.playerBoard);
-
-    this.testShipSending(shipArray);
-  }
-
-  testShipSending(shipArray: ShipArray) {
-
-    const shipArrayJson = JSON.stringify(shipArray);
-
-    console.log(shipArrayJson);
-
-    this.shipSender.postShip(shipArrayJson)
-      .then(result => {
-        this.result2 = result['result'];
-        if (this.result2 == 'true') {
-          console.log("Emiting result");
-        }
-      });
   }
 
   takeJustBoardDiv(boardDiv: Element) {

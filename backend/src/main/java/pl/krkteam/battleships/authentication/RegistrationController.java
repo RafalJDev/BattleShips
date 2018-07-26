@@ -2,7 +2,6 @@ package pl.krkteam.battleships.authentication;
 
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
-import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlayerDTO;
 
@@ -12,11 +11,9 @@ import java.util.Set;
 @RestController
 public class RegistrationController {
 
-    private final Game game;
     private final PlayerHolder playerHolder;
 
-    public RegistrationController(Game game, PlayerHolder playerHolder) {
-        this.game = game;
+    public RegistrationController(PlayerHolder playerHolder) {
         this.playerHolder = playerHolder;
     }
 
@@ -28,7 +25,6 @@ public class RegistrationController {
         Player player = PlayerConversionUtil.convertPlayerDTOtoPlayer(playerDTO);
 
         PlayerResultAdderDTO playerResultAdderDTO = playerHolder.addPlayer(player);
-        game.addPlayer(player);
 
         String addResultJson = gson.toJson(playerResultAdderDTO);
         return addResultJson;

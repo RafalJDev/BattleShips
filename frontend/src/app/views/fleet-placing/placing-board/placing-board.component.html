@@ -1,0 +1,34 @@
+<p>
+  placing-board {{ 'COMMON.WORKS' | translate }}
+</p>
+
+<div #boardDiv
+     class="field col-12"
+>
+  <div *ngFor="let row of placedBoard.board;let rowIndex = index"
+       class="row row{{rowIndex}}"
+  >
+    <div *ngFor="let cell of row.row; let x = index"
+         class="square square{{rowIndex}}{{x}}"
+         draggable="true"
+         (dragenter)="dragShipService.dragEnter()"
+         (dragexit)="dragShipService.dragExit()"
+    >
+      <div class="inner-color-before-shot inner-color-locator"
+      >
+        <div *ngIf="cell.isShipHere()"
+             class="ship ship1"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<mat-button-toggle class="col-12"
+                   (click)="generateRandomBoard()"
+>
+  {{ 'PLACING-BOARD.BUTTON' | translate }}
+</mat-button-toggle>
+
+

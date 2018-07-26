@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.Coordinates;
 import pl.krkteam.battleships.common.domain.GameBoard;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
-import pl.krkteam.battleships.shooting.conventers.CoordinateDTOtoCoordinates;
+import pl.krkteam.battleships.shooting.converters.CoordinateDTOtoCoordinates;
 import pl.krkteam.battleships.shooting.dto.ShotDTO;
 import pl.krkteam.battleships.shooting.dto.result.ResultHitDTO;
 
