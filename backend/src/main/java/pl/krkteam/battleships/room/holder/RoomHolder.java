@@ -28,7 +28,7 @@ public class RoomHolder {
 
     public WaiterResponseDTO isOpponentInRoom(String roomName, Player player) {
         final Room room = roomMap.get(roomName);
-        if (room.isPlayerBelongToRoom(player)) {
+        if (!room.isPlayerBelongToRoom(player)) {
             return new OpponentAbsentDTO();
         }
         return room.areBothPlayers();

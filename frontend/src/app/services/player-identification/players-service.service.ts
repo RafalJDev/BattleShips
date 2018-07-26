@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs/Observable";
-import {Player} from "../models/player";
-import {RegisteredPlayers} from "../rest/get/registered-players";
-import {of} from "rxjs/observable/of";
+import {Injectable} from '@angular/core'
+import {Observable} from "rxjs/Observable"
+import {Player} from "../../models/player"
+import {RegisteredPlayers} from "../../rest/get/registered-players"
+import {of} from "rxjs/observable/of"
 
 @Injectable()
 export class PlayersService {

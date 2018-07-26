@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PlayersService} from "../../services/players-service.service";
-import {Player} from "../../models/player";
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {PlayersService} from "../../services/player-identification/players-service.service"
+import {Player} from "../../models/player"
 
 @Component({
   selector: 'app-registered-players',
