@@ -56,7 +56,7 @@ public class Room {
         }
     }
 
-    public synchronized boolean isPlayerBelongToRoom(Player player) {
+    synchronized boolean isPlayerBelongToRoom(Player player) {
         return playerSet.contains(player);
     }
 }

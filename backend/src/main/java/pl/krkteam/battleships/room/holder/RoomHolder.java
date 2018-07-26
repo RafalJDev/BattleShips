@@ -14,41 +14,41 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class RoomHolder {
-    private Map<String, Room> roomMap = new ConcurrentHashMap<>();
+    private Map<String, Room> roomNameToRoomMap = new ConcurrentHashMap<>();
 
     public List<Room> getRoomList() {
-        List<Room> roomList = new ArrayList<>(roomMap.values());
+        List<Room> roomList = new ArrayList<>(roomNameToRoomMap.values());
         return Collections.unmodifiableList(roomList);
     }
 
-    public JoinResultDTO joinPlayer(String roomName, Player player) {
-        final Room room = roomMap.get(roomName);
+    JoinResultDTO joinPlayer(String roomName, Player player) {
+        final Room room = roomNameToRoomMap.get(roomName);
         return room.joinPlayer(player);
     }
 
     public WaiterResponseDTO isOpponentInRoom(String roomName, Player player) {
-        final Room room = roomMap.get(roomName);
-        if (room.isPlayerBelongToRoom(player)) {
+        final Room room = roomNameToRoomMap.get(roomName);
+        if (!room.isPlayerBelongToRoom(player)) {
             return new OpponentAbsentDTO();
         }
         return room.areBothPlayers();
     }
 
     public Room getRoom(String roomName) {
-        final Room room = roomMap.get(roomName);
+        final Room room = roomNameToRoomMap.get(roomName);
         if (room == null) {
             throw new NoSuchElementException();
         }
         return room;
     }
 
-    public CreateResultDTO createRoom(Player player, String roomName) {
-        if (roomMap.containsKey(roomName)) {
+    CreateResultDTO createRoom(Player player, String roomName) {
+        if (roomNameToRoomMap.containsKey(roomName)) {
             return new CreateRoomWrongDTO();
         }
 
         Room room = new Room(roomName);
-        roomMap.put(roomName, room);
+        roomNameToRoomMap.put(roomName, room);
 
         room.joinPlayer(player);
         return new CreateRoomOkDTO();
