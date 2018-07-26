@@ -13,7 +13,6 @@ import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 @RestController
 public class RoomsController {
 
-
     private final RoomHolder roomHolder;
     private final RoomHolderToRoomListDTO roomHolderToRoomListDTO;
 
@@ -56,6 +55,5 @@ public class RoomsController {
 
         return gson.toJson(createResultDTO);
     }
-
 
 }
