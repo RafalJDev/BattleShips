@@ -48,7 +48,6 @@ public class ShipControllerTest {
                 shipsLocationValidatorService, shipsToShipHolder, roomHolder);
 
         mockMvc = MockMvcBuilders.standaloneSetup(shipController).build();
-
     }
 
     @Test

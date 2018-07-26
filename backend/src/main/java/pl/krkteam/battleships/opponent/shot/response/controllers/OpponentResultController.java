@@ -1,7 +1,6 @@
 package pl.krkteam.battleships.opponent.shot.response.controllers;
 
 import com.google.gson.Gson;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,7 @@ public class OpponentResultController {
         this.roomHolder = roomHolder;
     }
 
-    @GetMapping(value = "/game/opponent/result", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/game/opponent/result")
     public String onShotOpponentResponse(@RequestParam String playerName, @RequestParam String roomName) {
         final Game game = getGameForPlayer(roomName);
         OpponentShotResult shotResult = getResponse(playerName, game);
