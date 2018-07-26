@@ -10,7 +10,6 @@ import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Component
 public class RoomHolderToRoomListDTO implements Converter<RoomHolder, RoomListDTO> {
 

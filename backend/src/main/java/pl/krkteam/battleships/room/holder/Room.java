@@ -52,7 +52,7 @@ public class Room {
         if (!isGameInitialized) {
             List<Player> playerList = new ArrayList<>(playerSet);
             game.initializeGame(playerList.get(0), playerList.get(1));
-            isGameInitialized=true;
+            isGameInitialized = true;
         }
     }
 

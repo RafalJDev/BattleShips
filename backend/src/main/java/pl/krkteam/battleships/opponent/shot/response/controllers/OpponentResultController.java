@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
-import pl.krkteam.battleships.room.holder.Room;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -23,7 +22,7 @@ public class OpponentResultController {
 
     @GetMapping(value = "/game/opponent/result")
     public String onShotOpponentResponse(@RequestParam String playerName, @RequestParam String roomName) {
-        final Game game = getGameForPlayer(roomName);
+        final Game game = getGameFromRoom(roomName);
         OpponentShotResult shotResult = getResponse(playerName, game);
 
         Gson gson = new Gson();
@@ -35,8 +34,7 @@ public class OpponentResultController {
         return game.getShotResultFromQueue(opponentPlayer);
     }
 
-    private Game getGameForPlayer(String roomName) {
-        final Room room = roomHolder.getRoom(roomName);
-        return room.getGame();
+    private Game getGameFromRoom(String roomName) {
+        return roomHolder.getRoom(roomName).getGame();
     }
 }

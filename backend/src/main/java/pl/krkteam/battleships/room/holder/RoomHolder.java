@@ -36,12 +36,11 @@ public class RoomHolder {
 
     public Room getRoom(String roomName) {
         final Room room = roomMap.get(roomName);
-        if (null == room) {
+        if (room == null) {
             throw new NoSuchElementException();
         }
         return room;
     }
-
 
     public CreateResultDTO createRoom(Player player, String roomName) {
         if (roomMap.containsKey(roomName)) {

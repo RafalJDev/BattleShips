@@ -9,7 +9,6 @@ import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipFromFronted;
 import pl.krkteam.battleships.common.dto.ShipHolderDTO;
-import pl.krkteam.battleships.room.holder.Room;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.ships.placing.validation.converters.ShipsToShipHolder;
 import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipHolderFromJson;
@@ -69,7 +68,7 @@ public class ShipController {
 
     private GameBoard prepareGameBoard(String playerName, String roomName) {
 
-        final Game game = getGameForPlayer(roomName);
+        final Game game = getGameFromRoom(roomName);
         final GameBoardHolder gameBoardHolder = game.getGameBoardHolder();
 
         Player player = new Player(playerName);
@@ -78,9 +77,8 @@ public class ShipController {
         return playerGameBoard;
     }
 
-    private Game getGameForPlayer(String roomName) {
-        final Room room = roomHolder.getRoom(roomName);
-        return room.getGame();
+    private Game getGameFromRoom(String roomName) {
+        return roomHolder.getRoom(roomName).getGame();
     }
 
     private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,

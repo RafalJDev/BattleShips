@@ -21,13 +21,11 @@ public class WaitForOpponentController {
 
     @PostMapping(value = "room/opponent/present")
     public String isOpponentPresent(@RequestParam String playerName, @RequestParam String roomName) {
-
         Gson gson = new Gson();
-
         Player waitingPlayer = new Player(playerName);
-
-        final WaiterResponseDTO waiterResponseDTO = roomHolder.isOpponentInRoom(roomName, waitingPlayer);
-
+        final WaiterResponseDTO waiterResponseDTO = roomHolder
+                .isOpponentInRoom(roomName, waitingPlayer);
+        
         return gson.toJson(waiterResponseDTO);
     }
 
