@@ -18,6 +18,7 @@ public class Room {
     private String roomName;
     private Game game = new Game();
     private Set<Player> playerSet = new HashSet<>(2);
+    private boolean isGameInitialized = false;
 
     public Room(String roomName) {
         this.roomName = roomName;
@@ -48,8 +49,11 @@ public class Room {
     }
 
     private void initializeGame() {
-        List<Player> playerList = new ArrayList<>(playerSet);
-        game.initializeGame(playerList.get(0), playerList.get(1));
+        if (!isGameInitialized) {
+            List<Player> playerList = new ArrayList<>(playerSet);
+            game.initializeGame(playerList.get(0), playerList.get(1));
+            isGameInitialized=true;
+        }
     }
 
     public synchronized boolean isPlayerBelongToRoom(Player player) {

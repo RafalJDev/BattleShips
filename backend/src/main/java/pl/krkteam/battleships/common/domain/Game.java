@@ -8,16 +8,14 @@ import pl.krkteam.battleships.turns.holding.TurnHolder;
 
 public class Game {
 
+    private GameBoardHolder gameBoardHolder = new GameBoardHolder();
+    private ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
+    private TurnHolder turnHolder = new TurnHolder();
+
     public void initializeGame(Player playerA, Player playerB) {
         addPlayer(playerA);
         addPlayer(playerB);
     }
-
-    private GameBoardHolder gameBoardHolder = new GameBoardHolder();
-
-    private ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
-
-    private TurnHolder turnHolder = new TurnHolder();
 
     public GameBoardHolder getGameBoardHolder() {
         return gameBoardHolder;

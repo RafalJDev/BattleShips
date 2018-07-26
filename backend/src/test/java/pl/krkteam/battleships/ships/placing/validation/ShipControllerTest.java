@@ -7,14 +7,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.krkteam.battleships.common.domain.Game;
-import pl.krkteam.battleships.common.domain.GameBoard;
-import pl.krkteam.battleships.common.domain.GameBoardHolder;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.CoordinateDTO;
 import pl.krkteam.battleships.common.dto.PlacingValidationResultDTO;
 import pl.krkteam.battleships.common.dto.ShipDTO;
 import pl.krkteam.battleships.common.dto.ShipHolderDTO;
+import pl.krkteam.battleships.room.holder.Room;
+import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.ships.placing.validation.converters.ShipsToShipHolder;
 import pl.krkteam.battleships.ships.placing.validation.fromJson.CoordinatesFromJson;
 import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipFromJson;
@@ -37,7 +36,7 @@ public class ShipControllerTest {
     ShipsToShipHolder shipsToShipHolder;
 
     @Mock
-    Game game;
+    RoomHolder roomHolder;
 
     MockMvc mockMvc;
 
@@ -46,7 +45,7 @@ public class ShipControllerTest {
         MockitoAnnotations.initMocks(this);
 
         shipController = new ShipController(
-                shipsLocationValidatorService, shipsToShipHolder, game);
+                shipsLocationValidatorService, shipsToShipHolder, roomHolder);
 
         mockMvc = MockMvcBuilders.standaloneSetup(shipController).build();
 
@@ -87,18 +86,21 @@ public class ShipControllerTest {
         when(shipsLocationValidatorService.validateShipLocation(any(), any())).thenReturn(
                 new PlacingValidationResultDTO(PlacingValidationResultDTO.Result.OK));
 
-        GameBoardHolder gameBoardHolder = new GameBoardHolder();
-        Player player = new Player("SomePlayer");
-        gameBoardHolder.addPlayer(player, new GameBoard());
-        when(game.getGameBoardHolder()).thenReturn(gameBoardHolder);
-
+        Room room = new Room("SomeRoom");
+        Player playerA = new Player("SomePlayerA");
+        Player playerB = new Player("SomePlayerB");
+        room.joinPlayer(playerA);
+        room.joinPlayer(playerB);
+        room.areBothPlayers();
+        when(roomHolder.getRoom("SomeRoom")).thenReturn(room);
 
         Gson gson = new Gson();
         final String shipsJson = gson.toJson(shipHolderDTO);
 
         mockMvc.perform(post("/ships")
                 .content(shipsJson)
-                .param("playerName", "SomePlayer"))
+                .param("playerName", "SomePlayerA")
+                .param("roomName", "SomeRoom"))
                 .andExpect(status()
                         .is2xxSuccessful());
     }
