@@ -1,12 +1,10 @@
 package pl.krkteam.battleships.turns.holding;
 
-import org.springframework.stereotype.Component;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 
 import java.util.NoSuchElementException;
 
-@Component
 public class TurnHolder {
 
     private volatile Player currentPlayer;
