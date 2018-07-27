@@ -16,7 +16,7 @@ public class PlayerHolder {
         if (player == null) {
             throw new IllegalArgumentException("Player cannot be null");
         }
-        System.out.println("Player " + player.getName() + " has been added to PlayerHolder");
+        System.out.println("Player " + player.getPlayerName() + " has been added to PlayerHolder");
         return new PlayerResultAdderDTO(players.add(player));
     }
 

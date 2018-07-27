@@ -9,15 +9,7 @@ import java.util.List;
 public class GameBoard {
     private Board board = new Board(new BoardSize(10));
     private ShipHolder shipHolder = new ShipHolder();
-
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public ShipHolder getShipHolder() {
-        return shipHolder;
-    }
+    private volatile boolean placedFleet = false;
 
     public Ship createShip(List<Coordinates> coordinates) {
         Ship ship = new Ship(shipHolder);
@@ -35,5 +27,21 @@ public class GameBoard {
             Mast mast = new Mast(ship);
             board.putCoordinatesAndCell(coor, mast);
         });
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    ShipHolder getShipHolder() {
+        return shipHolder;
+    }
+
+    public synchronized boolean isPlacedFleet() {
+        return placedFleet;
+    }
+
+    public synchronized void setPlacedFleet(boolean placedFleet) {
+        this.placedFleet = placedFleet;
     }
 }

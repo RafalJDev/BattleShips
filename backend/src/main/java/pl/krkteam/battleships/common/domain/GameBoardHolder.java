@@ -1,6 +1,9 @@
 package pl.krkteam.battleships.common.domain;
 
 import pl.krkteam.battleships.common.domain.player.Player;
+import pl.krkteam.battleships.start.game.waiter.dto.ReadinessForPlayDTO;
+import pl.krkteam.battleships.start.game.waiter.dto.ReadyForPlayDTO;
+import pl.krkteam.battleships.start.game.waiter.dto.WaitForPlayDTO;
 
 import java.util.*;
 
@@ -8,7 +11,7 @@ public class GameBoardHolder {
 
     private Map<Player, GameBoard> playerGameBoardMap = new HashMap<>();
 
-    public boolean addPlayer(Player player, GameBoard gameBoard) {
+    boolean addPlayer(Player player, GameBoard gameBoard) {
         if (player == null) {
             throw new IllegalArgumentException("Player cannot be null");
         }
@@ -20,6 +23,21 @@ public class GameBoardHolder {
         }
         playerGameBoardMap.put(player, gameBoard);
         return true;
+    }
+
+    boolean addPlayer(Player player) {
+        return addPlayer(player, new GameBoard());
+    }
+
+    ReadinessForPlayDTO areBothFleetsValid() {
+        if (playerGameBoardMap.size() != 2) {
+            throw new IndexOutOfBoundsException("There are not enough players");
+        }
+        if (playerGameBoardMap.values().stream().allMatch(GameBoard::isPlacedFleet)) {
+            return new ReadyForPlayDTO();
+        }
+        return new WaitForPlayDTO();
+
     }
 
     public GameBoard getGameBoard(Player player) {

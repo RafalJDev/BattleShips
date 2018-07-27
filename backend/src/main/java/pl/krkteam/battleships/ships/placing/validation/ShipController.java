@@ -54,7 +54,7 @@ public class ShipController {
         final PlacingValidationResultDTO placingValidationResultDTO = shipsLocationValidatorService
                 .validateShipLocation(shipHolderFromJson, playerGameBoard);
 
-        resetGameBoardIfValidationFailed(placingValidationResultDTO, playerGameBoard);
+        fleetPlacementHandler(placingValidationResultDTO, playerGameBoard);
 
         Gson gson = new Gson();
         return gson.toJson(placingValidationResultDTO);
@@ -81,15 +81,18 @@ public class ShipController {
         return roomHolder.getRoom(roomName).getGame();
     }
 
-    private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
-                                                  GameBoard playerGameBoard) {
-        if (isPlacingInvalid(placingValidationResultDTO)) {
+    private void fleetPlacementHandler(PlacingValidationResultDTO placingValidationResultDTO,
+                                       GameBoard playerGameBoard) {
+        if (isPlacementValid(placingValidationResultDTO)) {
+            playerGameBoard.setPlacedFleet(true);
+        } else {
             playerGameBoard.reset();
         }
     }
 
-    private boolean isPlacingInvalid(PlacingValidationResultDTO placingValidationResultDTO) {
-        return placingValidationResultDTO.getResult()
-                .equals(PlacingValidationResultDTO.Result.WRONG);
+    private boolean isPlacementValid(PlacingValidationResultDTO placingValidationResultDTO) {
+        return (placingValidationResultDTO.getResult()
+                .equals(PlacingValidationResultDTO.Result.OK));
     }
+
 }
