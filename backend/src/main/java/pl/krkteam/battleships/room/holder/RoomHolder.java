@@ -41,7 +41,7 @@ public class RoomHolder {
         return room;
     }
 
-    CreateResultDTO createRoomAndJoinPlayer(Player player, String roomName) {
+    public CreateResultDTO createRoomAndJoinPlayer(Player player, String roomName) {
         if (roomNameToRoomMap.containsKey(roomName)) {
             return new CreateRoomWrongDTO();
         }

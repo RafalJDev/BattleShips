@@ -7,8 +7,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.player.Player;
+import pl.krkteam.battleships.start.game.waiter.dto.ReadyForPlayDTO;
+import pl.krkteam.battleships.start.game.waiter.dto.WaitForPlayDTO;
 
 import java.util.NoSuchElementException;
+
+import static org.mockito.Mockito.when;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class GameBoardHolderTest {
 
@@ -86,5 +91,40 @@ public class GameBoardHolderTest {
         boolean addResult = gameBoardHolder.addPlayer(player1, gameBoard2);
         // when - then
         Assert.assertFalse(addResult);
+    }
+
+    @Test
+    public void testAreBothFleetsValidAndExpectAreValid() {
+        GameBoardHolder gameBoardHolder = new GameBoardHolder();
+        gameBoardHolder.addPlayer(player1, gameBoard1);
+        gameBoardHolder.addPlayer(player2, gameBoard2);
+
+        when(gameBoard1.isPlacedFleet()).thenReturn(true);
+        when(gameBoard2.isPlacedFleet()).thenReturn(true);
+
+        assertEquals(gameBoardHolder.areBothFleetsValid(player1).getResult(),
+                new ReadyForPlayDTO().getResult());
+    }
+
+    @Test
+    public void testAreBothFleetsValidAndExpectAreNotValid() {
+        GameBoardHolder gameBoardHolder = new GameBoardHolder();
+        gameBoardHolder.addPlayer(player1, gameBoard1);
+        gameBoardHolder.addPlayer(player2, gameBoard2);
+
+        when(gameBoard1.isPlacedFleet()).thenReturn(true);
+
+        assertEquals(gameBoardHolder.areBothFleetsValid(player1).getResult(),
+                new WaitForPlayDTO().getResult());
+    }
+
+    @Test(expectedExceptions = IndexOutOfBoundsException.class)
+    public void testAreBothFleetsValidAndExpectThereAreNotEnoughPlayers() {
+        GameBoardHolder gameBoardHolder = new GameBoardHolder();
+        gameBoardHolder.addPlayer(player1, gameBoard1);
+
+        when(gameBoard1.isPlacedFleet()).thenReturn(true);
+
+        gameBoardHolder.areBothFleetsValid(player1);
     }
 }
