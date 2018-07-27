@@ -22,10 +22,9 @@ public class ShipController {
     private final ShipsToShipHolder shipsToShipHolder;
     private final RoomHolder roomHolder;
 
-
-    public ShipController(
-            ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder, RoomHolder roomHolder) {
+    public ShipController(ShipsPlacingValidatorService shipsLocationValidatorService,
+                          ShipsToShipHolder shipsToShipHolder,
+                          RoomHolder roomHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
         this.roomHolder = roomHolder;
@@ -45,14 +44,15 @@ public class ShipController {
 
     @PostMapping(value = "/ships")
     public String validateAndSaveShips(@RequestBody String shipsJson,
-                                       @RequestParam String playerName, @RequestParam String roomName) {
+                                       @RequestParam String playerName,
+                                       @RequestParam String roomName) {
 
         GameBoard playerGameBoard = prepareGameBoard(playerName, roomName);
 
         final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(shipsJson);
 
-        final PlacingValidationResultDTO placingValidationResultDTO =
-                shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
+        final PlacingValidationResultDTO placingValidationResultDTO = shipsLocationValidatorService
+                .validateShipLocation(shipHolderFromJson, playerGameBoard);
 
         resetGameBoardIfValidationFailed(placingValidationResultDTO, playerGameBoard);
 
@@ -83,8 +83,13 @@ public class ShipController {
 
     private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
                                                   GameBoard playerGameBoard) {
-        if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
+        if (isPlacingInvalid(placingValidationResultDTO)) {
             playerGameBoard.reset();
         }
+    }
+
+    private boolean isPlacingInvalid(PlacingValidationResultDTO placingValidationResultDTO) {
+        return placingValidationResultDTO.getResult()
+                .equals(PlacingValidationResultDTO.Result.WRONG);
     }
 }

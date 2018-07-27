@@ -3,16 +3,16 @@ package pl.krkteam.battleships.room.holder.dto.room.list;
 import java.util.Arrays;
 
 public class RoomListDTO {
-    private RoomDTO[] roomName;
+    private RoomDTO[] roomDTOS;
 
-    public RoomListDTO(RoomDTO[] roomName) {
-        this.roomName = roomName;
+    public RoomListDTO(RoomDTO[] roomDTOS) {
+        this.roomDTOS = roomDTOS;
     }
 
     @Override
     public String toString() {
         return "RoomListDTO{" +
-                "roomName=" + (roomName == null ? null : Arrays.asList(roomName)) +
+                "roomDTOS=" + (roomDTOS == null ? null : Arrays.asList(roomDTOS)) +
                 '}';
     }
 }

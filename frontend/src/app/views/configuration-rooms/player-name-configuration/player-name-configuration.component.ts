@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {Player} from "../../../models/player";
-import {LoginRequestSender} from "../../../rest/post/login-request";
-import {PlayersService} from "../../../services/players-service.service";
-import {ActivatedRoute} from '@angular/router';
+import {Component} from "@angular/core"
+import {Player} from "../../../models/player"
+import {LoginRequestSender} from "../../../rest/post/login-request"
+import {PlayersService} from "../../../services/player-identification/players-service.service"
+import {ActivatedRoute} from '@angular/router'
 
 @Component({
              selector: 'app-configuration-screen',

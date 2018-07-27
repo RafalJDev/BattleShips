@@ -4,22 +4,22 @@ import java.util.Arrays;
 
 public class ShipHolderDTO {
 
-  private ShipDTO[] shipArray;
+    private ShipDTO[] shipArray;
 
-  public ShipHolderDTO(ShipDTO[] shipArray) {
-    this.shipArray = shipArray;
-  }
+    public ShipDTO[] getShipArray() {
+        return shipArray;
+    }
 
-  @Override
-  public String toString() {
-    return "ShipHolderDTO{" +
-       "shipDTOS=" + Arrays.toString(shipArray) +
-       '}';
-  }
+    public ShipHolderDTO(ShipDTO[] shipArray) {
+        this.shipArray = shipArray;
+    }
 
-  public ShipDTO[] getShipArray() {
-    return shipArray;
-  }
+    @Override
+    public String toString() {
+        return "ShipHolderDTO{" +
+                "shipDTOS=" + Arrays.toString(shipArray) +
+                '}';
+    }
 }
 
 

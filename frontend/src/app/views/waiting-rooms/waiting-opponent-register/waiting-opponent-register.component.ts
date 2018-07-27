@@ -1,4 +1,6 @@
 import {Component, OnDestroy} from '@angular/core'
+import {OpponentPresentAsker} from "../../../rest/get/opponent-present-asker"
+import {Router} from "@angular/router"
 
 @Component({
              selector: 'app-waiting-opponent-name',
@@ -7,9 +9,10 @@ import {Component, OnDestroy} from '@angular/core'
            })
 export class WaitingOpponentRegisterComponent implements OnDestroy {
   
+  
   askerInterval
   
-  constructor() {
+  constructor(private opponentPresentAsker: OpponentPresentAsker, private router: Router) {
     
     this.askForRoomListInInterval(null)
   }
@@ -22,11 +25,26 @@ export class WaitingOpponentRegisterComponent implements OnDestroy {
     this.askerInterval = setInterval(() => {
       console.log("Callback to know if opponent is in room")
       
-      clearInterval(this.askerInterval)
+      this.opponentPresentAsker.getOpponenIsPresent()
+          .then(opponentPresentResponse => {
+        
+            let opponentPresentString = opponentPresentResponse['result']
+            let opponentPresent: boolean = this.responseStringToBoolean(opponentPresentString)
+        
+            if (opponentPresent) {
+              this.router.navigate(['/game/fleet/placing'])
+              // clearInterval(this.askerInterval)
+            }
+          })
     }, 500)
   }
   
-  isThereOpponent(): boolean {
-    return true
+  private responseStringToBoolean(result: string): boolean {
+    switch (result) {
+      case "OpponentPresent":
+        return true
+      case "OpponentAbsent":
+        return false
+    }
   }
 }

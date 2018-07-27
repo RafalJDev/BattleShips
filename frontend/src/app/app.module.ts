@@ -27,7 +27,7 @@ import {OpponentBoardComponent} from './views/boards/opponent-board/opponent-boa
 import {RequestExecutor} from "./rest/request-executor"
 import {ShotSender} from "./rest/post/shot-sender"
 import {LoginRequestSender} from "./rest/post/login-request"
-import {PlayersService} from "./services/players-service.service"
+import {PlayersService} from "./services/player-identification/players-service.service"
 import {RegisteredPlayers} from "./rest/get/registered-players"
 import {OpponentAsker} from "./rest/get/opponent-asker"
 import {FirstRoundAsker} from "./rest/get/first-round-asker.service"
@@ -40,6 +40,9 @@ import {WaitingOpponentFleetComponent} from './views/waiting-rooms/waiting-oppon
 import {RoomListAsker} from "./rest/get/room-list-asker.service"
 import {FleetPlacingComponent} from './views/fleet-placing/fleet-placing.component'
 import {PlacingBoardComponent} from './views/fleet-placing/placing-board/placing-board.component'
+import {RoomsService} from "./services/player-identification/rooms-service"
+import {RoomCreateAsker} from "./rest/post/room-create-asker.service"
+import {RoomJoinAsker} from "./rest/get/room-join-asker"
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'configuration/player/name', pathMatch: 'full'},
@@ -105,6 +108,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               OpponentAsker,
               FirstRoundAsker,
               RoomListAsker,
+              RoomsService,
+              RoomCreateAsker,
+              RoomJoinAsker,
+              RoomsService
             ],
             bootstrap: [AppComponent],
           })

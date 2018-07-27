@@ -6,7 +6,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 
