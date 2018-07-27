@@ -45,15 +45,16 @@ export class RoomConfiguration implements OnDestroy, OnInit {
   
   tryCreateRoom() {
     let roomToCreateJson = JSON.stringify(this.roomToCreate)
+    
     this.createRoom.postCreateRoom(roomToCreateJson)
         .then(roomCreateResponse => {
-          let resultString = roomCreateResponse['result']
-      
-          this.responseRoomCreated = this.responseStringToBoolean(resultString)
+          this.responseRoomCreated = this.createRoom.responseToBoolean(roomCreateResponse)
+          console.log("isRoomCreated: " + this.responseRoomCreated)
+          
           if (this.responseRoomCreated) {
             this.roomsService.room = this.roomToCreate
+            this.router.navigate(['/waiting/opponent/register'])
           }
-      
         })
   }
   
@@ -62,9 +63,9 @@ export class RoomConfiguration implements OnDestroy, OnInit {
     
     this.roomJoinAsker.getCanPlayerJoinRoom()
         .then(joinResponse => {
-          let joinResponseString = joinResponse['result']
-          this.responseJoinedToRoom = this.responseStringToBoolean(joinResponseString)
-  
+      
+          this.responseJoinedToRoom = this.roomJoinAsker.responseToBoolean(joinResponse)
+      
           if (this.responseJoinedToRoom) {
             this.router.navigate(['/game/fleet/placing'])
           }
@@ -76,15 +77,6 @@ export class RoomConfiguration implements OnDestroy, OnInit {
         .subscribe(roomArr => {
           this.rooms.roomArray = roomArr
         })
-  }
-  
-  private responseStringToBoolean(result: string): boolean {
-    switch (result) {
-      case "Ok":
-        return true
-      case "Wrong":
-        return false
-    }
   }
   
 }

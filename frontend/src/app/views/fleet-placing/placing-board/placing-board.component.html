@@ -8,16 +8,21 @@
   <div *ngFor="let row of placedBoard.board;let rowIndex = index"
        class="row row{{rowIndex}}"
   >
-    <div *ngFor="let cell of row.row; let x = index"
-         class="square square{{rowIndex}}{{x}}"
-         draggable="true"
-         (dragenter)="dragShipService.dragEnter()"
-         (dragexit)="dragShipService.dragExit()"
+    <div *ngFor="let cell of row.row; let columnIndex = index"
+         class="square square{{rowIndex}}{{columnIndex}}"
     >
       <div class="inner-color-before-shot inner-color-locator"
+           [draggable]="true"
+           (dragenter)="dragPlacingBoard.dragEnter($event, placedBoard, rowIndex, columnIndex)"
+           (dragleave)="dragPlacingBoard.dragLeave($event, placedBoard, rowIndex, columnIndex)"
       >
         <div *ngIf="cell.isShipHere()"
              class="ship ship1"
+
+             [draggable]="true"
+
+             (dragstart)="dragPlacingBoard.dragStart($event)"
+             (dragend)="dragPlacingBoard.dragEnd($event)"
         >
         </div>
       </div>

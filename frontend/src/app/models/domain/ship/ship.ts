@@ -1,4 +1,4 @@
-import {Coordinate} from "./coordinate/coordinate";
+import {Coordinate} from "./coordinate/coordinate"
 
 export class Ship {
   readonly coordinates: Array<Coordinate>;
@@ -11,4 +11,5 @@ export class Ship {
   public addMast(coordinate: Coordinate) {
     this.coordinates.push(coordinate);
   }
+  
 }
