@@ -12,7 +12,7 @@ import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 @Service
 public class ShotResultCheckerServiceImpl implements ShotResultCheckerService {
     private final CoordinateDTOtoCoordinates coordinateDTOtoCoordinates;
-    
+
     public ShotResultCheckerServiceImpl(
             CoordinateDTOtoCoordinates coordinateDTOtoCoordinates) {
         this.coordinateDTOtoCoordinates = coordinateDTOtoCoordinates;

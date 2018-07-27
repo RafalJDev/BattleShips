@@ -9,7 +9,10 @@ import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.OpponentPresentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Room {
     private String roomName;
@@ -35,11 +38,6 @@ public class Room {
 
     public Game getGame() {
         return game;
-    }
-    
-    public List<Player> getPlayerList(){
-        List<Player> playerList=new ArrayList<>(playerSet);
-        return Collections.unmodifiableList(playerList);
     }
 
     public synchronized WaiterResponseDTO areBothPlayers() {

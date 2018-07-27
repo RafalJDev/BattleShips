@@ -6,7 +6,7 @@ import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipFromJson;
 class ShipDirectionChecker {
     static Direction whatDirection(ShipFromJson shipFromJson) {
         CoordinatesFromJson[] coordinatesFromJsonArray = shipFromJson.getCoordinates();
-        if (coordinatesFromJsonArray.length==1){
+        if (coordinatesFromJsonArray.length == 1) {
             return Direction.ONE_MAST;
         }
         if (coordinatesFromJsonArray[0].getX() + 1 == coordinatesFromJsonArray[1].getX() &&

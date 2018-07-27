@@ -13,7 +13,6 @@ public class Game {
     private TurnHolder turnHolder = new TurnHolder();
 
     public void initializeGame(Player playerA, Player playerB) {
-        System.out.println("Inicjalizacja gry:"+playerA.getName()+" "+playerB.getName());
         addPlayer(playerA);
         addPlayer(playerB);
     }
