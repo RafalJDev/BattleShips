@@ -20,7 +20,7 @@ public class RoomHolder {
         return Collections.unmodifiableList(roomList);
     }
 
-    JoinResultDTO joinPlayer(String roomName, Player player) {
+    public JoinResultDTO joinPlayer(String roomName, Player player) {
         final Room room = roomNameToRoomMap.get(roomName);
         return room.joinPlayer(player);
     }
