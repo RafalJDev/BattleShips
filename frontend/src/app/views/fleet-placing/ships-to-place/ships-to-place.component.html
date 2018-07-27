@@ -3,24 +3,25 @@
 </p>
 
 <div class="container">
-  <div *ngFor="let ships of availableShips.shipsWithSomeMast"
+  <div *ngFor="let ships of availableShips.shipsWithSomeMast;let arrayMastIndex = index"
   >
-    Mast count: {{5-ships.length}}
+    Mast count: {{arrayMastIndex + 1}}
 
-    <div
-      [style.width]="(5-ships.length)*130+'px'"
+    <div [ngStyle]="{'display':'flex','flex-direction': 'row','justify-content':'space-evenly'}"
+         [style.width]="(ships.length) * (arrayMastIndex + 1) * 36 + 'px'"
     >
 
-      <div *ngFor="let ship of ships"
-
-           [ngStyle]="{'display':'flex','flex-direction': shipDirectionHorizontal ? 'row ': 'column',
-           'justify-content':'space-evenly'}"
-           [style.width]="(ship.mastCount+1)*35+'px'"
+      <div *ngFor="let ship of ships;let shipInArrayIndex = index"
+           [style.width]="(ship.mastCount + 1) * 35 + 'px'"
       >
         Ship:
         <div draggable="true"
-             (dragstart)="dragShipService.dragStart($event, ships)"
-             (dragend)="dragShipService.dragEnd($event)"
+
+             (dragstart)="dragShipService.dragStart($event, availableShips, arrayMastIndex, shipInArrayIndex)"
+             (dragend)="dragShipService.dragEnd($event,availableShips, arrayMastIndex, shipInArrayIndex)"
+
+             [ngStyle]="{'display':'flex','flex-direction': shipDirectionHorizontal ? 'row ': 'column',
+           'justify-content':'space-evenly'}"
         >
           <div *ngFor="let mast of ship.mastArray"
           >
@@ -38,5 +39,5 @@
 <mat-button-toggle class="col-12"
                    (click)="changeShipsDirection()"
 >
-  TODO
+  TODO: Change ship to place direction
 </mat-button-toggle>

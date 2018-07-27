@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 import {ShipGenerator} from "../../../services/ship-generator/ship-generator.service"
 import {BoardOfCells} from "../../../models/domain/board/board-of-cells"
 import {ShipSender} from "../../../rest/post/ship-sender"
-import {DragShipService} from "../../../services/drag-ship/drag-ship.service"
+import {DragShipsToPlace} from "../../../services/drag-ship/drag-ships-to-place.service"
 import {BoardTransferSingelton} from "../../fleet-placing/transfer-class/board-transfer-singelton"
 
 @Component({
@@ -24,7 +24,7 @@ export class PlayerBoardComponent implements OnInit {
   boardDivEmitter = new EventEmitter<Element>();
 
   constructor(private shipGenerator: ShipGenerator, private shipSender: ShipSender,
-              public dragShipService: DragShipService) {
+              public dragShipService: DragShipsToPlace) {
     this.shipGenerator = new ShipGenerator();
   }
 

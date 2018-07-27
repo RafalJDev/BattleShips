@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {IndexRandomGenerator} from "../index-random-generator/index-random-generator.service";
-import {CoordinateChecker} from "./coordinate-checker.service";
-import {CoordinatesOnSurrounding} from "./coordinate-on-surronding";
-import {BoardOfCells} from "../../../models/domain/board/board-of-cells";
-import {Coordinate} from "../../../models/domain/ship/coordinate/coordinate";
+import {Injectable} from "@angular/core"
+import {IndexRandomGenerator} from "../index-random-generator/index-random-generator.service"
+import {CoordinateChecker} from "./coordinate-checker.service"
+import {CoordinatesOnSurrounding} from "./coordinate-on-surronding"
+import {BoardOfCells} from "../../../models/domain/board/board-of-cells"
+import {Coordinate} from "../../../models/domain/ship/coordinate/coordinate"
 
 @Injectable()
 export class CoordinateRandomGenerator {
@@ -34,7 +34,7 @@ export class CoordinateRandomGenerator {
     return new Coordinate(rowIndex, columnIndex);
   }
   
-  private isThereShipInSurrounding(coordinate: Coordinate,
+  public isThereShipInSurrounding(coordinate: Coordinate,
                                    board: BoardOfCells,
                                    mastCount: number,
                                    isHorizontal: boolean): boolean {

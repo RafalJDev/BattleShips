@@ -9,42 +9,31 @@ import {Router} from "@angular/router"
            })
 export class WaitingOpponentRegisterComponent implements OnDestroy {
   
-  
   askerInterval
   
   constructor(private opponentPresentAsker: OpponentPresentAsker, private router: Router) {
     
-    this.askForRoomListInInterval(null)
+    this.askIsOpponentPresentInterval()
   }
   
   ngOnDestroy() {
     clearInterval(this.askerInterval)
   }
   
-  askForRoomListInInterval(opponentInRoomAsker) {
+  askIsOpponentPresentInterval() {
     this.askerInterval = setInterval(() => {
       console.log("Callback to know if opponent is in room")
       
       this.opponentPresentAsker.getOpponenIsPresent()
           .then(opponentPresentResponse => {
-        
-            let opponentPresentString = opponentPresentResponse['result']
-            let opponentPresent: boolean = this.responseStringToBoolean(opponentPresentString)
+            //todo 27.8 lambda body to method, but I don't know if it work with interval
+            let opponentPresent: boolean = this.opponentPresentAsker.responseToBoolean(opponentPresentResponse)
         
             if (opponentPresent) {
               this.router.navigate(['/game/fleet/placing'])
-              // clearInterval(this.askerInterval)
             }
           })
     }, 500)
   }
   
-  private responseStringToBoolean(result: string): boolean {
-    switch (result) {
-      case "OpponentPresent":
-        return true
-      case "OpponentAbsent":
-        return false
-    }
-  }
 }

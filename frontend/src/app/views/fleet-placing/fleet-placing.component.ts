@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core'
 import {ShipSender} from "../../rest/post/ship-sender"
 import {ShipArray} from "../../models/domain/ship/ship-array"
 import {BoardTransferSingelton} from "./transfer-class/board-transfer-singelton"
+import {Router} from "@angular/router"
+import {GameStartAsker} from "../../rest/get/game-start-asker"
 
 @Component({
              selector: 'app-fleet-placing',
@@ -10,9 +12,11 @@ import {BoardTransferSingelton} from "./transfer-class/board-transfer-singelton"
            })
 export class FleetPlacingComponent implements OnInit {
   
-  shipResponse: string
+  private shipResponse: string
   
-  constructor(private shipSender: ShipSender) {
+  private shipResultBoolean: boolean
+  
+  constructor(private shipSender: ShipSender, private gameStartAsker:GameStartAsker,private router: Router) {
   }
   
   ngOnInit() {
@@ -29,20 +33,30 @@ export class FleetPlacingComponent implements OnInit {
   }
   
   sendShipsToValidateOnBackend() {
-    
     let shipArray: ShipArray = BoardTransferSingelton.getInstance().shipArray
-    
     const shipArrayJson = JSON.stringify(shipArray)
     
     console.log(shipArrayJson)
     
     this.shipSender.postShip(shipArrayJson)
         .then(result => {
-          let shipResultResponse = result['result']
+          //todo extract to method
+          console.log("shipResultResponse: " + result['result'])
       
-          console.log("shipResultResponse: " + shipResultResponse)
-      
+          this.shipResultBoolean = this.shipSender.responseToBoolean(result)
+  
+          if (this.shipResultBoolean) {
+            this.router.navigate(['/game/board'])
+    
+          }
         })
+  }
+  
+  private askIfCanStartGame() {
+  this.gameStartAsker.getGameStartResult()
+      .then(gameStartResult=>{
+      
+      })
   }
   
 }

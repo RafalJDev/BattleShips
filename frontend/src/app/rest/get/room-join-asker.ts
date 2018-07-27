@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http"
+import {HttpClient, HttpEvent} from "@angular/common/http"
 import {GetRequestExecutor} from "./get-request-executor"
 import {PlayersService} from "../../services/player-identification/players-service.service"
 import {RoomsService} from "../../services/player-identification/rooms-service"
@@ -17,6 +17,17 @@ export class RoomJoinAsker extends GetRequestExecutor {
     //todo 27.7 REST API turn to round
     return this.get(this.hostUrl + "/room/join?playerName=" + this.playersService.whoami.name +
       "&roomName=" + this.roomsService.room.roomName)
-
   }
+  
+  responseToBoolean(joinResponse: HttpEvent<string>): boolean {
+    let joinResponseString = joinResponse['result']
+    
+    switch (joinResponseString) {
+      case "Ok":
+        return true
+      case "Wrong":
+        return false
+    }
+  }
+  
 }

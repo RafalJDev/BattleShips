@@ -8,16 +8,21 @@
 
   </app-placing-board>
 
-  <app-ships-to-place>
-
-  </app-ships-to-place>
+  <br>
+  <br>
 
   <mat-button-toggle class="col-12"
-                     routerLink="/game/board"
                      *ngIf="isThereShipsToSend()"
                      (click)="sendShipsToValidateOnBackend()"
   >
     {{ 'FLEET-PLACING.BUTTON' | translate }}
   </mat-button-toggle>
+
+  <br>
+  <br>
+
+  <app-ships-to-place>
+
+  </app-ships-to-place>
 
 </div>

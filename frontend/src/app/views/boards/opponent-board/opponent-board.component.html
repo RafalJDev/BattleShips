@@ -1,7 +1,7 @@
 <div #boardDiv
      class="field col-12"
 >
-  <div *ngFor="let row of opponentBoard.board;let rowIndex = index"
+  <div *ngFor="let row of opponentBoard.board;"
        class="row row{{rowIndex}}"
   >
     <div *ngFor="let cell of row.row; let columnIndex = index"
