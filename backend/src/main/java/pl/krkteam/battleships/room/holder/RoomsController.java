@@ -51,7 +51,7 @@ public class RoomsController {
         Player roomCreatorPlayer = new Player(playerName);
 
         final String roomName = roomDTO.getRoomName();
-        CreateResultDTO createResultDTO = roomHolder.createRoom(roomCreatorPlayer, roomName);
+        CreateResultDTO createResultDTO = roomHolder.createRoomAndJoinPlayer(roomCreatorPlayer, roomName);
 
         return gson.toJson(createResultDTO);
     }

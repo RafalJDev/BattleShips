@@ -83,9 +83,13 @@ public class ShipController {
 
     private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
                                                   GameBoard playerGameBoard) {
-        if (placingValidationResultDTO.getResult()
-                .equals(PlacingValidationResultDTO.Result.WRONG)) {
+        if (isPlacingInvalid(placingValidationResultDTO)) {
             playerGameBoard.reset();
         }
+    }
+
+    private boolean isPlacingInvalid(PlacingValidationResultDTO placingValidationResultDTO) {
+        return placingValidationResultDTO.getResult()
+                .equals(PlacingValidationResultDTO.Result.WRONG);
     }
 }

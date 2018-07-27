@@ -84,7 +84,7 @@ public class RoomsControllerTest {
         Gson gson = new Gson();
         final String roomJson = gson.toJson(roomDTO);
 
-        when(roomHolder.createRoom(any(), eq("SomeRoom")))
+        when(roomHolder.createRoomAndJoinPlayer(any(), eq("SomeRoom")))
                 .thenReturn(new CreateRoomOkDTO());
 
         mockMvc.perform(post("/room/create")
@@ -93,7 +93,7 @@ public class RoomsControllerTest {
                 .andExpect(status()
                         .is2xxSuccessful());
 
-        verify(roomHolder, times(1)).createRoom(any(), anyString());
+        verify(roomHolder, times(1)).createRoomAndJoinPlayer(any(), anyString());
     }
 
 }

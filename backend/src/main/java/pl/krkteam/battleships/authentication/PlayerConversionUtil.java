@@ -7,14 +7,8 @@ import java.util.Collection;
 
 public class PlayerConversionUtil {
 
-    public static PlayerDTO convertPlayerToPlayerDTO(Player playerDAO) {
-        PlayerDTO result = new PlayerDTO();
-        result.name = playerDAO.getName();
-        return result;
-    }
-
     public static Player convertPlayerDTOtoPlayer(PlayerDTO playerDTO) {
-        return new Player(playerDTO.name);
+        return new Player(playerDTO.getName());
     }
 
     public static PlayerDTO[] convertPlayerToPlayerDTOs(Collection<Player> playerCollection) {

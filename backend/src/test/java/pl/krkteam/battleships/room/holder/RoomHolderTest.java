@@ -30,8 +30,8 @@ public class RoomHolderTest {
         Player playerA = new Player("SomePlayerA");
         Player playerB = new Player("SomePlayerB");
         List<String> roomNamesList = Arrays.asList("SomeRoom1", "SomeRoom2");
-        roomHolder.createRoom(playerA, roomNamesList.get(0));
-        roomHolder.createRoom(playerB, roomNamesList.get(1));
+        roomHolder.createRoomAndJoinPlayer(playerA, roomNamesList.get(0));
+        roomHolder.createRoomAndJoinPlayer(playerB, roomNamesList.get(1));
 
         final List<String> returnedRoomNamesList = roomHolder.getRoomList()
                 .stream()
@@ -45,11 +45,11 @@ public class RoomHolderTest {
     public void createRoomEndExpectSecondPlayerJoined() {
         String roomName = "SomeRoom";
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
 
         Player playerB = new Player("SomePlayerB");
-        assertEquals(roomHolder.joinPlayer(roomName, playerB).getResult()
-                , new JoinResultOkDTO().getResult());
+        assertEquals(roomHolder.joinPlayer(roomName, playerB).getResult(),
+                new JoinResultOkDTO().getResult());
     }
 
     @Test
@@ -57,13 +57,13 @@ public class RoomHolderTest {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
         Player playerB = new Player("SomePlayerB");
         roomHolder.joinPlayer(roomName, playerB);
 
         Player playerC = new Player("PlayerC");
-        assertEquals(roomHolder.joinPlayer(roomName, playerC).getResult()
-                , new JoinResultWrongDTO().getResult());
+        assertEquals(roomHolder.joinPlayer(roomName, playerC).getResult(),
+                new JoinResultWrongDTO().getResult());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class RoomHolderTest {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
         Player playerB = new Player("SomePlayerB");
         roomHolder.joinPlayer(roomName, playerB);
 
@@ -84,7 +84,7 @@ public class RoomHolderTest {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
 
         assertEquals(roomHolder.isOpponentInRoom(roomName, playerA).getResponse(),
                 new OpponentAbsentDTO().getResponse());
@@ -95,7 +95,7 @@ public class RoomHolderTest {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
         Player playerB = new Player("SomePlayerB");
         roomHolder.joinPlayer(roomName, playerB);
 
@@ -111,7 +111,7 @@ public class RoomHolderTest {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
 
         assertEquals(roomHolder.getRoom(roomName).getRoomName(), roomName);
     }
@@ -120,7 +120,7 @@ public class RoomHolderTest {
     public void createRoomAndTryGetFromRoomHolderNotExistingRoom() {
         String roomName = "SomeRoom";
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
 
         String notExistingRoomName = "BadRoom";
 
@@ -132,11 +132,11 @@ public class RoomHolderTest {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
-        roomHolder.createRoom(playerA, roomName);
+        roomHolder.createRoomAndJoinPlayer(playerA, roomName);
 
         Player playerB = new Player("SomePlayerB");
 
-        assertEquals(roomHolder.createRoom(playerB, roomName).getResult()
-                , new CreateRoomWrongDTO().getResult());
+        assertEquals(roomHolder.createRoomAndJoinPlayer(playerB, roomName).getResult(),
+                new CreateRoomWrongDTO().getResult());
     }
 }
