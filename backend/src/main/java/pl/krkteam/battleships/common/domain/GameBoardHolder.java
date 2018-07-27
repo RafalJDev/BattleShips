@@ -29,10 +29,12 @@ public class GameBoardHolder {
         return addPlayer(player, new GameBoard());
     }
 
-    ReadinessForPlayDTO areBothFleetsValid() {
+    public ReadinessForPlayDTO areBothFleetsValid(Player player) {
         if (playerGameBoardMap.size() != 2) {
             throw new IndexOutOfBoundsException("There are not enough players");
         }
+        checkIfPlayerBelongThisBoardHolder(player);
+
         if (playerGameBoardMap.values().stream().allMatch(GameBoard::isPlacedFleet)) {
             return new ReadyForPlayDTO();
         }
@@ -44,9 +46,8 @@ public class GameBoardHolder {
         if (player == null) {
             throw new IllegalArgumentException("Player cannot be null");
         }
-        if (!playerGameBoardMap.containsKey(player)) {
-            throw new NoSuchElementException("Given player does not belong to this holder");
-        }
+        checkIfPlayerBelongThisBoardHolder(player);
+
         return playerGameBoardMap.get(player);
     }
 
@@ -55,5 +56,11 @@ public class GameBoardHolder {
         List<Player> playerList = new ArrayList<>(playerSet);
         playerList.remove(player);
         return playerList.get(0);
+    }
+
+    private void checkIfPlayerBelongThisBoardHolder(Player player) {
+        if (!playerGameBoardMap.containsKey(player)) {
+            throw new NoSuchElementException("Given player does not belong to this holder");
+        }
     }
 }
