@@ -43,6 +43,7 @@ import {PlacingBoardComponent} from './views/fleet-placing/placing-board/placing
 import {RoomsService} from "./services/player-identification/rooms-service"
 import {RoomCreateAsker} from "./rest/post/room-create-asker.service"
 import {RoomJoinAsker} from "./rest/get/room-join-asker"
+import {OpponentPresentAsker} from "./rest/get/opponent-present-asker"
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'configuration/player/name', pathMatch: 'full'},
@@ -111,7 +112,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               RoomsService,
               RoomCreateAsker,
               RoomJoinAsker,
-              RoomsService
+              RoomsService,
+              OpponentPresentAsker,
             ],
             bootstrap: [AppComponent],
           })

@@ -14,21 +14,21 @@ export class WaitingOpponentRegisterComponent implements OnDestroy {
   
   constructor(private opponentPresentAsker: OpponentPresentAsker, private router: Router) {
     
-    this.askForRoomListInInterval(null)
+    this.askIsOpponentPresentInterval(opponentPresentAsker)
   }
   
   ngOnDestroy() {
     clearInterval(this.askerInterval)
   }
   
-  askForRoomListInInterval(opponentInRoomAsker) {
+  askIsOpponentPresentInterval(opponentInRoomAsker) {
     this.askerInterval = setInterval(() => {
       console.log("Callback to know if opponent is in room")
       
       this.opponentPresentAsker.getOpponenIsPresent()
           .then(opponentPresentResponse => {
         
-            let opponentPresentString = opponentPresentResponse['result']
+            let opponentPresentString = opponentPresentResponse['response']
             let opponentPresent: boolean = this.responseStringToBoolean(opponentPresentString)
         
             if (opponentPresent) {
