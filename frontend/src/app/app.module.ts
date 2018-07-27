@@ -46,6 +46,9 @@ import {RoomJoinAsker} from "./rest/get/room-join-asker"
 import {OpponentPresentAsker} from "./rest/get/opponent-present-asker"
 import {GameStartAsker} from "./rest/get/game-start-asker"
 import {DragPlacingBoard} from "./services/drag-ship/drag-placing-board"
+import {IndexRandomGenerator} from "./services/ship-generator/index-random-generator/index-random-generator.service"
+import {ShipSurroundingChecker} from "./services/ship-generator/coordinate-generator/ship-surrounding-checker"
+import {CoordinateRandomGenerator} from "./services/ship-generator/coordinate-generator/coordinate-random-generator.service"
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'configuration/player/name', pathMatch: 'full'},
@@ -118,6 +121,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               OpponentPresentAsker,
               GameStartAsker,
               DragPlacingBoard,
+              IndexRandomGenerator,
+              ShipSurroundingChecker,
+              CoordinateRandomGenerator,
             ],
             bootstrap: [AppComponent],
           })

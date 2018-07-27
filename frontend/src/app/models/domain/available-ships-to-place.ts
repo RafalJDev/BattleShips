@@ -13,7 +13,12 @@ export class AvailableShipsToPlace {
   }
   
   generateNoFleet() {
-    this.shipsWithSomeMast = []
+    // this.shipsWithSomeMast = []
+    
+    this.shipsWithSomeMast[0] = []
+    this.shipsWithSomeMast[1] = []
+    this.shipsWithSomeMast[2] = []
+    this.shipsWithSomeMast[3] = []
   }
   
   generateDefaultFullFleet() {
@@ -38,4 +43,7 @@ export class AvailableShipsToPlace {
     this.shipsWithSomeMast[arrayMastIndex].splice(shipInArrayIndex, 0, new ConfigurationShip(arrayMastIndex + 1))
   }
   
+  addShipWithMastCount(arrayMastCount: number) {
+    this.shipsWithSomeMast[arrayMastCount-1].push(new ConfigurationShip(arrayMastCount))
+  }
 }

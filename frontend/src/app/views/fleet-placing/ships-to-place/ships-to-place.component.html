@@ -2,10 +2,13 @@
   UNDER CONSTRUCTION
 </p>
 
-<div class="container">
+<div class="container"
+     draggable="true"
+     (dragenter)="dragShipService.dragEnter()"
+>
   <div *ngFor="let ships of availableShips.shipsWithSomeMast;let arrayMastIndex = index"
   >
-    Mast count: {{arrayMastIndex + 1}}
+    Ships with mast count: {{arrayMastIndex + 1}}
 
     <div [ngStyle]="{'display':'flex','flex-direction': 'row','justify-content':'space-evenly'}"
          [style.width]="(ships.length) * (arrayMastIndex + 1) * 36 + 'px'"

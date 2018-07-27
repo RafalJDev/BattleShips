@@ -21,8 +21,8 @@
 
              [draggable]="true"
 
-             (dragstart)="dragPlacingBoard.dragStart($event)"
-             (dragend)="dragPlacingBoard.dragEnd($event)"
+             (dragstart)="dragPlacingBoard.dragStart($event,rowIndex, columnIndex)"
+             (dragend)="dragPlacingBoard.dragEnd($event,rowIndex, columnIndex)"
         >
         </div>
       </div>

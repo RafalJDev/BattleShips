@@ -13,11 +13,9 @@ export class ShipGenerator {
   
   generatedShips: ShipArray;
   
-  readonly coordinateRandomGenerator: CoordinateRandomGenerator;
   private arrayOfMastToGenerate: Array<MastCount>;
   
-  constructor() {
-    this.coordinateRandomGenerator = new CoordinateRandomGenerator();
+  constructor(public coordinateRandomGenerator:CoordinateRandomGenerator) {
     
     this.generatedShips = new ShipArray();
   

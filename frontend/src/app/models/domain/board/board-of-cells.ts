@@ -35,7 +35,7 @@ export class BoardOfCells {
   }
   
   replaceCurrentCellContentWithWater(rowIndex, columnIndex) {
-    this.getRow(rowIndex)
+    this.getRow(rowIndex).putWaterOnCell(columnIndex)
   }
   
   putWaterOnCell(rowIndex, columnIndex) {

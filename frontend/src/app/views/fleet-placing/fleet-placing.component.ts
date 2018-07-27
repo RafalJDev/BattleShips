@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {ShipSender} from "../../rest/post/ship-sender"
 import {ShipArray} from "../../models/domain/ship/ship-array"
-import {BoardTransferSingelton} from "./transfer-class/board-transfer-singelton"
+import {BoardAndArrayTransfer} from "./transfer-class/board-and-array-transfer"
 import {Router} from "@angular/router"
 import {GameStartAsker} from "../../rest/get/game-start-asker"
 
@@ -29,11 +29,11 @@ export class FleetPlacingComponent implements OnInit {
   }
   
   isThereShipsToSend(): boolean {
-    return !(BoardTransferSingelton.getInstance().shipArray == undefined)
+    return !(BoardAndArrayTransfer.getInstance().shipArray == undefined)
   }
   
   sendShipsToValidateOnBackend() {
-    let shipArray: ShipArray = BoardTransferSingelton.getInstance().shipArray
+    let shipArray: ShipArray = BoardAndArrayTransfer.getInstance().shipArray
     const shipArrayJson = JSON.stringify(shipArray)
     
     console.log(shipArrayJson)

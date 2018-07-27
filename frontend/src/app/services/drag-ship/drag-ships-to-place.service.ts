@@ -1,65 +1,75 @@
 import {Injectable} from "@angular/core"
 import {AvailableShipsToPlace} from "../../models/domain/available-ships-to-place"
-import {ShipPlacementTransfer} from "../../views/fleet-placing/placing-board/placing-board.component"
 import {IndexVerification} from "../verification/index-verification"
 import {Ship} from "../../models/domain/ship/ship"
 import {ShipCreator} from "../ship-generator/ship-creator/ship-creator"
 import {ShipOnBoardPlacer} from "../ship-generator/ship-placer/ship-on-board-placer.service"
+import {ShipSurroundingChecker} from "../ship-generator/coordinate-generator/ship-surrounding-checker"
+import {ShipPlacementDataTransfer} from "../../views/fleet-placing/transfer-class/ship-placement-data-transfer"
+import {ShipOnArrayPlacer} from "../ship-generator/ship-placer/ship-on-array-placer"
+import {BoardAndArrayTransfer} from "../../views/fleet-placing/transfer-class/board-and-array-transfer"
 
 @Injectable()
 export class DragShipsToPlace {
   
-  shipPlacementTransfer: ShipPlacementTransfer = ShipPlacementTransfer.getInstance()
+  shipPlacementDataTransfer: ShipPlacementDataTransfer = ShipPlacementDataTransfer.getInstance()
   
-  constructor() {
+  boardAndArrayTransfer: BoardAndArrayTransfer = BoardAndArrayTransfer.getInstance()
+  
+  constructor(public shipSurroundingChecker: ShipSurroundingChecker) {
   }
   
   dragStart($event, availableShips: AvailableShipsToPlace, arrayMastIndex: number, shipInArrayIndex: number) {
-    // this.availableShips = availableShips
     console.log('Ship set')
     
-    this.shipPlacementTransfer.nowDraggedShip = availableShips.getShipOnIndex(arrayMastIndex, shipInArrayIndex)
-    
-    // availableShips.removeShipWithIndexes(arrayMastIndex, shipInArrayIndex)
+    this.shipPlacementDataTransfer.nowDraggedShip = availableShips.getShipOnIndex(arrayMastIndex, shipInArrayIndex)
   }
   
   dragEnd($event, availableShips: AvailableShipsToPlace, arrayMastIndex: number, shipInArrayIndex: number) {
     console.log("in dragEnd before if")
     
-    if (this.shipPlacementTransfer.isOnPlacingBaordComponent) {
+    if (this.shipPlacementDataTransfer.isOverPlacingBoardComponent) {
       
-      console.log("in isOnPlacingBaordComponent")
+      console.log("in isOverPlacingBoardComponent")
       
-      if (this.canShipBeSetHere()) {
+      let coordinate = this.shipPlacementDataTransfer.overCellCoordinate
+      let mastCount = this.shipPlacementDataTransfer.nowDraggedShip.getMastCount()
+      let isHorizontal = this.shipPlacementDataTransfer.isDraggedShipHorizontal
+      if (this.canShipBeSetHere(mastCount, isHorizontal)) {
         
         console.log("in dragEnd after ifs")
         
-        let coordinate = this.shipPlacementTransfer.overCellCoordinate
-        let mastCount = this.shipPlacementTransfer.nowDraggedShip.getMastCount()
-        let isHorizontal = this.shipPlacementTransfer.isDraggedShipHorizontal
-        
         const ship: Ship = ShipCreator.createShipWithHeadCoordinate(coordinate, mastCount, isHorizontal)
         
-        ShipOnBoardPlacer.placeShip(this.shipPlacementTransfer.placedBoard, ship)
+        ShipOnArrayPlacer.placeShip(this.boardAndArrayTransfer.shipArray, ship)
+        ShipOnBoardPlacer.placeShip(this.boardAndArrayTransfer.placedBoard, ship)
+        
         availableShips.removeShipWithIndexes(arrayMastIndex, shipInArrayIndex)
       }
     }
     
-    this.shipPlacementTransfer.isOnPlacingBaordComponent = false
-    this.shipPlacementTransfer.overCellCoordinate = null
+    this.shipPlacementDataTransfer.isOverPlacingBoardComponent = false
+    this.shipPlacementDataTransfer.overCellCoordinate = null
   }
   
-  canShipBeSetHere(): boolean {
-    let boardOfCells = this.shipPlacementTransfer.placedBoard
-    let rowIndex = this.shipPlacementTransfer.overCellCoordinate.rowIndex
-    let columnIndex = this.shipPlacementTransfer.overCellCoordinate.columnIndex
+  dragEnter() {
+    this.shipPlacementDataTransfer.isOverShipsToPlaceComponent = true
     
-    if (boardOfCells.isShipOnCell(rowIndex, columnIndex)) {
+  }
+  
+  private canShipBeSetHere(mastCount: number, isHorizontal: boolean): boolean {
+    let boardOfCells = this.boardAndArrayTransfer.placedBoard
+    let overCellCoordinate = this.shipPlacementDataTransfer.overCellCoordinate
+    let rowIndex = overCellCoordinate.rowIndex
+    let columnIndex = overCellCoordinate.columnIndex
+    
+    if (this.shipSurroundingChecker.isThereShipInSurrounding(overCellCoordinate, boardOfCells,
+                                                             mastCount, isHorizontal)) {
       return false
     }
     
-    let validBoardSize = 10 - this.shipPlacementTransfer.nowDraggedShip.getMastCount() + 1
-    if (this.shipPlacementTransfer.isDraggedShipHorizontal) {
+    let validBoardSize = 10 - this.shipPlacementDataTransfer.nowDraggedShip.getMastCount() + 1
+    if (this.shipPlacementDataTransfer.isDraggedShipHorizontal) {
       return IndexVerification.isInRangeForBoardSize(validBoardSize, columnIndex)
     } else {
       return IndexVerification.isInRangeForBoardSize(validBoardSize, rowIndex)
