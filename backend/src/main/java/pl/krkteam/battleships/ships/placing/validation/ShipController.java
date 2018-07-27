@@ -17,73 +17,93 @@ import pl.krkteam.battleships.ships.placing.validation.services.ShipsPlacingVali
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShipController {
-
+    
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
     private final RoomHolder roomHolder;
-
-
-    public ShipController(
-            ShipsPlacingValidatorService shipsLocationValidatorService,
-            ShipsToShipHolder shipsToShipHolder, RoomHolder roomHolder) {
+    
+    public ShipController(ShipsPlacingValidatorService shipsLocationValidatorService,
+                          ShipsToShipHolder shipsToShipHolder,
+                          RoomHolder roomHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
         this.shipsToShipHolder = shipsToShipHolder;
         this.roomHolder = roomHolder;
     }
-
+    
     @PostMapping(value = "/post/ships")
     public String communicateWithAngularByPostingShip(@RequestBody String post) {
-
+        
         Gson gson = new Gson();
-
+        
         ShipFromFronted shipFromFronted = gson.fromJson(post, ShipFromFronted.class);
-
+        
         System.out.println(shipFromFronted);
-
+        
         return "{\"message\": \"Cry Germoney!\"}";
     }
-
+    
     @PostMapping(value = "/ships")
     public String validateAndSaveShips(@RequestBody String shipsJson,
-                                       @RequestParam String playerName, @RequestParam String roomName) {
-
+                                       @RequestParam String playerName,
+                                       @RequestParam String roomName) {
+        
+        System.out.println("/Ships: playerName: " + playerName + " ,roomName: " + roomName);
+        
+        System.out.println("HERE");
+        
+        roomHolder.getRoomList()
+                  .forEach(room ->
+                               System.out.println("room: " + room.getRoomName()));
+        System.out.println("HERE2");
+    
+        roomHolder.getRoomList()
+                  .stream()
+                  .forEach(room -> room.getPlayerList()
+                                       .stream()
+                                       .forEach(player -> System.out.println(player.getName())));
+    
+    
         GameBoard playerGameBoard = prepareGameBoard(playerName, roomName);
-
+        
         final ShipHolderFromJson shipHolderFromJson = createShipHolderFromJson(shipsJson);
-
-        final PlacingValidationResultDTO placingValidationResultDTO =
-                shipsLocationValidatorService.validateShipLocation(shipHolderFromJson, playerGameBoard);
-
+        
+        final PlacingValidationResultDTO placingValidationResultDTO = shipsLocationValidatorService
+            .validateShipLocation(
+            shipHolderFromJson,
+            playerGameBoard);
+        
         resetGameBoardIfValidationFailed(placingValidationResultDTO, playerGameBoard);
-
+        
         Gson gson = new Gson();
         return gson.toJson(placingValidationResultDTO);
     }
-
+    
     private ShipHolderFromJson createShipHolderFromJson(String postData) {
         Gson gson = new Gson();
         final ShipHolderDTO shipHolderDTO = gson.fromJson(postData, ShipHolderDTO.class);
         return shipsToShipHolder.convert(shipHolderDTO);
     }
-
+    
     private GameBoard prepareGameBoard(String playerName, String roomName) {
-
+        
         final Game game = getGameFromRoom(roomName);
         final GameBoardHolder gameBoardHolder = game.getGameBoardHolder();
-
+        
         Player player = new Player(playerName);
         GameBoard playerGameBoard = gameBoardHolder.getGameBoard(player);
         playerGameBoard.reset();
         return playerGameBoard;
     }
-
+    
     private Game getGameFromRoom(String roomName) {
-        return roomHolder.getRoom(roomName).getGame();
+        return roomHolder.getRoom(roomName)
+                         .getGame();
     }
-
+    
     private void resetGameBoardIfValidationFailed(PlacingValidationResultDTO placingValidationResultDTO,
                                                   GameBoard playerGameBoard) {
-        if (placingValidationResultDTO.getResult().equals(PlacingValidationResultDTO.Result.WRONG)) {
+        if (placingValidationResultDTO.getResult()
+                                      .equals(PlacingValidationResultDTO.Result.WRONG)) {
             playerGameBoard.reset();
         }
     }

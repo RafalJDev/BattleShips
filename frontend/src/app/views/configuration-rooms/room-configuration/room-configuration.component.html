@@ -3,14 +3,29 @@
 </p>
 
 <mat-list>
-  <mat-list-item *ngFor="let room of rooms.roomArray; let roomNumber = index">
-    <p>{{roomNumber}}:{{room.name}}</p>
+  <mat-list-item *ngFor="let room of rooms.roomArray; let roomNumber = index"
+                 (click)="joinThatRoom(room.roomName)">
+    <p>
+      {{roomNumber}}: {{room.roomName}}
+    </p>
   </mat-list-item>
 </mat-list>
 
+<mat-input-container class="col-12">
+
+  <input type="text" matInput [(ngModel)]="roomToCreate.roomName" placeholder="Room to createname:">
+</mat-input-container>
+
 <mat-button-toggle class="col-12"
-                   *ngIf="isThereRooms()"
+                   (click)="tryCreateRoom()"
+>
+  Try create room
+</mat-button-toggle>
+
+
+<mat-button-toggle class="col-12"
+                   *ngIf="responseRoomCreated"
                    routerLink="/waiting/opponent/register"
 >
-  {{ 'CONFIGURATION.ROOM.BUTTON' | translate }}
+  Room Created ! You can go to wait for opponent
 </mat-button-toggle>

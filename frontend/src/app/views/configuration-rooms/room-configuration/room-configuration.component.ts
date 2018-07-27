@@ -1,86 +1,90 @@
-import {Component, OnDestroy} from '@angular/core'
-import {RoomListAsker} from "../../../rest/get/room-list-asker.service"
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {RoomsService} from "../../../services/player-identification/rooms-service"
+import {RoomCreateAsker} from "../../../rest/post/room-create-asker.service"
+import {RoomDTO} from "../../../models/dto/room/room-DTO"
+import {Rooms} from "../../../models/dto/room/rooms"
+import {RoomJoinAsker} from "../../../rest/get/room-join-asker"
+import {Router} from "@angular/router"
 
 @Component({
              selector: 'app-room-configuration',
              templateUrl: './room-configuration.component.html',
              styleUrls: ['./room-configuration.component.css'],
            })
-export class RoomConfiguration implements OnDestroy{
+export class RoomConfiguration implements OnDestroy, OnInit {
   
   rooms: Rooms
   
-  askerInterval;
+  roomToCreate: RoomDTO
   
-  constructor(public roomListAsker: RoomListAsker) {
-    this.rooms = Rooms.ofEmpty()
+  responseRoomCreated: boolean = false
+  responseJoinedToRoom: boolean = false
   
+  askerInterval
+  
+  constructor(public roomsService: RoomsService, private createRoom: RoomCreateAsker,
+              private roomJoinAsker: RoomJoinAsker, private router: Router) {
     this.rooms = Rooms.ofRoomForTest()
-  
-    this.askForRoomListInInterval(roomListAsker)
+    this.roomToCreate = new RoomDTO("")
+    
+    this.askForRoomListInConstructor()
   }
   
   ngOnDestroy() {
-    clearInterval(this.askerInterval);
+    clearInterval(this.askerInterval)
   }
   
-  askForRoomListInInterval(roomListAsker: RoomListAsker) {
-    this.askerInterval = setInterval(() => {
-      console.log("Callback to get room list");
-  
-      this.rooms = Rooms.ofRoomForTest()
-  
-      clearInterval(this.askerInterval);
-    }, 500);
+  ngOnInit(): void {
+    this.askerInterval =
+      setInterval(() =>
+                    this.roomsService.getRooms()
+                        .subscribe(roomArr => {
+                          this.rooms.roomArray = roomArr
+                        }), 2000)
   }
   
-  isThereRooms(): boolean {
-    return this.rooms.isRoomArrayNotEmpty()
-  }
-}
-
-
-
-export class Rooms {
-  
-  roomArray: Array<Room>
-  
-  constructor(roomArray: Array<Room>) {
-    this.roomArray = roomArray
-  }
-  
-  static ofEmpty(): Rooms {
-    return new Rooms([])
+  tryCreateRoom() {
+    let roomToCreateJson = JSON.stringify(this.roomToCreate)
+    this.createRoom.postCreateRoom(roomToCreateJson)
+        .then(roomCreateResponse => {
+          let resultString = roomCreateResponse['result']
+      
+          this.responseRoomCreated = this.responseStringToBoolean(resultString)
+          if (this.responseRoomCreated) {
+            this.roomsService.room = this.roomToCreate
+          }
+      
+        })
   }
   
-  static ofRoomForTest(): Rooms {
-    let rooms = this.ofEmpty()
-    rooms.putRoomOfName("First Room")
-    rooms.putRoomOfName("Second Room")
-    return rooms
+  joinThatRoom(roomName: string) {
+    this.roomsService.room = new RoomDTO(roomName)
+    
+    this.roomJoinAsker.getCanPlayerJoinRoom()
+        .then(joinResponse => {
+          let joinResponseString = joinResponse['result']
+          this.responseJoinedToRoom = this.responseStringToBoolean(joinResponseString)
+  
+          if (this.responseJoinedToRoom) {
+            this.router.navigate(['/game/fleet/placing'])
+          }
+        })
   }
   
-  putRoom(room: Room) {
-    this.roomArray.push(room)
+  askForRoomListInConstructor() {
+    this.roomsService.getRooms()
+        .subscribe(roomArr => {
+          this.rooms.roomArray = roomArr
+        })
   }
   
-  putRoomOfName(roomName: string) {
-    this.roomArray.push(new Room(roomName))
+  private responseStringToBoolean(result: string): boolean {
+    switch (result) {
+      case "Ok":
+        return true
+      case "Wrong":
+        return false
+    }
   }
   
-  isRoomArrayNotEmpty(): boolean {
-    return !this.isRoomArrayEmpty()
-  }
-  
-  isRoomArrayEmpty(): boolean {
-    return this.roomArray.length == 0
-  }
-}
-
-export class Room {
-  name: string
-  
-  constructor(name: string) {
-    this.name = name
-  }
 }
