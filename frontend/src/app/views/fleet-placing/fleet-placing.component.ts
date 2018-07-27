@@ -16,7 +16,7 @@ export class FleetPlacingComponent implements OnInit {
   
   private shipResultBoolean: boolean
   
-  constructor(private shipSender: ShipSender, private gameStartAsker:GameStartAsker,private router: Router) {
+  constructor(private shipSender: ShipSender, private gameStartAsker: GameStartAsker, private router: Router) {
   }
   
   ngOnInit() {
@@ -44,19 +44,24 @@ export class FleetPlacingComponent implements OnInit {
           console.log("shipResultResponse: " + result['result'])
       
           this.shipResultBoolean = this.shipSender.responseToBoolean(result)
-  
+      
           if (this.shipResultBoolean) {
-            this.router.navigate(['/game/board'])
-    
+            this.askIfCanStartGame()
           }
         })
   }
   
   private askIfCanStartGame() {
-  this.gameStartAsker.getGameStartResult()
-      .then(gameStartResult=>{
+    this.gameStartAsker.getGameStartResult()
+        .then(gameStartResult => {
+          let startGameResultBoolean = this.gameStartAsker.responseToBoolean(gameStartResult)
       
-      })
+          if (startGameResultBoolean) {
+            this.router.navigate(['/game/board'])
+          } else {
+            this.router.navigate(['/waiting/opponent/fleet'])
+          }
+        })
   }
   
 }
