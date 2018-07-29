@@ -1,7 +1,8 @@
-import {StrategyOpponentShotResult} from "./strategy-opponent-shot-result";
-import {DOMCell} from "../../../../DOM/dom-cell";
-import {Round} from "../../../../../models/domain/player-turn/round";
-import {DomManipulator} from "../../../../DOM/dom-manipulator";
+import {StrategyOpponentShotResult} from "./strategy-opponent-shot-result"
+import {DOMCell} from "../../../../DOM/dom-cell"
+import {Round} from "../../../../../models/domain/player-turn/round"
+import {DomManipulator} from "../../../../DOM/dom-manipulator"
+import {MessageTransfer} from "../../../../../views/game/message-transfer/message-transfer"
 
 export class StrategyOpponentHit extends StrategyOpponentShotResult {
   
@@ -14,8 +15,8 @@ export class StrategyOpponentHit extends StrategyOpponentShotResult {
     DomManipulator.setShip(playerDomCell);
     
     round.nextRoundIsOpponentRound();
-    
-    console.log("In Opponent HIT handleResult!!!");
+  
+    MessageTransfer.getInstance().opponentBoardMessage = "Opponent did HIT your ship !"
   }
   
   resultNameJustForTesting(): string {

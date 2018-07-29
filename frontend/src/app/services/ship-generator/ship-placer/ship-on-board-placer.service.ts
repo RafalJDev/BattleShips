@@ -18,10 +18,9 @@ export class ShipOnBoardPlacer {
     coordinates.forEach(coordinate => {
       const rowIndex = coordinate.rowIndex
       const columnIndex = coordinate.columnIndex
-  
-      console.log("rowIndex: "+rowIndex)
-      console.log("columnIndex: "+columnIndex)
-  
+      
+      console.log("ShipOnBoardPlacer.removeShipFromBoard " + "rowIndex: " + rowIndex + " columnIndex: " + columnIndex)
+      
       board.putWaterOnCell(rowIndex, columnIndex)
     })
   }

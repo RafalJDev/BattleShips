@@ -20,9 +20,7 @@ export class DragShipsToPlace {
   }
   
   dragStart($event, availableShips: AvailableShipsToPlace, arrayMastIndex: number, shipInArrayIndex: number) {
-    console.log('Ship set')
-    
-    this.shipPlacementDataTransfer.nowDraggedShip = availableShips.getShipOnIndex(arrayMastIndex, shipInArrayIndex)
+    this.shipPlacementDataTransfer.nowDraggedConfigurationShip = availableShips.getShipOnIndex(arrayMastIndex, shipInArrayIndex)
   }
   
   dragEnd($event, availableShips: AvailableShipsToPlace, arrayMastIndex: number, shipInArrayIndex: number) {
@@ -33,7 +31,7 @@ export class DragShipsToPlace {
       console.log("in isOverPlacingBoardComponent")
       
       let coordinate = this.shipPlacementDataTransfer.overCellCoordinate
-      let mastCount = this.shipPlacementDataTransfer.nowDraggedShip.getMastCount()
+      let mastCount = this.shipPlacementDataTransfer.nowDraggedConfigurationShip.getMastCount()
       let isHorizontal = this.shipPlacementDataTransfer.isDraggedShipHorizontal
       if (this.canShipBeSetHere(mastCount, isHorizontal)) {
         
@@ -54,7 +52,7 @@ export class DragShipsToPlace {
   
   dragEnter() {
     this.shipPlacementDataTransfer.isOverShipsToPlaceComponent = true
-    
+    this.shipPlacementDataTransfer.isOverPlacingBoardComponent = false
   }
   
   private canShipBeSetHere(mastCount: number, isHorizontal: boolean): boolean {
@@ -68,7 +66,7 @@ export class DragShipsToPlace {
       return false
     }
     
-    let validBoardSize = 10 - this.shipPlacementDataTransfer.nowDraggedShip.getMastCount() + 1
+    let validBoardSize = 10 - this.shipPlacementDataTransfer.nowDraggedConfigurationShip.getMastCount() + 1
     if (this.shipPlacementDataTransfer.isDraggedShipHorizontal) {
       return IndexVerification.isInRangeForBoardSize(validBoardSize, columnIndex)
     } else {

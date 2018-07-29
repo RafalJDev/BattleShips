@@ -1,11 +1,8 @@
-<p>
-  UNDER CONSTRUCTION
-</p>
-
 <div class="container"
      draggable="true"
      (dragenter)="dragShipService.dragEnter()"
 >
+  <p>Drag ship here !</p>
   <div *ngFor="let ships of availableShips.shipsWithSomeMast;let arrayMastIndex = index"
   >
     Ships with mast count: {{arrayMastIndex + 1}}

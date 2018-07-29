@@ -1,7 +1,8 @@
-import {StrategyOpponentShotResult} from "./strategy-opponent-shot-result";
-import {DOMCell} from "../../../../DOM/dom-cell";
-import {Round} from "../../../../../models/domain/player-turn/round";
-import {DomManipulator} from "../../../../DOM/dom-manipulator";
+import {StrategyOpponentShotResult} from "./strategy-opponent-shot-result"
+import {DOMCell} from "../../../../DOM/dom-cell"
+import {Round} from "../../../../../models/domain/player-turn/round"
+import {DomManipulator} from "../../../../DOM/dom-manipulator"
+import {MessageTransfer} from "../../../../../views/game/message-transfer/message-transfer"
 
 export class StrategyOpponentMiss extends StrategyOpponentShotResult {
   
@@ -13,8 +14,8 @@ export class StrategyOpponentMiss extends StrategyOpponentShotResult {
     DomManipulator.colorCell(playerDomCell, "dimgray", "miss-locator");
   
     round.nextRoundIsPlayerRound();
-    
-    console.log("In Opponent MISS handleResult!!!");
+  
+    MessageTransfer.getInstance().opponentBoardMessage = "Opponent did MISS!"
   }
   
   resultNameJustForTesting(): string {

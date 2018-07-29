@@ -28,8 +28,8 @@ export class FleetPlacingComponent implements OnInit {
     console.log("Capture ship response: " + this.shipResponse)
   }
   
-  isThereShipsToSend(): boolean {
-    return !(BoardAndArrayTransfer.getInstance().shipArray == undefined)
+  isFleetPlaced(): boolean {
+    return BoardAndArrayTransfer.getInstance().shipArray.getShipArrayLength() == 10
   }
   
   sendShipsToValidateOnBackend() {

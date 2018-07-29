@@ -1,5 +1,5 @@
-import {Round} from "../../../../../models/domain/player-turn/round";
-import {DOMCell} from "../../../../DOM/dom-cell";
+import {Round} from "../../../../../models/domain/player-turn/round"
+import {DOMCell} from "../../../../DOM/dom-cell"
 
 export interface StrategyShotResult {
   

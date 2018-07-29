@@ -18,7 +18,7 @@ import {
 
 import {GameComponent} from "./views/game/game.component"
 import {ShipsToPlaceComponent} from "./views/fleet-placing/ships-to-place/ships-to-place.component"
-import {DragShipsToPlace} from "./services/drag-ship/drag-ships-to-place.service"
+import {DragShipsToPlace} from "./services/drag-ship/drag-ship-ships-to-place.service"
 import {BoardOfCells} from "./models/domain/board/board-of-cells"
 import {ShipGenerator} from "./services/ship-generator/ship-generator.service"
 import {ShipSender} from "./rest/post/ship-sender"
@@ -45,7 +45,7 @@ import {RoomCreateAsker} from "./rest/post/room-create-asker.service"
 import {RoomJoinAsker} from "./rest/get/room-join-asker"
 import {OpponentPresentAsker} from "./rest/get/opponent-present-asker"
 import {GameStartAsker} from "./rest/get/game-start-asker"
-import {DragPlacingBoard} from "./services/drag-ship/drag-placing-board"
+import {DragShipPlacingBoard} from "./services/drag-ship/drag-ship-placing-board"
 import {IndexRandomGenerator} from "./services/ship-generator/index-random-generator/index-random-generator.service"
 import {ShipSurroundingChecker} from "./services/ship-generator/coordinate-generator/ship-surrounding-checker"
 import {CoordinateRandomGenerator} from "./services/ship-generator/coordinate-generator/coordinate-random-generator.service"
@@ -120,7 +120,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
               RoomsService,
               OpponentPresentAsker,
               GameStartAsker,
-              DragPlacingBoard,
+              DragShipPlacingBoard,
               IndexRandomGenerator,
               ShipSurroundingChecker,
               CoordinateRandomGenerator,

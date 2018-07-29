@@ -9,10 +9,13 @@
 
   "CONFIGURATION":{
     "PLAYER-NAME":{
+      "H1": "Te Panie napisz Pan to jak Cię jakoś tam zwą, kumasz no nie ? Noo to napisz, nie czytaj tego więcej, na chuj Ci to, weź się zajmij czymś poważnym. TERAZ. BYE. SAJONARA",
       "BUTTON": "Zatwierdź imię i idź do ekranu wyboru pokoju"
     },
     "ROOM":{
-      "BUTTON": "Stwórz pokój"
+      "H1":"No to tak. Nie możesz nic tu zrobić, no dobra coś tam możesz. Ale myślisz drogi czytelniku, że Ci to podam na tacy ? Procedura wygląda tak: klękasz i kładziesz się iii...",
+      "H2":"Kliknij i WEJDŹ WE MNIE, JUŻ TERAZ ",
+      "BUTTON": "Stwórz pokój, ŻEBY KTOŚ MÓGŁ WEJŚC W ... NIEGO"
     }
   },
 
@@ -25,14 +28,21 @@
 
   "WAITING":{
     "OPPONENT-REGISTER": {
-      "BUTTON": "Przejdź do rozmieszaczania statków mordko"
+      "H2": "Znowu Ty ... Jeruna na ciul Tyś tu polozł"
     },
     "OPPONENT-FLEET": {
-      "BUTTON": "Idź do planszy i zacznij grać Hanysie! Aa no i powodzonka"
+      "H2":"Se poczekaj aż tamten ćwok ułoży to co ma ułożyć, a jak ułoży, kurła na ciul to czytasz, tyś chyba nie jest hanys, co ? GOROLU"
     }
   },
 
   "REGISTERED-PLAYERS": {
     "TITLE": "Zarejestrowani gracze"
   }
+
+,
+
+  "GAME": {
+    "H2": "Jeruna to je ta pierunsko gro szołotki, niy ? Szłotki? Niy ? Aa Sztotki ? No to ja niy wim co "
+  }
+
 }

@@ -6,6 +6,7 @@ import {DOMCell} from "../../../services/DOM/dom-cell"
 import {FirstRoundAsker} from "../../../rest/get/first-round-asker.service"
 import {OpponentAsker} from "../../../rest/get/opponent-asker"
 import {ShotSender} from "../../../rest/post/shot-sender"
+import {MessageTransfer} from "../../game/message-transfer/message-transfer"
 
 @Component({
              selector: 'app-opponent-board',
@@ -24,6 +25,8 @@ export class OpponentBoardComponent implements OnDestroy {
   playerBoardDiv: Element
   
   playerBoardWaiter
+  
+  messageTransfer: MessageTransfer = MessageTransfer.getInstance()
   
   private firstTurnRequestDone = false
   

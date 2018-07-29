@@ -1,5 +1,5 @@
 import {Component} from "@angular/core"
-import {DragShipsToPlace} from "../../../services/drag-ship/drag-ships-to-place.service"
+import {DragShipsToPlace} from "../../../services/drag-ship/drag-ship-ships-to-place.service"
 import {AvailableShipsToPlace} from "../../../models/domain/available-ships-to-place"
 import {ShipPlacementDataTransfer} from "../transfer-class/ship-placement-data-transfer"
 

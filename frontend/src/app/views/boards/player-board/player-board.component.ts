@@ -1,7 +1,8 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {BoardOfCells} from "../../../models/domain/board/board-of-cells"
-import {DragShipsToPlace} from "../../../services/drag-ship/drag-ships-to-place.service"
+import {DragShipsToPlace} from "../../../services/drag-ship/drag-ship-ships-to-place.service"
 import {BoardAndArrayTransfer} from "../../fleet-placing/transfer-class/board-and-array-transfer"
+import {MessageTransfer} from "../../game/message-transfer/message-transfer"
 
 @Component({
              selector: 'app-player-board',
@@ -14,12 +15,16 @@ export class PlayerBoardComponent implements OnInit {
   
   playerBoard: BoardOfCells
   
-  @ViewChild("fakeDiv") fakeDiv: ElementRef
+  @ViewChild("fakeDiv")
+  fakeDiv: ElementRef
   
   boardDiv: Element
   
   @Output()
   boardDivEmitter = new EventEmitter<Element>()
+  
+  messageTransfer: MessageTransfer = MessageTransfer.getInstance()
+  
   
   constructor(public dragShipService: DragShipsToPlace) {
   }

@@ -13,8 +13,9 @@
     >
       <div class="inner-color-before-shot inner-color-locator"
            [draggable]="true"
-           (dragenter)="dragPlacingBoard.dragEnter($event, placedBoard, rowIndex, columnIndex)"
-           (dragleave)="dragPlacingBoard.dragLeave($event, placedBoard, rowIndex, columnIndex)"
+           (dragenter)="dragPlacingBoard.dragEnter($event, rowIndex, columnIndex)"
+           (dragleave)="dragPlacingBoard.dragLeave($event, rowIndex, columnIndex)"
+           (dragexit)="dragPlacingBoard.dragExit($event, rowIndex, columnIndex)"
       >
         <div *ngIf="cell.isShipHere()"
              class="ship ship1"

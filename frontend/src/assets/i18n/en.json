@@ -9,9 +9,12 @@
 
   "CONFIGURATION":{
     "PLAYER-NAME":{
+      "H1": "Please provide your name !",
       "BUTTON": "Apply name and go to screen with rooms"
     },
     "ROOM":{
+      "H1":"You are in room configuration. You can create room or join to already existing one",
+      "H2":"Click to join this room !",
       "BUTTON": "Create room"
     }
   },
@@ -25,14 +28,19 @@
 
   "WAITING":{
     "OPPONENT-REGISTER": {
-      "BUTTON": "Go to fleet placement screen my friend"
+      "H2": "Wait for someone to join you room. Estimated waiting time: 5 hours"
     },
     "OPPONENT-FLEET": {
-      "BUTTON": "Go to game board and start playi! Good luck"
+      "H2":"Wait for till that GOROL will place his fleet"
     }
   },
 
   "REGISTERED-PLAYERS": {
     "TITLE": "Registered players"
+  },
+
+  "GAME": {
+    "H2": "Let's play !"
   }
+
 }

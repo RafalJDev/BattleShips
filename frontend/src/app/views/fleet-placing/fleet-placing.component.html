@@ -12,7 +12,7 @@
   <br>
 
   <mat-button-toggle class="col-12"
-                     *ngIf="isThereShipsToSend()"
+                     *ngIf="isFleetPlaced()"
                      (click)="sendShipsToValidateOnBackend()"
   >
     {{ 'FLEET-PLACING.BUTTON' | translate }}

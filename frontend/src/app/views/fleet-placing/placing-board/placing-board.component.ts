@@ -3,7 +3,7 @@ import {BoardOfCells} from "../../../models/domain/board/board-of-cells"
 import {ShipGenerator} from "../../../services/ship-generator/ship-generator.service"
 import {BoardAndArrayTransfer} from "../transfer-class/board-and-array-transfer"
 import {ShipArray} from "../../../models/domain/ship/ship-array"
-import {DragPlacingBoard} from "../../../services/drag-ship/drag-placing-board"
+import {DragShipPlacingBoard} from "../../../services/drag-ship/drag-ship-placing-board"
 import {ShipPlacementDataTransfer} from "../transfer-class/ship-placement-data-transfer"
 
 @Component({
@@ -19,7 +19,7 @@ export class PlacingBoardComponent implements OnInit {
   
   boardAndArrayTransfer: BoardAndArrayTransfer = BoardAndArrayTransfer.getInstance()
   
-  constructor(private shipGenerator: ShipGenerator, public dragPlacingBoard: DragPlacingBoard) {
+  constructor(private shipGenerator: ShipGenerator, public dragPlacingBoard: DragShipPlacingBoard) {
     this.generateBoardWithWater()
     
     this.shipPlacementTransfer.availableShips.generateDefaultFullFleet()
