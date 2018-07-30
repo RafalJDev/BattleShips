@@ -15,6 +15,7 @@ export class StrategyOpponentPlayerLoose extends StrategyOpponentShotResult {
     DomManipulator.setShip(playerDomCell);
     
     round.nextRoundIsOpponentRound();
+    round.isEndOfGame = true
   
     MessageTransfer.getInstance().opponentBoardMessage = "YOU LOOSE THE GAME!!!"
   }

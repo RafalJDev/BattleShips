@@ -37,6 +37,10 @@ export class OpponentBoardComponent implements OnDestroy {
     
     this.askWhichPlayerIsFirst(shotSender, opponentAsker)
     
+    this.waitForPlayerBoardDivAndFirstTurnRequest()
+  }
+  
+  waitForPlayerBoardDivAndFirstTurnRequest() {
     this.playerBoardWaiter = setInterval(() => {
       console.log("Callback my dear")
       
@@ -83,7 +87,7 @@ export class OpponentBoardComponent implements OnDestroy {
   
   handleClick(boardDiv: Element, rowIndex, columnIndex) {
     console.log("rowIndex: " + rowIndex + " columnIndex: " + columnIndex)
-    if (this.round.isPlayerRound() && this.round.isNotWaitingForShotResult()) {
+    if (this.round.isPlayerClickPossible()) {
       let domCell = DOMCell.ofBoardAndIndexes(boardDiv, rowIndex, columnIndex)
       this.opponentBoardHandler.handleShotClick(domCell)
     }

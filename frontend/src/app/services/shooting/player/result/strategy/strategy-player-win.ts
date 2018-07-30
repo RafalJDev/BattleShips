@@ -18,6 +18,7 @@ export class StrategyPlayerWin implements StrategyShotResult {
     DomBufferCreator.setBufferOnShipHeadAndTail(domCell)
     
     round.nextRoundIsPlayerRound()
+    round.isEndOfGame = true
     
     MessageTransfer.getInstance().playerBoardMessage = "YOU WIN THE GAME!"
   }

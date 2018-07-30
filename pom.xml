@@ -18,6 +18,7 @@
     <modules>
         <module>frontend</module>
         <module>backend</module>
+        <module>selenium</module>
     </modules>
 
 </project>
