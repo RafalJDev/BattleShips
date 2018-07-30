@@ -30,6 +30,7 @@
         <enforcer.version>3.0.0-M2</enforcer.version>
         <dependency-plugin.version>3.1.1</dependency-plugin.version>
         <spring-boot-dependencies.version>1.5.9.RELEASE</spring-boot-dependencies.version>
+        <log4j.version>2.11.0</log4j.version>
     </properties>
 
     <dependencies>
@@ -58,6 +59,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
 
     </dependencies>
