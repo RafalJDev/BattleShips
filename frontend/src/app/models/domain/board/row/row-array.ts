@@ -1,4 +1,4 @@
-import {Cell} from "./cell/cell";
+import {Cell} from "./cell/cell"
 
 export class RowArray {
   
@@ -19,4 +19,5 @@ export class RowArray {
   putWaterOnCell(columnIndex) {
     this.row[columnIndex] = Cell.ofWater();
   }
+  
 }

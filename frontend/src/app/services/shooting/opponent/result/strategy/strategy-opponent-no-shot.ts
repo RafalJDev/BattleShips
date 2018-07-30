@@ -1,6 +1,7 @@
-import {StrategyOpponentShotResult} from "./strategy-opponent-shot-result";
-import {DOMCell} from "../../../../DOM/dom-cell";
-import {Round} from "../../../../../models/domain/player-turn/round";
+import {StrategyOpponentShotResult} from "./strategy-opponent-shot-result"
+import {DOMCell} from "../../../../DOM/dom-cell"
+import {Round} from "../../../../../models/domain/player-turn/round"
+import {MessageTransfer} from "../../../../../views/game/message-transfer/message-transfer"
 
 export class StrategyOpponentNoShot extends StrategyOpponentShotResult {
   
@@ -10,8 +11,8 @@ export class StrategyOpponentNoShot extends StrategyOpponentShotResult {
   
   handleResult(round: Round, playerDomCell: DOMCell) {
     round.nextRoundIsOpponentRound();
-    
-    console.log("In Opponent NOSHOT handleResult!!!");
+  
+    MessageTransfer.getInstance().opponentBoardMessage = "NO SHOT from oppoent yet"
   }
   
   resultNameJustForTesting(): string {

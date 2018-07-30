@@ -1,13 +1,13 @@
-<p>
-  room-configuration {{ 'COMMON.WORKS' | translate }}
-</p>
+<h1>
+  {{ 'CONFIGURATION.ROOM.H1' | translate }}
+</h1>
 
 <mat-list>
   <mat-list-item *ngFor="let room of rooms.roomArray; let roomNumber = index"
                  (click)="joinThatRoom(room.roomName)">
-    <p>
-      {{roomNumber}}: {{room.roomName}}
-    </p>
+    <h2>
+      {{roomNumber+1}}: {{ 'CONFIGURATION.ROOM.H2' | translate }} : {{room.roomName}}
+    </h2>
   </mat-list-item>
 </mat-list>
 
@@ -20,12 +20,4 @@
                    (click)="tryCreateRoom()"
 >
   Try create room
-</mat-button-toggle>
-
-
-<mat-button-toggle class="col-12"
-                   *ngIf="responseRoomCreated"
-                   routerLink="/waiting/opponent/register"
->
-  Room Created ! You can go to wait for opponent
 </mat-button-toggle>

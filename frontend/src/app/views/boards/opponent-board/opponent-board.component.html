@@ -1,7 +1,11 @@
+<h4>
+  {{messageTransfer.opponentBoardMessage}}
+</h4>
+
 <div #boardDiv
      class="field col-12"
 >
-  <div *ngFor="let row of opponentBoard.board;let rowIndex = index"
+  <div *ngFor="let row of opponentBoard.board; let rowIndex = index"
        class="row row{{rowIndex}}"
   >
     <div *ngFor="let cell of row.row; let columnIndex = index"

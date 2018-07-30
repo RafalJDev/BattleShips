@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core'
 import {BoardOfCells} from "../../../models/domain/board/board-of-cells"
 import {ShipGenerator} from "../../../services/ship-generator/ship-generator.service"
-import {BoardTransferSingelton} from "../transfer-class/board-transfer-singelton"
-import {DragShipService} from "../../../services/drag-ship/drag-ship.service"
+import {BoardAndArrayTransfer} from "../transfer-class/board-and-array-transfer"
+import {ShipArray} from "../../../models/domain/ship/ship-array"
+import {DragShipPlacingBoard} from "../../../services/drag-ship/drag-ship-placing-board"
+import {ShipPlacementDataTransfer} from "../transfer-class/ship-placement-data-transfer"
 
 @Component({
              selector: 'app-placing-board',
@@ -13,10 +15,14 @@ export class PlacingBoardComponent implements OnInit {
   
   placedBoard: BoardOfCells
   
-  constructor(private shipGenerator: ShipGenerator,public dragShipService: DragShipService) {
-    this.shipGenerator = new ShipGenerator()
-    
+  shipPlacementTransfer: ShipPlacementDataTransfer = ShipPlacementDataTransfer.getInstance()
+  
+  boardAndArrayTransfer: BoardAndArrayTransfer = BoardAndArrayTransfer.getInstance()
+  
+  constructor(private shipGenerator: ShipGenerator, public dragPlacingBoard: DragShipPlacingBoard) {
     this.generateBoardWithWater()
+    
+    this.shipPlacementTransfer.availableShips.generateDefaultFullFleet()
   }
   
   ngOnInit() {
@@ -25,6 +31,10 @@ export class PlacingBoardComponent implements OnInit {
   generateBoardWithWater() {
     this.placedBoard = new BoardOfCells()
     this.placedBoard.generateBoardWithWater(10)
+    
+    console.log("generateBoardWithWater: " + this.shipPlacementTransfer)
+    this.boardAndArrayTransfer.placedBoard = this.placedBoard
+    this.boardAndArrayTransfer.shipArray = new ShipArray()
   }
   
   generateRandomBoard() {
@@ -33,11 +43,13 @@ export class PlacingBoardComponent implements OnInit {
   }
   
   putShipsFromShipGenerator_random() {
-    const shipArray = this.shipGenerator.generateShipsRandomly(this.placedBoard)
+    const shipArray: ShipArray = this.shipGenerator.generateShipsRandomly(this.placedBoard)
     
-    let instance = BoardTransferSingelton.getInstance()
-    instance.placedBoard = this.placedBoard
-    instance.shipArray = shipArray
+    this.boardAndArrayTransfer.placedBoard = this.placedBoard
+    this.boardAndArrayTransfer.shipArray = shipArray
+    
+    this.shipPlacementTransfer.availableShips.generateNoFleet()
+    this.boardAndArrayTransfer.placedBoard = this.placedBoard
   }
   
 }

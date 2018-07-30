@@ -1,6 +1,7 @@
 import {Component} from "@angular/core"
-import {DragShipService} from "../../../services/drag-ship/drag-ship.service"
-import {AvailableShips} from "../../../models/domain/available-ships"
+import {DragShipsToPlace} from "../../../services/drag-ship/drag-ship-ships-to-place.service"
+import {AvailableShipsToPlace} from "../../../models/domain/available-ships-to-place"
+import {ShipPlacementDataTransfer} from "../transfer-class/ship-placement-data-transfer"
 
 @Component({
              selector: 'app-ships-to-place',
@@ -9,16 +10,19 @@ import {AvailableShips} from "../../../models/domain/available-ships"
            })
 export class ShipsToPlaceComponent {
   
-  availableShips: AvailableShips
+  availableShips: AvailableShipsToPlace
   
   shipDirectionHorizontal: boolean = true
   
-  constructor(public dragShipService: DragShipService) {
-    this.availableShips = new AvailableShips()
+  shipPlacementTransfer: ShipPlacementDataTransfer = ShipPlacementDataTransfer.getInstance()
+  
+  constructor(public dragShipService: DragShipsToPlace) {
+    this.availableShips = this.shipPlacementTransfer.availableShips
   }
   
   changeShipsDirection() {
     this.shipDirectionHorizontal = !this.shipDirectionHorizontal
+    this.shipPlacementTransfer.isDraggedShipHorizontal = this.shipDirectionHorizontal
   }
   
 }

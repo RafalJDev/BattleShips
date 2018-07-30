@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core'
 import {ShipSender} from "../../rest/post/ship-sender"
 import {ShipArray} from "../../models/domain/ship/ship-array"
-import {BoardTransferSingelton} from "./transfer-class/board-transfer-singelton"
+import {BoardAndArrayTransfer} from "./transfer-class/board-and-array-transfer"
+import {Router} from "@angular/router"
+import {GameStartAsker} from "../../rest/get/game-start-asker"
 
 @Component({
              selector: 'app-fleet-placing',
@@ -10,9 +12,11 @@ import {BoardTransferSingelton} from "./transfer-class/board-transfer-singelton"
            })
 export class FleetPlacingComponent implements OnInit {
   
-  shipResponse: string
+  private shipResponse: string
   
-  constructor(private shipSender: ShipSender) {
+  private shipResultBoolean: boolean
+  
+  constructor(private shipSender: ShipSender, private gameStartAsker: GameStartAsker, private router: Router) {
   }
   
   ngOnInit() {
@@ -24,24 +28,39 @@ export class FleetPlacingComponent implements OnInit {
     console.log("Capture ship response: " + this.shipResponse)
   }
   
-  isThereShipsToSend(): boolean {
-    return !(BoardTransferSingelton.getInstance().shipArray == undefined)
+  isFleetPlaced(): boolean {
+    return BoardAndArrayTransfer.getInstance().shipArray.getShipArrayLength() == 10
   }
   
   sendShipsToValidateOnBackend() {
-    
-    let shipArray: ShipArray = BoardTransferSingelton.getInstance().shipArray
-    
+    let shipArray: ShipArray = BoardAndArrayTransfer.getInstance().shipArray
     const shipArrayJson = JSON.stringify(shipArray)
     
     console.log(shipArrayJson)
     
     this.shipSender.postShip(shipArrayJson)
         .then(result => {
-          let shipResultResponse = result['result']
+          //todo extract to method
+          console.log("shipResultResponse: " + result['result'])
       
-          console.log("shipResultResponse: " + shipResultResponse)
+          this.shipResultBoolean = this.shipSender.responseToBoolean(result)
       
+          if (this.shipResultBoolean) {
+            this.askIfCanStartGame()
+          }
+        })
+  }
+  
+  private askIfCanStartGame() {
+    this.gameStartAsker.getGameStartResult()
+        .then(gameStartResult => {
+          let startGameResultBoolean = this.gameStartAsker.responseToBoolean(gameStartResult)
+      
+          if (startGameResultBoolean) {
+            this.router.navigate(['/game/board'])
+          } else {
+            this.router.navigate(['/waiting/opponent/fleet'])
+          }
         })
   }
   

@@ -40,7 +40,7 @@ public class Game {
     }
 
     public void addPlayer(Player player) {
-        gameBoardHolder.addPlayer(player, new GameBoard());
+        gameBoardHolder.addPlayer(player);
         shotResultQueueHolder.addPlayer(player);
         turnHolder.addPlayer(player);
     }

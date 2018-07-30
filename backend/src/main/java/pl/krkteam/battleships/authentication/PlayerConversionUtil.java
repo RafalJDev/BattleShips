@@ -13,7 +13,7 @@ public class PlayerConversionUtil {
 
     public static PlayerDTO[] convertPlayerToPlayerDTOs(Collection<Player> playerCollection) {
         return playerCollection.stream()
-                .map(playerDAO -> new PlayerDTO(playerDAO.getName()))
+                .map(playerDAO -> new PlayerDTO(playerDAO.getPlayerName()))
                 .toArray(PlayerDTO[]::new);
     }
 

@@ -1,7 +1,7 @@
 import {PostRequestExecutor} from "./post-request-executor"
 import {Injectable} from "@angular/core"
 import {PlayersService} from "../../services/player-identification/players-service.service"
-import {HttpClient} from "@angular/common/http"
+import {HttpClient, HttpEvent} from "@angular/common/http"
 import {RoomsService} from "../../services/player-identification/rooms-service"
 
 @Injectable()
@@ -16,6 +16,17 @@ export class ShipSender extends PostRequestExecutor {
   postShip(shipArrayJson: string) {
     return this.post(this.hostUrl + "/ships?playerName=" + this.playersService.whoami.name +
       "&roomName=" + this.roomsService.room.roomName, shipArrayJson)
+  }
+  
+  responseToBoolean(shipResultResponse: HttpEvent<string>): boolean {
+    let shipResultString = shipResultResponse['result']
+    
+    switch (shipResultString) {
+      case "OK":
+        return true
+      case "WRONG":
+        return false
+    }
   }
   
 }

@@ -10,18 +10,17 @@ import pl.krkteam.battleships.wait.opponent.dto.OpponentAbsentDTO;
 import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class RoomHolder {
-    private Map<String, Room> roomNameToRoomMap = new ConcurrentHashMap<>();
+    private Map<String, Room> roomNameToRoomMap = Collections.synchronizedMap(new LinkedHashMap<>());
 
     public List<Room> getRoomList() {
         List<Room> roomList = new ArrayList<>(roomNameToRoomMap.values());
         return Collections.unmodifiableList(roomList);
     }
 
-    JoinResultDTO joinPlayer(String roomName, Player player) {
+    public JoinResultDTO joinPlayer(String roomName, Player player) {
         final Room room = roomNameToRoomMap.get(roomName);
         return room.joinPlayer(player);
     }
@@ -42,7 +41,7 @@ public class RoomHolder {
         return room;
     }
 
-    CreateResultDTO createRoomAndJoinPlayer(Player player, String roomName) {
+    public CreateResultDTO createRoomAndJoinPlayer(Player player, String roomName) {
         if (roomNameToRoomMap.containsKey(roomName)) {
             return new CreateRoomWrongDTO();
         }

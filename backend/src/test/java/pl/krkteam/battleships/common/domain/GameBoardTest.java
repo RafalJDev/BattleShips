@@ -69,4 +69,13 @@ public class GameBoardTest {
         assertTrue(coordinatesCellMap.containsKey(coordinates3));
         assertTrue(coordinatesCellMap.containsKey(coordinates4));
     }
+
+    @Test
+    public void isPlacedFleetAndExpect() {
+        GameBoard gameBoard = new GameBoard();
+
+        gameBoard.setPlacedFleet(true);
+
+        assertTrue(gameBoard.isPlacedFleet());
+    }
 }

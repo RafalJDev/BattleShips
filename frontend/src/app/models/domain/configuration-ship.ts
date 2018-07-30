@@ -9,4 +9,8 @@ export class ConfigurationShip {
     }
   }
   
+  getMastCount(): number {
+    return this.mastArray.length
+  }
+  
 }
