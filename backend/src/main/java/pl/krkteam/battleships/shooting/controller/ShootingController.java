@@ -11,6 +11,7 @@ import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.shooting.dto.ShotDTO;
 import pl.krkteam.battleships.shooting.dto.result.NotYourTurnDTO;
+import pl.krkteam.battleships.shooting.dto.result.ResultPlayerWonDTO;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 import pl.krkteam.battleships.turns.holding.TurnHolder;
@@ -48,7 +49,14 @@ public class ShootingController {
 
         calculateTurn(shootingPlayer, shotResultDTO, turnHolder);
 
+        onGameEnd(shotResultDTO, roomName);
         return gson.toJson(shotResultDTO);
+    }
+
+    private void onGameEnd(ShotResultDTO shotResultDTO, String roomName) {
+        if (shotResultDTO instanceof ResultPlayerWonDTO) {
+            roomHolder.removeRoom(roomName);
+        }
     }
 
     private Game getGameFromRoom(String roomName) {

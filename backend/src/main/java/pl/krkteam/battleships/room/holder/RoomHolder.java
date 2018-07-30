@@ -52,4 +52,9 @@ public class RoomHolder {
         room.joinPlayer(player);
         return new CreateRoomOkDTO();
     }
+
+    public void removeRoom(String roomName) {
+        roomNameToRoomMap.remove(roomName);
+    }
+
 }
