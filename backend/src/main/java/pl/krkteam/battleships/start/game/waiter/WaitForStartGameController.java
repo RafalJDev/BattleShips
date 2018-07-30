@@ -14,11 +14,11 @@ import pl.krkteam.battleships.start.game.waiter.dto.ReadinessForPlayDTO;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class StartGameWaiterController {
+public class WaitForStartGameController {
 
     private final RoomHolder roomHolder;
 
-    public StartGameWaiterController(RoomHolder roomHolder) {
+    public WaitForStartGameController(RoomHolder roomHolder) {
         this.roomHolder = roomHolder;
     }
 

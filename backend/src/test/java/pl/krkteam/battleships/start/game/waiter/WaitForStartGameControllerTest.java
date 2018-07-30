@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class StartGameWaiterControllerTest {
+public class WaitForStartGameControllerTest {
 
     @Test
     public void testCanWeStartPlay() {

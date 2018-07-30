@@ -33,13 +33,21 @@ public class GameBoardHolder {
         if (playerGameBoardMap.size() != 2) {
             throw new IndexOutOfBoundsException("There are not enough players");
         }
-        checkIfPlayerBelongThisBoardHolder(player);
+        try {
+            checkIfPlayerBelongThisBoardHolder(player);
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
 
-        if (playerGameBoardMap.values().stream().allMatch(GameBoard::isPlacedFleet)) {
+        if (hasBothPlayersFleetPlaced()) {
             return new ReadyForPlayDTO();
         }
         return new WaitForPlayDTO();
 
+    }
+
+    private boolean hasBothPlayersFleetPlaced() {
+        return playerGameBoardMap.values().stream().allMatch(GameBoard::isPlacedFleet);
     }
 
     public GameBoard getGameBoard(Player player) {
