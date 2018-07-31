@@ -12,7 +12,7 @@ export class StrategyOpponentNoShot extends StrategyOpponentShotResult {
   handleResult(round: Round, playerDomCell: DOMCell) {
     round.nextRoundIsOpponentRound();
   
-    MessageTransfer.getInstance().opponentBoardMessage = "NO SHOT from oppoent yet"
+    MessageTransfer.getInstance().opponentBoardMessage = "Wait for your turn"
   }
   
   resultNameJustForTesting(): string {
