@@ -7,7 +7,7 @@
     <div *ngFor="let cell of row.row; let columnIndex = index"
          class="square square{{rowIndex}}{{columnIndex}}"
     >
-      <div class="inner-color-before-shot inner-color-locator"
+      <div class="inner-color-before-shot inner-color-loc ator"
            [draggable]="true"
            (dragenter)="dragPlacingBoard.dragEnter($event, rowIndex, columnIndex)"
            (dragleave)="dragPlacingBoard.dragLeave($event, rowIndex, columnIndex)"
@@ -32,6 +32,3 @@
 >
   {{ 'PLACING-BOARD.BUTTON' | translate }}
 </mat-button-toggle>
-
-
-q

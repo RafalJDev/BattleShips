@@ -22,7 +22,7 @@
 
   "FLEET-PLACING":{
     "BUTTON": "Go to waiting room, to wait till opponent will place fleet!",
-    "P":"Fleet placing page"
+    "P":"Please place your fleet"
   },
   "PLACING-BOARD":{
     "BUTTON": "Click to generate radnom fleet"
@@ -45,5 +45,4 @@
     "H2": "Let's play !",
     "BUTTON":"Go to rooms ! And play again !"
   }
-
 }
