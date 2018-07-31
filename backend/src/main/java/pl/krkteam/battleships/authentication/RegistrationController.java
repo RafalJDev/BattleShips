@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.common.dto.PlayerDTO;
 
+import java.util.Arrays;
 import java.util.Set;
 
 @Slf4j
@@ -35,10 +36,10 @@ public class RegistrationController {
     public String getPlayers() {
         Set<Player> players = playerHolder.getPlayers();
         PlayerDTO[] playerDTOs = PlayerConversionUtil.convertPlayerToPlayerDTOs(players);
+        log.debug("Players list: " + Arrays.toString(playerDTOs));
 
         Gson gson = new Gson();
         String result = gson.toJson(playerDTOs);
-        log.info("Players list " + playerDTOs);
         return result;
     }
 
