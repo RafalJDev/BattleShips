@@ -1,6 +1,6 @@
 <div>
   <p>
-    fleet-placing {{ 'COMMON.WORKS' | translate }}
+    {{ 'FLEET-PLACING.P' | translate }}
   </p>
   <app-placing-board
     (shipResponseEmitter)="captureShipResponse($event)"
@@ -11,7 +11,7 @@
   <br>
   <br>
 
-  <mat-button-toggle class="col-12"
+  <mat-button-toggle class="col-12 send-ships"
                      *ngIf="isFleetPlaced()"
                      (click)="sendShipsToValidateOnBackend()"
   >

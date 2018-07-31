@@ -12,7 +12,7 @@ export class StrategyMiss implements StrategyShotResult {
     
     round.nextRoundIsOpponentRound()
     
-    MessageTransfer.getInstance().playerBoardMessage = "You did miss!"
+    MessageTransfer.getInstance().playerBoardMessage = "You MISSEd!"
   }
   
   resultNameJustForTesting(): string {

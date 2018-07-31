@@ -1,13 +1,13 @@
-package pl.krkteam.battleships.web
+package pl.krkteam.battleships.web.script
 
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
-object SourcePageExtractor {
+object HtmlExtractor {
 
-    fun getPageSource(webDriver: WebDriver, clasName: String): String {
+    fun getElementHtml(webDriver: WebDriver, clasName: String): String {
         val element: WebElement = webDriver.findElement(By.className(clasName))
         return (webDriver as JavascriptExecutor)
                 .executeScript("return arguments[0].innerHTML;", element)

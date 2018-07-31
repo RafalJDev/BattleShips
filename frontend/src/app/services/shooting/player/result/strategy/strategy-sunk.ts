@@ -19,7 +19,7 @@ export class StrategySunk implements StrategyShotResult {
     
     round.nextRoundIsPlayerRound()
     
-    MessageTransfer.getInstance().playerBoardMessage = "You did SUNK ship!"
+    MessageTransfer.getInstance().playerBoardMessage = "You have SUNK ship!"
   }
   
   resultNameJustForTesting(): string {

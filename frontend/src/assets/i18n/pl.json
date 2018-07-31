@@ -9,18 +9,20 @@
 
   "CONFIGURATION":{
     "PLAYER-NAME":{
-      "H1": "Te Panie napisz Pan to jak Cię jakoś tam zwą, kumasz no nie ? Noo to napisz, nie czytaj tego więcej, na chuj Ci to, weź się zajmij czymś poważnym. TERAZ. BYE. SAJONARA",
+      "H1": "Te Panie napisz Pan to jak Cię jakoś tam zwą, kumasz no nie ? Noo to napisz, nie czytaj tego więcej, na ciul Ci to, weź się zajmij czymś poważnym. TERAZ. BYE. SAJONARA",
       "BUTTON": "Zatwierdź imię i idź do ekranu wyboru pokoju"
     },
     "ROOM":{
       "H1":"No to tak. Nie możesz nic tu zrobić, no dobra coś tam możesz. Ale myślisz drogi czytelniku, że Ci to podam na tacy ? Procedura wygląda tak: klękasz i kładziesz się iii...",
       "H2":"Kliknij i WEJDŹ WE MNIE, JUŻ TERAZ ",
-      "BUTTON": "Stwórz pokój, ŻEBY KTOŚ MÓGŁ WEJŚC W ... NIEGO"
+      "BUTTON": "Stwórz pokój, ŻEBY KTOŚ MÓGŁ WEJŚC W ... NIEGO",
+      "P":"Kliknij w pokój, żeby w niego wejść"
     }
   },
 
   "FLEET-PLACING":{
-    "BUTTON": "Przejdź do poczekalni, żeby poczekać na przeciwnika"
+    "BUTTON": "Przejdź do poczekalni, żeby poczekać na przeciwnika",
+    "P":"Ekran kładzenia statków"
   },
   "PLACING-BOARD":{
     "BUTTON": "Naciśnij, ażeby wytentegować nową flotę"
@@ -42,7 +44,8 @@
 ,
 
   "GAME": {
-    "H2": "Jeruna to je ta pierunsko gro szołotki, niy ? Szłotki? Niy ? Aa Sztotki ? No to ja niy wim co "
+    "H2": "Jeruna to je ta pierunsko gro szołotki, niy ? Szłotki? Niy ? Aa Sztotki ? No to ja niy wim co ",
+    "BUTTON":"Idź do pokoi i zacznij nowe życie!"
   }
 
 }

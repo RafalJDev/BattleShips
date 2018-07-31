@@ -1,6 +1,6 @@
-<h2>
+<h4>
   {{ 'GAME.H2' | translate }}
-</h2>
+</h4>
 
 <div>
 
@@ -17,6 +17,13 @@
                           [playerBoardDiv]="playerBoardDiv"
       >
       </app-opponent-board>
+
+      <mat-button-toggle class="col-12"
+                         *ngIf="isEndOfGame()"
+                         routerLink="configuration/room"
+      >
+        {{ 'GAME.BUTTON' | translate }}
+      </mat-button-toggle>
 
     </div>
   </div>

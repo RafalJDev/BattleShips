@@ -7,6 +7,7 @@ export class Round {
   isEndOfGame: boolean = false
   
   constructor(playerRoundBoolean) {
+    this.isEndOfGame = false
     if (playerRoundBoolean === 'true') {
       this.playerRoundBoolean = true
       this.waitingForShotResult = false

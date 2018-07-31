@@ -15,7 +15,6 @@ object Clicker {
     }
 
     private fun sleep() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         Thread.sleep(200)
     }
 }

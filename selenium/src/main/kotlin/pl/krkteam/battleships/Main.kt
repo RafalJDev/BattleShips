@@ -7,4 +7,5 @@ fun main(args: Array<String>) {
 
     val controller = Controller()
 
+    controller.runIt()
 }
