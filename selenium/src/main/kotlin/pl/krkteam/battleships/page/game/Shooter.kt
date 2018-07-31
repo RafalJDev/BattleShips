@@ -16,7 +16,7 @@ class Shooter {
 
     fun shootAllTimeXD(webDriver: WebDriver) {
         while (true) {
-            Thread.sleep(30)
+            Thread.sleep(25)
             val randomSquare = "opponent-square" + generateRandomIndex() + generateRandomIndex()
             webDriver.findElement(By.id(randomSquare)).click()
         }

@@ -54,7 +54,7 @@ export class OpponentBoardComponent implements OnDestroy {
           + " ,field value: " + this.round.playerRoundBoolean)
         this.opponentBoardHandler.handleOpponentResult()
       }
-    }, 500)
+    }, 150)
   }
   
   ngOnDestroy() {

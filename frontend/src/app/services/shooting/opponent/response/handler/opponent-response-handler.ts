@@ -32,7 +32,7 @@ export class OpponentResponseHandler {
           .then(opponentResponse => {
             this.handleOpponentShotResult(opponentResponse)
           })
-    }, 1000)
+    }, 150)
   }
   
   handleOpponentShotResult(opponentResponse: HttpEvent<string>) {

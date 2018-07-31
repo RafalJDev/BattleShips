@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
   
   isEndOfGame():boolean {
     return this.messageTransfer.playerBoardMessage == "YOU ARE THE WINNER!" ||
-      this.messageTransfer.opponentBoardMessage == "Opponent SANK your ship !"
+      this.messageTransfer.opponentBoardMessage == "YOU LOOSE THE GAME!!!"
   }
   
   capturePlayerBoardDiv(event) {
