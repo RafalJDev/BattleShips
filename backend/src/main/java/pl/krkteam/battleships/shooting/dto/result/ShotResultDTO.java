@@ -12,4 +12,10 @@ public abstract class ShotResultDTO {
         return resultMessage;
     }
 
+    @Override
+    public String toString() {
+        return "ShotResultDTO{" +
+                "resultMessage='" + resultMessage + '\'' +
+                '}';
+    }
 }

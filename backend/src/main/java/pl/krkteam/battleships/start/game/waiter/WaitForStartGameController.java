@@ -2,6 +2,7 @@ package pl.krkteam.battleships.start.game.waiter;
 
 
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.start.game.waiter.dto.ReadinessForPlayDTO;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class WaitForStartGameController {
@@ -28,6 +30,7 @@ public class WaitForStartGameController {
 
         Player askingPlayer = new Player(playerName);
         final ReadinessForPlayDTO readinessForPlayDTO = gameBoardHolder.areBothFleetsValid(askingPlayer);
+        log.debug("Room: " + roomName + ", players readiness for game: " + readinessForPlayDTO.getResult());
 
         Gson gson = new Gson();
         return gson.toJson(readinessForPlayDTO);

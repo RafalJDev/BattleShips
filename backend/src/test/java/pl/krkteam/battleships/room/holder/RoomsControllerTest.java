@@ -11,9 +11,7 @@ import pl.krkteam.battleships.room.holder.converters.RoomHolderToRoomListDTO;
 import pl.krkteam.battleships.room.holder.dto.create.room.CreateRoomOkDTO;
 import pl.krkteam.battleships.room.holder.dto.join.result.JoinResultOkDTO;
 import pl.krkteam.battleships.room.holder.dto.room.list.RoomDTO;
-
-import java.util.Arrays;
-import java.util.List;
+import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,18 +42,18 @@ public class RoomsControllerTest {
 
     @Test
     public void testGetRoomList() throws Exception {
-        Room roomA = new Room("roomA");
-        Room roomB = new Room("roomB");
-        Room roomC = new Room("roomC");
-        List<Room> roomList = Arrays.asList(roomA, roomB, roomC);
+        RoomDTO roomA = new RoomDTO("roomA");
+        RoomDTO roomB = new RoomDTO("roomB");
+        RoomDTO roomC = new RoomDTO("roomC");
+        RoomListDTO roomListDTO = new RoomListDTO(new RoomDTO[]{roomA, roomB, roomC});
 
-        when(roomHolder.getRoomList()).thenReturn(roomList);
+        when(roomHolderToRoomListDTO.convert(any())).thenReturn(roomListDTO);
 
         mockMvc.perform(get("/room/list"))
                 .andExpect(status()
                         .is2xxSuccessful());
 
-        verify(roomHolder, times(0)).getRoomList();
+        verify(roomHolderToRoomListDTO, times(1)).convert(any());
     }
 
     @Test
