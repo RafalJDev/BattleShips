@@ -19,7 +19,7 @@ public class PlayerHolder {
             log.error("Player cannot be null");
             throw new IllegalArgumentException("Player cannot be null");
         }
-        log.info("Player " + player.getPlayerName() + " has been added to PlayerHolder");
+        log.info("Player " + player.getPlayerName() + " has been added to PlayerHolder.");
         return new PlayerResultAdderDTO(players.add(player));
     }
 
