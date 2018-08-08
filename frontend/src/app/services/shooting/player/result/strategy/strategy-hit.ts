@@ -17,7 +17,7 @@ export class StrategyHit implements StrategyShotResult {
     
     round.nextRoundIsPlayerRound()
     
-    MessageTransfer.getInstance().playerBoardMessage = "You did HIT ship!"
+    MessageTransfer.getInstance().playerBoardMessage = "You HIT ship!"
   }
   
   resultNameJustForTesting(): string {

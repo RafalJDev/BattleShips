@@ -1,6 +1,7 @@
 package pl.krkteam.battleships.shooting.controller;
 
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pl.krkteam.battleships.common.domain.Game;
 import pl.krkteam.battleships.common.domain.GameBoard;
@@ -11,10 +12,12 @@ import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 import pl.krkteam.battleships.shooting.dto.ShotDTO;
 import pl.krkteam.battleships.shooting.dto.result.NotYourTurnDTO;
+import pl.krkteam.battleships.shooting.dto.result.ResultPlayerWonDTO;
 import pl.krkteam.battleships.shooting.dto.result.ShotResultDTO;
 import pl.krkteam.battleships.shooting.services.ShotResultCheckerService;
 import pl.krkteam.battleships.turns.holding.TurnHolder;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShootingController {
@@ -36,19 +39,37 @@ public class ShootingController {
 
         final Game game = getGameFromRoom(roomName);
         final TurnHolder turnHolder = game.getTurnHolder();
-        if (!turnHolder.isTurnOfPlayer(shootingPlayer)) {
+        final boolean turnOfPlayer = turnHolder.isTurnOfPlayer(shootingPlayer);
+        log.info("Player: " + playerName + ", turn: " + turnOfPlayer);
+        if (!turnOfPlayer) {
             return gson.toJson(new NotYourTurnDTO());
         }
 
         final Player opponentPlayer = getOpponentPlayer(shootingPlayer, game);
         ShotDTO shotDTO = convertToShotDTO(shotJson, gson);
+        log.info(shotJson);
 
         final ShotResultDTO shotResultDTO = getShotResult(opponentPlayer, shotDTO, game);
+        log.info(shotResultDTO.toString());
         sendResponseToOpponentPlayer(shotResultDTO, shotDTO, opponentPlayer, game);
 
         calculateTurn(shootingPlayer, shotResultDTO, turnHolder);
 
+        onGameEnd(shotResultDTO, roomName);
         return gson.toJson(shotResultDTO);
+    }
+
+    private void onGameEnd(ShotResultDTO shotResultDTO, String roomName) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (shotResultDTO instanceof ResultPlayerWonDTO) {
+                roomHolder.removeRoom(roomName);
+            }
+        }).start();
     }
 
     private Game getGameFromRoom(String roomName) {

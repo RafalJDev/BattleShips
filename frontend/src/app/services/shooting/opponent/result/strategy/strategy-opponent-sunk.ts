@@ -16,7 +16,7 @@ export class StrategyOpponentSunk extends StrategyOpponentShotResult {
     
     round.nextRoundIsOpponentRound();
   
-    MessageTransfer.getInstance().opponentBoardMessage = "Opponent did SUNK your ship !"
+    MessageTransfer.getInstance().opponentBoardMessage = "Opponent SANK your ship !"
   }
   
   resultNameJustForTesting(): string {

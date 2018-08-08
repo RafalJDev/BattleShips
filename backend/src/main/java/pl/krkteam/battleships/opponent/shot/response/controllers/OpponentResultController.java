@@ -1,6 +1,7 @@
 package pl.krkteam.battleships.opponent.shot.response.controllers;
 
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,7 @@ import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.opponent.shot.response.dto.OpponentShotResult;
 import pl.krkteam.battleships.room.holder.RoomHolder;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class OpponentResultController {
@@ -25,6 +27,8 @@ public class OpponentResultController {
         final Game game = getGameFromRoom(roomName);
         OpponentShotResult shotResult = getResponse(playerName, game);
 
+        log.debug("In room: " + roomName + ". Waiting player " +
+                playerName + " received response: " + shotResult.getMessage());
         Gson gson = new Gson();
         return gson.toJson(shotResult);
     }

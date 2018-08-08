@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core"
+import {MessageTransfer} from "./message-transfer/message-transfer"
 
 @Component({
              selector: 'app-game',
@@ -9,10 +10,17 @@ export class GameComponent implements OnInit {
   
   playerBoardDiv: Element
   
+  messageTransfer: MessageTransfer = MessageTransfer.getInstance()
+  
   constructor() {
   }
   
   ngOnInit() {
+  }
+  
+  isEndOfGame():boolean {
+    return this.messageTransfer.playerBoardMessage == "YOU ARE THE WINNER!" ||
+      this.messageTransfer.opponentBoardMessage == "YOU LOOSE THE GAME!!!"
   }
   
   capturePlayerBoardDiv(event) {

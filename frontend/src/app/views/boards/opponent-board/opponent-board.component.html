@@ -1,5 +1,5 @@
-<h4>
-  {{messageTransfer.opponentBoardMessage}}
+<h4 id="player-message">
+  {{messageTransfer.playerBoardMessage}}
 </h4>
 
 <div #boardDiv
@@ -9,7 +9,8 @@
        class="row row{{rowIndex}}"
   >
     <div *ngFor="let cell of row.row; let columnIndex = index"
-         class="square square{{rowIndex}}{{columnIndex}} "
+         class="square square{{rowIndex}}{{columnIndex}}"
+         id="opponent-square{{rowIndex}}{{columnIndex}}"
          (click)="handleClick(boardDiv, rowIndex, columnIndex)"
     >
       <div class="inner-color-before-shot inner-color-locator">

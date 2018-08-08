@@ -1,7 +1,3 @@
-<p>
-  placing-board {{ 'COMMON.WORKS' | translate }}
-</p>
-
 <div #boardDiv
      class="field col-12"
 >
@@ -11,7 +7,7 @@
     <div *ngFor="let cell of row.row; let columnIndex = index"
          class="square square{{rowIndex}}{{columnIndex}}"
     >
-      <div class="inner-color-before-shot inner-color-locator"
+      <div class="inner-color-before-shot inner-color-loc ator"
            [draggable]="true"
            (dragenter)="dragPlacingBoard.dragEnter($event, rowIndex, columnIndex)"
            (dragleave)="dragPlacingBoard.dragLeave($event, rowIndex, columnIndex)"
@@ -31,10 +27,8 @@
   </div>
 </div>
 
-<mat-button-toggle class="col-12"
+<mat-button-toggle class="col-12 random-fleet"
                    (click)="generateRandomBoard()"
 >
   {{ 'PLACING-BOARD.BUTTON' | translate }}
 </mat-button-toggle>
-
-

@@ -15,8 +15,8 @@ export class StrategyOpponentHit extends StrategyOpponentShotResult {
     DomManipulator.setShip(playerDomCell);
     
     round.nextRoundIsOpponentRound();
-  
-    MessageTransfer.getInstance().opponentBoardMessage = "Opponent did HIT your ship !"
+    
+    MessageTransfer.getInstance().opponentBoardMessage = "Opponent HIT your ship !"
   }
   
   resultNameJustForTesting(): string {

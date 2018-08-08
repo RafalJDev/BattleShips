@@ -1,5 +1,6 @@
 package pl.krkteam.battleships.common.domain;
 
+import lombok.extern.slf4j.Slf4j;
 import pl.krkteam.battleships.common.domain.player.Player;
 import pl.krkteam.battleships.start.game.waiter.dto.ReadinessForPlayDTO;
 import pl.krkteam.battleships.start.game.waiter.dto.ReadyForPlayDTO;
@@ -7,16 +8,21 @@ import pl.krkteam.battleships.start.game.waiter.dto.WaitForPlayDTO;
 
 import java.util.*;
 
+@Slf4j
 public class GameBoardHolder {
 
     private Map<Player, GameBoard> playerGameBoardMap = new HashMap<>();
 
     boolean addPlayer(Player player, GameBoard gameBoard) {
         if (player == null) {
-            throw new IllegalArgumentException("Player cannot be null");
+            String message = "Player cannot be null";
+            log.error(message);
+            throw new IllegalArgumentException(message);
         }
         if (gameBoard == null) {
-            throw new IllegalArgumentException("GameBoard cannot be null");
+            String message = "GameBoard cannot be null";
+            log.error(message);
+            throw new IllegalArgumentException(message);
         }
         if (playerGameBoardMap.containsKey(player)) {
             return false;
@@ -31,12 +37,14 @@ public class GameBoardHolder {
 
     public ReadinessForPlayDTO areBothFleetsValid(Player player) {
         if (playerGameBoardMap.size() != 2) {
-            throw new IndexOutOfBoundsException("There are not enough players");
+            String message = "There are not enough players";
+            log.error(message);
+            throw new IndexOutOfBoundsException(message);
         }
         try {
             checkIfPlayerBelongThisBoardHolder(player);
         } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
 
         if (hasBothPlayersFleetPlaced()) {
@@ -52,7 +60,9 @@ public class GameBoardHolder {
 
     public GameBoard getGameBoard(Player player) {
         if (player == null) {
-            throw new IllegalArgumentException("Player cannot be null");
+            String message = "Player cannot be null";
+            log.error(message);
+            throw new IllegalArgumentException(message);
         }
         checkIfPlayerBelongThisBoardHolder(player);
 
@@ -68,7 +78,9 @@ public class GameBoardHolder {
 
     private void checkIfPlayerBelongThisBoardHolder(Player player) {
         if (!playerGameBoardMap.containsKey(player)) {
-            throw new NoSuchElementException("Given player does not belong to this holder");
+            String message = "Given player does not belong to this holder";
+            log.error(message);
+            throw new NoSuchElementException(message);
         }
     }
 }

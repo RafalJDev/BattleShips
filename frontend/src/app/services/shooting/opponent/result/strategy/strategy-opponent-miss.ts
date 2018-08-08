@@ -15,7 +15,8 @@ export class StrategyOpponentMiss extends StrategyOpponentShotResult {
   
     round.nextRoundIsPlayerRound();
   
-    MessageTransfer.getInstance().opponentBoardMessage = "Opponent did MISS!"
+    MessageTransfer.getInstance().opponentBoardMessage = "Opponent MISSED!"
+    MessageTransfer.getInstance().playerBoardMessage= "YOUR TURN!"
   }
   
   resultNameJustForTesting(): string {
