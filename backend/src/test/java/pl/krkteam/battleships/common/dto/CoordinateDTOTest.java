@@ -9,7 +9,7 @@ public class CoordinateDTOTest {
     CoordinateDTO coordinateDTO = new CoordinateDTO(3, 2);
 
     @Test
-    public void testToString() {
+    void testToString() {
         assertEquals(coordinateDTO.toString(), "CoordinateDTOS{" +
                 "x=" + 2 +
                 ", y=" + 3 +
@@ -17,12 +17,12 @@ public class CoordinateDTOTest {
     }
 
     @Test
-    public void testGetX() {
+    void testGetX() {
         assertEquals(coordinateDTO.getX(), 2);
     }
 
     @Test
-    public void testGetY() {
+    void testGetY() {
         assertEquals(coordinateDTO.getY(), 3);
     }
 }

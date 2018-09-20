@@ -20,18 +20,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class RoomsControllerTest {
 
-    private RoomsController roomsController;
+    RoomsController roomsController;
 
     @Mock
-    private RoomHolder roomHolder;
+    RoomHolder roomHolder;
 
     @Mock
-    private RoomHolderToRoomListDTO roomHolderToRoomListDTO;
+    RoomHolderToRoomListDTO roomHolderToRoomListDTO;
 
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
 
         roomsController = new RoomsController(roomHolder, roomHolderToRoomListDTO);
@@ -41,7 +41,7 @@ public class RoomsControllerTest {
 
 
     @Test
-    public void testGetRoomList() throws Exception {
+    void testGetRoomList() throws Exception {
         RoomDTO roomA = new RoomDTO("roomA");
         RoomDTO roomB = new RoomDTO("roomB");
         RoomDTO roomC = new RoomDTO("roomC");
@@ -57,7 +57,7 @@ public class RoomsControllerTest {
     }
 
     @Test
-    public void joinExistingRoomAndExpectJoined() throws Exception {
+    void joinExistingRoomAndExpectJoined() throws Exception {
         String roomName = "SomeRoom";
         String joiningPlayer = "JoiningPlayer";
 
@@ -75,7 +75,7 @@ public class RoomsControllerTest {
 
 
     @Test
-    public void testCreateRoom() throws Exception {
+    void testCreateRoom() throws Exception {
         String playerName = "SomePlayer";
 
         RoomDTO roomDTO = new RoomDTO("SomeRoom");

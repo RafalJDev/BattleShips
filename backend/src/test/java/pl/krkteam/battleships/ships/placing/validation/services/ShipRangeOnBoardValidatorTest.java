@@ -12,16 +12,16 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class ShipRangeOnBoardValidatorTest {
-    private Board board;
+    Board board;
 
     @BeforeTest
-    private void prepareBoard() {
+    void prepareBoard() {
         board = new Board(new BoardSize(10));
     }
 
 
     @Test
-    public void testIsVerticalShipInRange() {
+    void testIsVerticalShipInRange() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(0, 2), new CoordinatesFromJson(1, 2), new CoordinatesFromJson(2, 2)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -32,7 +32,7 @@ public class ShipRangeOnBoardValidatorTest {
     }
 
     @Test
-    public void testIsHorizontalShipInRange() {
+    void testIsHorizontalShipInRange() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(0, 0), new CoordinatesFromJson(0, 1), new CoordinatesFromJson(0, 2)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -44,7 +44,7 @@ public class ShipRangeOnBoardValidatorTest {
 
 
     @Test
-    public void testIsVerticalShipInOutOfRange() {
+    void testIsVerticalShipInOutOfRange() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(-1, 2), new CoordinatesFromJson(0, 2), new CoordinatesFromJson(1, 2)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -55,7 +55,7 @@ public class ShipRangeOnBoardValidatorTest {
     }
 
     @Test
-    public void testIsHorizontalShipInOutOfRange() {
+    void testIsHorizontalShipInOutOfRange() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(0, -1), new CoordinatesFromJson(0, 0), new CoordinatesFromJson(0, 1)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -67,7 +67,7 @@ public class ShipRangeOnBoardValidatorTest {
 
 
     @Test
-    public void testIsCoordinateInBoard() {
+    void testIsCoordinateInBoard() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(2, 2);
         BoardSize boardSize = board.getBoardSize();
 
@@ -75,7 +75,7 @@ public class ShipRangeOnBoardValidatorTest {
     }
 
     @Test
-    public void testIsCoordinateInBoardForBothCoorOutOfRange() {
+    void testIsCoordinateInBoardForBothCoorOutOfRange() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(-1, -3);
         BoardSize boardSize = board.getBoardSize();
 
@@ -84,7 +84,7 @@ public class ShipRangeOnBoardValidatorTest {
 
 
     @Test
-    public void testIsCoordinateInBoardForXCoorOutOfRange() {
+    void testIsCoordinateInBoardForXCoorOutOfRange() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(0, -3);
         BoardSize boardSize = board.getBoardSize();
 
@@ -92,7 +92,7 @@ public class ShipRangeOnBoardValidatorTest {
     }
 
     @Test
-    public void testIsCoordinateInBoardForYCoorOutOfRange() {
+    void testIsCoordinateInBoardForYCoorOutOfRange() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(-1, 2);
         BoardSize boardSize = board.getBoardSize();
 
@@ -100,7 +100,7 @@ public class ShipRangeOnBoardValidatorTest {
     }
 
     @Test
-    public void testIsCoordinateInBoardForRightBottomOutOfRange() {
+    void testIsCoordinateInBoardForRightBottomOutOfRange() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(12, 14);
         BoardSize boardSize = board.getBoardSize();
 
@@ -109,7 +109,7 @@ public class ShipRangeOnBoardValidatorTest {
 
 
     @Test
-    public void testIsCoordinateInBoardForRightBottomOutOfRangeY() {
+    void testIsCoordinateInBoardForRightBottomOutOfRangeY() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(10, 4);
         BoardSize boardSize = board.getBoardSize();
 
@@ -117,7 +117,7 @@ public class ShipRangeOnBoardValidatorTest {
     }
 
     @Test
-    public void testIsCoordinateInBoardForRightBottomOutOfRangeX() {
+    void testIsCoordinateInBoardForRightBottomOutOfRangeX() {
         CoordinatesFromJson coordinatesFromJson = new CoordinatesFromJson(3, 10);
         BoardSize boardSize = board.getBoardSize();
 

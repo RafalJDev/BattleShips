@@ -4,14 +4,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ShipsToShipHolderTest {
-    private ShipsToShipHolder converter;
+    ShipsToShipHolder converter;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         converter = new ShipsToShipHolder();
     }
 
     @Test
-    public void testConvert() {
+    void testConvert() {
     }
 }

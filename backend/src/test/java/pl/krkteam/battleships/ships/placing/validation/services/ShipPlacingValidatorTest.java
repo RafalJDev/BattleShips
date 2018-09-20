@@ -13,10 +13,10 @@ import java.util.List;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class ShipPlacingValidatorTest {
+class ShipPlacingValidatorTest {
 
     @Test
-    public void testValidateSingleShipAndExpectIsValid() {
+    void testValidateSingleShipAndExpectIsValid() {
         ShipJsonToCoordinates shipJsonToCoordinates = new ShipJsonToCoordinates();
 
         CoordinatesFromJson[] coordinatesFromJsonsA = new CoordinatesFromJson[]
@@ -47,7 +47,7 @@ public class ShipPlacingValidatorTest {
 
 
     @Test
-    public void testValidateSingleShipAndExpectIsNotValid() {
+    void testValidateSingleShipAndExpectIsNotValid() {
         ShipJsonToCoordinates shipJsonToCoordinates = new ShipJsonToCoordinates();
 
         CoordinatesFromJson[] coordinatesFromJsonsA = new CoordinatesFromJson[]

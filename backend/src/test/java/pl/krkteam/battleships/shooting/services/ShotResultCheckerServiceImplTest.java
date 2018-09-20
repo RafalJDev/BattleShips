@@ -21,13 +21,13 @@ public class ShotResultCheckerServiceImplTest {
     CoordinateDTOtoCoordinates coordinateDTOtoCoordinates;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         coordinateDTOtoCoordinates = new CoordinateDTOtoCoordinates();
         shotResultCheckerService = new ShotResultCheckerServiceImpl(coordinateDTOtoCoordinates);
     }
 
     @Test
-    public void testCheckShotResultAndExpectHit() {
+    void testCheckShotResultAndExpectHit() {
         final Coordinates coordinates1 = new Coordinates(4, 3);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(4, 5);

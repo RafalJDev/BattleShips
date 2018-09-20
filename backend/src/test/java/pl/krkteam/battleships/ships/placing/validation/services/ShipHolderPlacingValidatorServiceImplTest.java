@@ -14,12 +14,12 @@ import static org.testng.Assert.assertEquals;
 
 public class ShipHolderPlacingValidatorServiceImplTest {
 
-    private ShipsPlacingValidatorServiceImpl shipPlacingValidator;
+    ShipsPlacingValidatorServiceImpl shipPlacingValidator;
 
-    private GameBoard gameBoard;
+    GameBoard gameBoard;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
         ShipJsonToCoordinates shipJsonToCoordinates = new ShipJsonToCoordinates();
         shipPlacingValidator = new ShipsPlacingValidatorServiceImpl(shipJsonToCoordinates);
@@ -27,7 +27,7 @@ public class ShipHolderPlacingValidatorServiceImplTest {
     }
 
     @Test
-    public void testValidateShipLocationAndExpectValid() {
+    void testValidateShipLocationAndExpectValid() {
         ShipHolderFromJson shipHolderFromJson = new ShipHolderFromJson();
 
         ShipFromJson shipFromJsonA = new ShipFromJson(new CoordinatesFromJson[]{
@@ -50,7 +50,7 @@ public class ShipHolderPlacingValidatorServiceImplTest {
     }
 
     @Test
-    public void testValidateShipLocationAndExpectNotValid() {
+    void testValidateShipLocationAndExpectNotValid() {
         ShipHolderFromJson shipHolderFromJson = new ShipHolderFromJson();
 
         ShipFromJson shipFromJsonA = new ShipFromJson(new CoordinatesFromJson[]{

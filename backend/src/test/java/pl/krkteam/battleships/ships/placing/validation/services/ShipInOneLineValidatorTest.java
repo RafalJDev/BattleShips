@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 public class ShipInOneLineValidatorTest {
 
     @Test
-    public void testIsShipInOneLineVertical() {
+    void testIsShipInOneLineVertical() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(0, 2), new CoordinatesFromJson(1, 2), new CoordinatesFromJson(2, 2)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -23,7 +23,7 @@ public class ShipInOneLineValidatorTest {
     }
 
     @Test
-    public void testIsShipInOneLineHorizontal() {
+    void testIsShipInOneLineHorizontal() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(7, 0), new CoordinatesFromJson(7, 1), new CoordinatesFromJson(7, 2)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -36,7 +36,7 @@ public class ShipInOneLineValidatorTest {
 
 
     @Test
-    public void testIsShipIneLineForOneMastShip() {
+    void testIsShipIneLineForOneMastShip() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]{new CoordinatesFromJson(2, 3)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
         Direction direction = Direction.ONE_MAST;
@@ -47,7 +47,7 @@ public class ShipInOneLineValidatorTest {
     }
 
     @Test
-    public void testIsShipInOneLineVerticalForBadShip() {
+    void testIsShipInOneLineVerticalForBadShip() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(0, 2), new CoordinatesFromJson(1, 2), new CoordinatesFromJson(2, 3)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
@@ -58,7 +58,7 @@ public class ShipInOneLineValidatorTest {
     }
 
     @Test
-    public void testIsShipInOneLineHorizontalForBadShip() {
+    void testIsShipInOneLineHorizontalForBadShip() {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(7, 0), new CoordinatesFromJson(7, -1), new CoordinatesFromJson(7, 2)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);

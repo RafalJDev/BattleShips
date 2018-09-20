@@ -7,7 +7,7 @@ import static org.testng.Assert.assertEquals;
 public class PlacingValidationResultDTOTest {
 
     @Test
-    public void testGetResult() {
+    void testGetResult() {
         PlacingValidationResultDTO placingValidationResultDTO = new PlacingValidationResultDTO(
                 PlacingValidationResultDTO.Result.OK);
 

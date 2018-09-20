@@ -10,20 +10,21 @@ import static org.testng.Assert.assertTrue;
 
 public class BoardTest {
 
-    @Test
-    public void testPutCoordinatesAndCell() {
-    }
+    //todo not written test
+//    @Test
+//    void testPutCoordinatesAndCell() {
+//    }
+//
+//    @Test
+//    void testGetBoardSize() {
+//    }
+//
+//    @Test
+//    void testGetCoordinatesCellMap() {
+//    }
 
     @Test
-    public void testGetBoardSize() {
-    }
-
-    @Test
-    public void testGetCoordinatesCellMap() {
-    }
-
-    @Test
-    public void testIsCellEmptyAndExpectIsEmpty() {
+    void testIsCellEmptyAndExpectIsEmpty() {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
@@ -40,7 +41,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testIsCellEmptyAndExpectNotEmpty() {
+    void testIsCellEmptyAndExpectNotEmpty() {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);

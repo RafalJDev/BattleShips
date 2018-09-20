@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 public class CheckSunkTest {
 
     @Test
-    public void testGetShotResultAndExpectSunkOneMastShip() throws UnexpectedShotResultException {
+    void testGetShotResultAndExpectSunkOneMastShip() throws UnexpectedShotResultException {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
@@ -39,7 +39,7 @@ public class CheckSunkTest {
     }
 
     @Test
-    public void testGetShotResultAndExpectSunkTwoMastShip() throws UnexpectedShotResultException {
+    void testGetShotResultAndExpectSunkTwoMastShip() throws UnexpectedShotResultException {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);

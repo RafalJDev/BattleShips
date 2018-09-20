@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 public class GameBoardTest {
 
     @Test
-    public void testGetBoardAndExpectDimensions() {
+    void testGetBoardAndExpectDimensions() {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
@@ -29,11 +29,10 @@ public class GameBoardTest {
         Board board = gameBoard.getBoard();
 
         assertEquals(board.getBoardSize().getDimensions(), 10);
-
     }
 
     @Test
-    public void testGetShipHolder() {
+    void testGetShipHolder() {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
@@ -49,7 +48,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void testCreateShip() {
+    void testCreateShip() {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
@@ -71,7 +70,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void isPlacedFleetAndExpect() {
+    void isPlacedFleetAndExpect() {
         GameBoard gameBoard = new GameBoard();
 
         gameBoard.setPlacedFleet(true);

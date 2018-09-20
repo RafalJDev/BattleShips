@@ -27,7 +27,7 @@ public class WaitForOpponentControllerTest {
     private MockMvc mockMvc;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
 
         waitForOpponentController = new WaitForOpponentController(roomHolder);
@@ -36,7 +36,7 @@ public class WaitForOpponentControllerTest {
     }
 
     @Test
-    public void testIsOpponentPresentAndExpectPresent() throws Exception {
+    void testIsOpponentPresentAndExpectPresent() throws Exception {
         String roomName = "someRoom";
         String waitingPlayer = "SomePlayer";
 
@@ -53,7 +53,7 @@ public class WaitForOpponentControllerTest {
     }
 
     @Test
-    public void testIsOpponentPresentAndExpectAbsent() throws Exception {
+    void testIsOpponentPresentAndExpectAbsent() throws Exception {
         String roomName = "someRoom";
         String waitingPlayer = "SomePlayer";
         when(roomHolder.isOpponentInRoom(eq(roomName), any(Player.class)))

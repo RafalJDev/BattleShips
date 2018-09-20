@@ -15,7 +15,7 @@ import static org.testng.Assert.assertNotEquals;
 public class CheckMissTest {
 
     @Test
-    public void testGetShotResultAndExpectMissed() throws UnexpectedShotResultException {
+    void testGetShotResultAndExpectMissed() throws UnexpectedShotResultException {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);
@@ -36,7 +36,7 @@ public class CheckMissTest {
     }
 
     @Test
-    public void testGetShotResultAndExpectNotMissed() throws UnexpectedShotResultException {
+    void testGetShotResultAndExpectNotMissed() throws UnexpectedShotResultException {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);

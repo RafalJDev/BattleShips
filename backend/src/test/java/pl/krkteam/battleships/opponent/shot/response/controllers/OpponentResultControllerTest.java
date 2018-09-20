@@ -25,7 +25,7 @@ public class OpponentResultControllerTest {
     MockMvc mockMvc;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
 
         opponentResultController = new OpponentResultController(roomHolder);
@@ -34,7 +34,7 @@ public class OpponentResultControllerTest {
     }
 
     @Test
-    public void testOnShotOpponentResponse() throws Exception {
+    void testOnShotOpponentResponse() throws Exception {
         Room room = new Room("SomeRoom");
         Player playerA = new Player("SomePlayerA");
         Player playerB = new Player("SomePlayerB");

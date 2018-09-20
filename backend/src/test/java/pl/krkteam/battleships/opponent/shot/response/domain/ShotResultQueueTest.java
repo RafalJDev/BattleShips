@@ -19,19 +19,21 @@ public class ShotResultQueueTest {
     OpponentShotResult opponentShotResult2;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void shouldReturnFirstOfAddedShotResult() {
+    void shouldReturnFirstOfAddedShotResult() {
         // given
         ShotResultQueue shotResultQueue = new ShotResultQueue();
+
         // when
         when(opponentShotResult1.getMessage()).thenReturn("Missed");
         when(opponentShotResult2.getMessage()).thenReturn("Shot");
         boolean addResult1 = shotResultQueue.addShotResult(opponentShotResult1);
         boolean addResult2 = shotResultQueue.addShotResult(opponentShotResult2);
+
         // then
         OpponentShotResult firstResult = shotResultQueue.getOpponentShotResult();
         Assert.assertTrue(addResult1);
@@ -40,14 +42,16 @@ public class ShotResultQueueTest {
     }
 
     @Test
-    public void shouldReturnSecondOfAddedShotResultProperly() {
+    void shouldReturnSecondOfAddedShotResultProperly() {
         // given
         ShotResultQueue shotResultQueue = new ShotResultQueue();
+
         // when
         when(opponentShotResult1.getMessage()).thenReturn("Missed");
         when(opponentShotResult2.getMessage()).thenReturn("Shot");
         boolean addResult1 = shotResultQueue.addShotResult(opponentShotResult1);
         boolean addResult2 = shotResultQueue.addShotResult(opponentShotResult2);
+
         // then
         shotResultQueue.getOpponentShotResult();
         OpponentShotResult secondResult = shotResultQueue.getOpponentShotResult();
@@ -57,29 +61,33 @@ public class ShotResultQueueTest {
     }
 
     @Test
-    public void shouldReturnNoShootWhenQueueIsEmpty() {
+    void shouldReturnNoShootWhenQueueIsEmpty() {
         // given
         ShotResultQueue shotResultQueue = new ShotResultQueue();
+
         // when - then
         OpponentShotResult result = shotResultQueue.getOpponentShotResult();
         Assert.assertEquals(result.getMessage(), "NoShoot");
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenAddingResultIsNull() {
+    void shouldThrowExceptionWhenAddingResultIsNull() {
         // given
         ShotResultQueue shotResultQueue = new ShotResultQueue();
+
         // when - then
         shotResultQueue.addShotResult(null);
     }
 
     @Test
-    public void shouldReturnFalseWhenAddingResultIsNoShoot() {
+    void shouldReturnFalseWhenAddingResultIsNoShoot() {
         // given
         ShotResultQueue shotResultQueue = new ShotResultQueue();
         OpponentShotResult shotResult = new OpponentNoShot();
+
         // when
         boolean addResult = shotResultQueue.addShotResult(shotResult);
+
         // then
         Assert.assertFalse(addResult);
     }

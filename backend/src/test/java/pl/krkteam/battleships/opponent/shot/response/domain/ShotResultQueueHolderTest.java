@@ -27,7 +27,7 @@ public class ShotResultQueueHolderTest {
 
     @BeforeClass
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -41,22 +41,24 @@ public class ShotResultQueueHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "illegalPlayers")
-    public void shouldThrowExceptionWhenAtLeastOneGivenPlayerIsNull(Player player1, Player player2) {
+    void shouldThrowExceptionWhenAtLeastOneGivenPlayerIsNull(Player player1, Player player2) {
         new ShotResultQueueHolder(player1, player2);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenPlayerToGetQueueIsNull() {
+    void shouldThrowExceptionWhenGivenPlayerToGetQueueIsNull() {
         // given
         ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1, player2);
+
         // when - then
         shotResultQueueHolder.getShotResultQueue(null);
     }
 
     @Test(expectedExceptions = NoSuchElementException.class)
-    public void shouldThrowExceptionWhenGivenPlayerDoesNotBelongToCurrentHolder() {
+    void shouldThrowExceptionWhenGivenPlayerDoesNotBelongToCurrentHolder() {
         // given
         ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1, player2);
+
         // when - then
         shotResultQueueHolder.getShotResultQueue(player3);
     }
@@ -68,14 +70,16 @@ public class ShotResultQueueHolderTest {
     OpponentShotResult opponentShotResult2;
 
     @Test
-    public void shouldReturnProperQueueConnectedWithGivenPlayer() {
+    void shouldReturnProperQueueConnectedWithGivenPlayer() {
         // given
         ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder(player1, player2);
         when(opponentShotResult1.getMessage()).thenReturn("Missed");
         when(opponentShotResult2.getMessage()).thenReturn("Hit");
+
         // when
         shotResultQueueHolder.getShotResultQueue(player1).addShotResult(opponentShotResult1);
         shotResultQueueHolder.getShotResultQueue(player2).addShotResult(opponentShotResult2);
+
         // then
         ShotResultQueue queueOfPlayer1 = shotResultQueueHolder.getShotResultQueue(player1);
         OpponentShotResult forPlayer1 = queueOfPlayer1.getOpponentShotResult();
@@ -86,20 +90,23 @@ public class ShotResultQueueHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenPlayerToAddIsNull() {
+    void shouldThrowExceptionWhenGivenPlayerToAddIsNull() {
         // given
         ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
+
         // when - then
         shotResultQueueHolder.addPlayer(null);
     }
 
     @Test
-    public void shouldReturnFalseWhenGivenPlayerAlreadyExists() {
+    void shouldReturnFalseWhenGivenPlayerAlreadyExists() {
         // given
         ShotResultQueueHolder shotResultQueueHolder = new ShotResultQueueHolder();
+
         // when
         shotResultQueueHolder.addPlayer(player1);
         boolean addResult = shotResultQueueHolder.addPlayer(player1);
+
         //then
         Assert.assertFalse(addResult);
     }

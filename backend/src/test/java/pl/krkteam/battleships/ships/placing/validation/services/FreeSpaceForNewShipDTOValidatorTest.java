@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class FreeSpaceForNewShipDTOValidatorTest {
 
     @DataProvider(name = "provideBoard")
-    public Object[] boardProvider() {
+    Object[] boardProvider() {
         GameBoard gameBoard = new GameBoard();
         List<Coordinates> coordinatesList1 = Arrays.asList(
                 new Coordinates(7, 5),
@@ -34,7 +34,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
     }
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewHorizontalShipAndExpectFreeSpace(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewHorizontalShipAndExpectFreeSpace(GameBoard gameBoard) {
         FreeSpaceForNewShipValidator freeSpaceForNewShipValidator = new FreeSpaceForNewShipValidator();
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(5, 0), new CoordinatesFromJson(5, 1), new CoordinatesFromJson(5, 2)};
@@ -46,7 +46,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
     }
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewVerticalShipAndExpectFreeSpace(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewVerticalShipAndExpectFreeSpace(GameBoard gameBoard) {
         FreeSpaceForNewShipValidator freeSpaceForNewShipValidator = new FreeSpaceForNewShipValidator();
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(6, 1), new CoordinatesFromJson(7, 1), new CoordinatesFromJson(8, 1)};
@@ -58,7 +58,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
     }
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewShipAndExpectNewShipInBuffer(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewShipAndExpectNewShipInBuffer(GameBoard gameBoard) {
         FreeSpaceForNewShipValidator freeSpaceForNewShipValidator = new FreeSpaceForNewShipValidator();
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(6, 4), new CoordinatesFromJson(7, 4),
@@ -72,7 +72,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
 
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewShipAndExpectNewShipInImposeOnOtherShip(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewShipAndExpectNewShipInImposeOnOtherShip(GameBoard gameBoard) {
         FreeSpaceForNewShipValidator freeSpaceForNewShipValidator = new FreeSpaceForNewShipValidator();
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(2, 2), new CoordinatesFromJson(3, 2),
@@ -86,7 +86,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
 
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewShipAndExpectFreeSpaceInLeftBottomCorner(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewShipAndExpectFreeSpaceInLeftBottomCorner(GameBoard gameBoard) {
         FreeSpaceForNewShipValidator freeSpaceForNewShipValidator = new FreeSpaceForNewShipValidator();
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(9, 1), new CoordinatesFromJson(9, 2),
@@ -100,7 +100,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
 
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewShipAndExpectFreeSpaceInRightTopCorner(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewShipAndExpectFreeSpaceInRightTopCorner(GameBoard gameBoard) {
         FreeSpaceForNewShipValidator freeSpaceForNewShipValidator = new FreeSpaceForNewShipValidator();
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]
                 {new CoordinatesFromJson(0, 9), new CoordinatesFromJson(1, 9),
@@ -113,7 +113,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
     }
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewOneMastShipAndExpectFreeSpace(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewOneMastShipAndExpectFreeSpace(GameBoard gameBoard) {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]{new CoordinatesFromJson(0, 9)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
         Direction direction = ShipDirectionChecker.whatDirection(shipFromJson);
@@ -126,7 +126,7 @@ public class FreeSpaceForNewShipDTOValidatorTest {
 
 
     @Test(dataProvider = "provideBoard")
-    public void testIsFreeSpaceForNewOneMastShipAndExpectNewShipInBuffer(GameBoard gameBoard) {
+    void testIsFreeSpaceForNewOneMastShipAndExpectNewShipInBuffer(GameBoard gameBoard) {
         CoordinatesFromJson[] coordinatesFromJsons = new CoordinatesFromJson[]{new CoordinatesFromJson(7, 4)};
         ShipFromJson shipFromJson = new ShipFromJson(coordinatesFromJsons);
         Direction direction = ShipDirectionChecker.whatDirection(shipFromJson);

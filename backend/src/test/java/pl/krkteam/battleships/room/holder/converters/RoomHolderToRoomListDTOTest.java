@@ -11,15 +11,15 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class RoomHolderToRoomListDTOTest {
 
-    private RoomHolderToRoomListDTO converter;
+    RoomHolderToRoomListDTO converter;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         converter = new RoomHolderToRoomListDTO();
     }
 
     @Test
-    public void testConvertAndExpectConvertWell() {
+    void testConvertAndExpectConvertWell() {
         RoomHolder roomHolder = new RoomHolder();
         String roomNameA = "RoomA";
         String roomNameB = "RoomB";
@@ -37,7 +37,7 @@ public class RoomHolderToRoomListDTOTest {
     }
 
     @Test
-    public void testConvertAndExpectGetOnlyFreeRooms() {
+    void testConvertAndExpectGetOnlyFreeRooms() {
         RoomHolder roomHolder = new RoomHolder();
         String roomNameA = "RoomA";
         String roomNameB = "RoomB";
@@ -57,7 +57,7 @@ public class RoomHolderToRoomListDTOTest {
     }
 
     @Test
-    public void testConvertAndExpectTwoFreeRooms() {
+    void testConvertAndExpectTwoFreeRooms() {
         RoomHolder roomHolder = new RoomHolder();
         String roomNameA = "RoomA";
         String roomNameB = "RoomB";
@@ -85,7 +85,7 @@ public class RoomHolderToRoomListDTOTest {
     }
 
     @Test
-    public void testConvertForNullAndExpectReturnNull() {
+    void testConvertForNullAndExpectReturnNull() {
         RoomHolder roomHolder = null;
         assertEquals(converter.convert(roomHolder), null);
     }

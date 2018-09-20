@@ -26,25 +26,25 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class ShootingControllerTest {
 
-    private ShootingController shootingController;
+    ShootingController shootingController;
 
     @Mock
-    private ShotResultCheckerService shotResultCheckerService;
+    ShotResultCheckerService shotResultCheckerService;
 
     @Mock
-    private RoomHolder roomHolder;
+    RoomHolder roomHolder;
 
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
-    private String roomName = "SomeRoom";
-    private Room room = new Room(roomName);
-    private Game game = room.getGame();
-    private Player playerA = new Player("PlayerA");
-    private Player playerB = new Player("PlayerB");
+    String roomName = "SomeRoom";
+    Room room = new Room(roomName);
+    Game game = room.getGame();
+    Player playerA = new Player("PlayerA");
+    Player playerB = new Player("PlayerB");
 
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
 
         shootingController = new ShootingController(shotResultCheckerService, roomHolder);
@@ -53,7 +53,7 @@ public class ShootingControllerTest {
     }
 
     @BeforeMethod
-    public void reset() {
+    void reset() {
         this.roomName = "SomeRoom";
         this.room = new Room(roomName);
         this.game = room.getGame();
@@ -62,7 +62,7 @@ public class ShootingControllerTest {
     }
 
     @Test
-    public void testValidateShotAndExpectHit() throws Exception {
+    void testValidateShotAndExpectHit() throws Exception {
         game.initializeGame(playerA, playerB);
 
         when(roomHolder.getRoom(eq(roomName))).thenReturn(room);
@@ -88,7 +88,7 @@ public class ShootingControllerTest {
     }
 
     @Test
-    public void testValidateShotAndExpectShootMiss() throws Exception {
+    void testValidateShotAndExpectShootMiss() throws Exception {
         game.initializeGame(playerA, playerB);
 
         when(roomHolder.getRoom(eq(roomName))).thenReturn(room);
@@ -114,7 +114,7 @@ public class ShootingControllerTest {
     }
 
     @Test
-    public void testValidateShotAndExpectSunk() throws Exception {
+    void testValidateShotAndExpectSunk() throws Exception {
         game.initializeGame(playerA, playerB);
 
         when(roomHolder.getRoom(eq(roomName))).thenReturn(room);
@@ -139,7 +139,7 @@ public class ShootingControllerTest {
     }
 
     @Test
-    public void testValidateShotAndExpectPlayerWon() throws Exception {
+    void testValidateShotAndExpectPlayerWon() throws Exception {
         game.initializeGame(playerA, playerB);
 
         when(roomHolder.getRoom(eq(roomName))).thenReturn(room);
@@ -164,7 +164,7 @@ public class ShootingControllerTest {
     }
 
     @Test
-    public void testValidateShotAndExpectNotYourTurn() throws Exception {
+    void testValidateShotAndExpectNotYourTurn() throws Exception {
         game.initializeGame(playerA, playerB);
 
         when(roomHolder.getRoom(eq(roomName))).thenReturn(room);

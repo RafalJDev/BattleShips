@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 public class CheckPlayerWonTest {
 
     @Test
-    public void testGetShotResultAndExpectPlayerWon() throws UnexpectedShotResultException {
+    void testGetShotResultAndExpectPlayerWon() throws UnexpectedShotResultException {
         final Coordinates coordinates1 = new Coordinates(3, 4);
         final Coordinates coordinates2 = new Coordinates(4, 4);
         final Coordinates coordinates3 = new Coordinates(5, 4);

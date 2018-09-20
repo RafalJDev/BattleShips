@@ -3,7 +3,6 @@ package pl.krkteam.battleships.common.domain;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.krkteam.battleships.common.domain.player.Player;
@@ -32,14 +31,13 @@ public class GameBoardHolderTest {
     @Mock
     GameBoard gameBoard2;
 
-    @BeforeClass
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenPlayerToAddGameBoardIsNull() {
+    void shouldThrowExceptionWhenGivenPlayerToAddGameBoardIsNull() {
         // given
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         // when - then
@@ -47,7 +45,7 @@ public class GameBoardHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenToAddGameBoardIsNull() {
+    void shouldThrowExceptionWhenGivenToAddGameBoardIsNull() {
         // given
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         // when - then
@@ -55,7 +53,7 @@ public class GameBoardHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenPlayerToGetGameBoardIsNull() {
+    void shouldThrowExceptionWhenGivenPlayerToGetGameBoardIsNull() {
         // given
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         // when - then
@@ -63,7 +61,7 @@ public class GameBoardHolderTest {
     }
 
     @Test(expectedExceptions = NoSuchElementException.class)
-    public void shouldThrowExceptionWhenGivenPlayerDoesNotBelongToCurrentHolder() {
+    void shouldThrowExceptionWhenGivenPlayerDoesNotBelongToCurrentHolder() {
         // given
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         gameBoardHolder.addPlayer(player1, gameBoard1);
@@ -73,7 +71,7 @@ public class GameBoardHolderTest {
     }
 
     @Test
-    public void shouldReturnProperGameBoardConnectedWithGivenPlayer() {
+    void shouldReturnProperGameBoardConnectedWithGivenPlayer() {
         // given
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         gameBoardHolder.addPlayer(player1, gameBoard1);
@@ -84,7 +82,7 @@ public class GameBoardHolderTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenGivenPlayerToAddAlreadyExists() {
+    void shouldReturnFalseWhenGivenPlayerToAddAlreadyExists() {
         // given
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         gameBoardHolder.addPlayer(player1, gameBoard1);
@@ -94,7 +92,7 @@ public class GameBoardHolderTest {
     }
 
     @Test
-    public void testAreBothFleetsValidAndExpectAreValid() {
+    void testAreBothFleetsValidAndExpectAreValid() {
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         gameBoardHolder.addPlayer(player1, gameBoard1);
         gameBoardHolder.addPlayer(player2, gameBoard2);
@@ -107,7 +105,7 @@ public class GameBoardHolderTest {
     }
 
     @Test
-    public void testAreBothFleetsValidAndExpectAreNotValid() {
+    void testAreBothFleetsValidAndExpectAreNotValid() {
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         gameBoardHolder.addPlayer(player1, gameBoard1);
         gameBoardHolder.addPlayer(player2, gameBoard2);
@@ -119,7 +117,7 @@ public class GameBoardHolderTest {
     }
 
     @Test(expectedExceptions = IndexOutOfBoundsException.class)
-    public void testAreBothFleetsValidAndExpectThereAreNotEnoughPlayers() {
+    void testAreBothFleetsValidAndExpectThereAreNotEnoughPlayers() {
         GameBoardHolder gameBoardHolder = new GameBoardHolder();
         gameBoardHolder.addPlayer(player1, gameBoard1);
 

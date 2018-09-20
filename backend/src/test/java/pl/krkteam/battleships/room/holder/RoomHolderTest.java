@@ -18,15 +18,15 @@ import static org.testng.Assert.assertEquals;
 
 public class RoomHolderTest {
 
-    private RoomHolder roomHolder;
+    RoomHolder roomHolder;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         roomHolder = new RoomHolder();
     }
 
     @Test
-    public void testGetRoomListAndExpectHasTheSameRoomsNames() {
+    void testGetRoomListAndExpectHasTheSameRoomsNames() {
         Player playerA = new Player("SomePlayerA");
         Player playerB = new Player("SomePlayerB");
         List<String> roomNamesList = Arrays.asList("SomeRoom1", "SomeRoom2");
@@ -42,7 +42,7 @@ public class RoomHolderTest {
     }
 
     @Test
-    public void createRoomEndExpectSecondPlayerJoined() {
+    void createRoomEndExpectSecondPlayerJoined() {
         String roomName = "SomeRoom";
         Player playerA = new Player("SomePlayerA");
         roomHolder.createRoomAndJoinPlayer(playerA, roomName);
@@ -53,7 +53,7 @@ public class RoomHolderTest {
     }
 
     @Test
-    public void testTwoPlayersJoinedThirdPlayerCannotJoin() {
+    void testTwoPlayersJoinedThirdPlayerCannotJoin() {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
@@ -67,7 +67,7 @@ public class RoomHolderTest {
     }
 
     @Test
-    public void createRoomAndJoinSecondPlayerAndExpectOpponentPresent() {
+    void createRoomAndJoinSecondPlayerAndExpectOpponentPresent() {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
@@ -80,7 +80,7 @@ public class RoomHolderTest {
     }
 
     @Test
-    public void createRoomAndExpectOpponentAbsent() {
+    void createRoomAndExpectOpponentAbsent() {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
@@ -91,7 +91,7 @@ public class RoomHolderTest {
     }
 
     @Test
-    public void createRoomAndJoinSecondPlayerAndOpponentPresenceForPlayerDoesNotBelongToRoom() {
+    void createRoomAndJoinSecondPlayerAndOpponentPresenceForPlayerDoesNotBelongToRoom() {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
@@ -107,7 +107,7 @@ public class RoomHolderTest {
 
 
     @Test
-    public void createRoomAndExpectGetThisRoom() {
+    void createRoomAndExpectGetThisRoom() {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");
@@ -117,7 +117,7 @@ public class RoomHolderTest {
     }
 
     @Test(expectedExceptions = NoSuchElementException.class)
-    public void createRoomAndTryGetFromRoomHolderNotExistingRoom() {
+    void createRoomAndTryGetFromRoomHolderNotExistingRoom() {
         String roomName = "SomeRoom";
         Player playerA = new Player("SomePlayerA");
         roomHolder.createRoomAndJoinPlayer(playerA, roomName);
@@ -128,7 +128,7 @@ public class RoomHolderTest {
     }
 
     @Test
-    public void tryToCreateRoomForBusyNameAndExpectWillNotCreate() {
+    void tryToCreateRoomForBusyNameAndExpectWillNotCreate() {
         String roomName = "SomeRoom";
 
         Player playerA = new Player("SomePlayerA");

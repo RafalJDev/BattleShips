@@ -26,12 +26,12 @@ public class TurnHolderTest {
     Player player3;
 
     @BeforeTest
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @DataProvider(name = "illegalPlayers")
-    public Object[][] illegalPlayers() {
+    Object[][] illegalPlayers() {
         Object[][] result = new Object[3][2];
         result[0] = new Object[]{player1, null};
         result[1] = new Object[]{null, player2};
@@ -40,7 +40,7 @@ public class TurnHolderTest {
     }
 
     @DataProvider(name = "oneProperPlayer")
-    public Object[][] oneProperPlayer() {
+    Object[][] oneProperPlayer() {
         Object[][] result = new Object[3][1];
         result[0] = new Object[]{player1};
         result[1] = new Object[]{player2};
@@ -49,7 +49,7 @@ public class TurnHolderTest {
     }
 
     @DataProvider(name = "threeProperPlayers")
-    public Object[][] threeProperPlayers() {
+    Object[][] threeProperPlayers() {
         Object[][] result = new Object[6][3];
         result[0] = new Object[]{player1, player2, player3};
         result[1] = new Object[]{player2, player1, player3};
@@ -61,7 +61,7 @@ public class TurnHolderTest {
     }
 
     @DataProvider(name = "twoProperPlayers")
-    public Object[][] twoProperPlayers() {
+    Object[][] twoProperPlayers() {
         Object[][] result = new Object[6][2];
         result[0] = new Object[]{player1, player2};
         result[1] = new Object[]{player1, player3};
@@ -73,12 +73,12 @@ public class TurnHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "illegalPlayers")
-    public void shouldThrowExceptionWhenAtLeastGivenInConstructorPlayerIsNull(Player playerOne, Player playerTwo) {
+    void shouldThrowExceptionWhenAtLeastGivenInConstructorPlayerIsNull(Player playerOne, Player playerTwo) {
         new TurnHolder(playerOne, playerTwo);
     }
 
     @Test(expectedExceptions = NoSuchElementException.class)
-    public void shouldThrowExceptionOnChoosingFirstWhenGivenPlayerDoesNotBelongToHolder() {
+    void shouldThrowExceptionOnChoosingFirstWhenGivenPlayerDoesNotBelongToHolder() {
         // given
         TurnHolder turnHolder = new TurnHolder(player1, player2);
         // when - then
@@ -86,12 +86,12 @@ public class TurnHolderTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenGivenToAddPlayerIsNull() {
+    void shouldThrowExceptionWhenGivenToAddPlayerIsNull() {
         new TurnHolder().addPlayer(null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "oneProperPlayer")
-    public void shouldThrowExceptionWhenTryingAddAlreadyExistingInHolderPlayer(Player player) {
+    void shouldThrowExceptionWhenTryingAddAlreadyExistingInHolderPlayer(Player player) {
         // given
         TurnHolder turnHolder = new TurnHolder();
         // when - then
@@ -100,7 +100,7 @@ public class TurnHolderTest {
     }
 
     @Test(expectedExceptions = IllegalStateException.class, dataProvider = "threeProperPlayers")
-    public void shouldThrowExceptionWhenHolderIsFull(Player playerOne, Player playerTwo, Player playerThree) {
+    void shouldThrowExceptionWhenHolderIsFull(Player playerOne, Player playerTwo, Player playerThree) {
         // given
         TurnHolder turnHolder = new TurnHolder();
         // when - then
@@ -110,7 +110,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldBeFistPlayerTurnByDefault(Player playerOne, Player playerTwo) {
+    void shouldBeFistPlayerTurnByDefault(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder();
         // when
@@ -122,7 +122,7 @@ public class TurnHolderTest {
     }
 
     @Test(expectedExceptions = NoSuchElementException.class, dataProvider = "threeProperPlayers")
-    public void shouldThrowExceptionWhenGivenPlayerTo_isTurnOfPlayer_DoesNotBelongToHolder(Player playerOne,
+    void shouldThrowExceptionWhenGivenPlayerTo_isTurnOfPlayer_DoesNotBelongToHolder(Player playerOne,
                                                                                            Player playerTwo,
                                                                                            Player playerThree) {
         // given
@@ -132,7 +132,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldSetFirstPlayerOn_choseFirst(Player playerOne, Player playerTwo) {
+    void shouldSetFirstPlayerOn_choseFirst(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder();
         turnHolder.addPlayer(playerOne);
@@ -144,7 +144,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldChangeCurrentPlayerWhenMissed(Player playerOne, Player playerTwo) {
+    void shouldChangeCurrentPlayerWhenMissed(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -155,7 +155,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldChangeCurrentPlayerWhenMadeWrongShot(Player playerOne, Player playerTwo) {
+    void shouldChangeCurrentPlayerWhenMadeWrongShot(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -166,7 +166,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldStayCurrentPlayerWhenHit(Player playerOne, Player playerTwo) {
+    void shouldStayCurrentPlayerWhenHit(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -177,7 +177,7 @@ public class TurnHolderTest {
     }
 
     @Test(dataProvider = "twoProperPlayers")
-    public void shouldStayCurrentPlayerWhenSunk(Player playerOne, Player playerTwo) {
+    void shouldStayCurrentPlayerWhenSunk(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -188,7 +188,7 @@ public class TurnHolderTest {
     }
 
     @Test(expectedExceptions = IllegalStateException.class, dataProvider = "twoProperPlayers")
-    public void shouldThrowExceptionOn_choseFirst_WhenGameHasBeenStarted(Player playerOne, Player playerTwo) {
+    void shouldThrowExceptionOn_choseFirst_WhenGameHasBeenStarted(Player playerOne, Player playerTwo) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);
         // when
@@ -198,7 +198,7 @@ public class TurnHolderTest {
     }
 
     @Test(expectedExceptions = NoSuchElementException.class, dataProvider = "threeProperPlayers")
-    public void shouldThrowExceptionOn_addShotResult_WhenPlayerDoesNotExistInHolder(Player playerOne, Player playerTwo,
+    void shouldThrowExceptionOn_addShotResult_WhenPlayerDoesNotExistInHolder(Player playerOne, Player playerTwo,
                                                                                     Player playerThree) {
         // given
         TurnHolder turnHolder = new TurnHolder(playerOne, playerTwo);

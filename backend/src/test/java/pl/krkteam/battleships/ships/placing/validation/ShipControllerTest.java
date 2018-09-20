@@ -41,7 +41,7 @@ public class ShipControllerTest {
     MockMvc mockMvc;
 
     @BeforeMethod
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
 
         shipController = new ShipController(
@@ -51,7 +51,7 @@ public class ShipControllerTest {
     }
 
     @Test
-    public void testValidateAndSaveShips() throws Exception {
+    void testValidateAndSaveShips() throws Exception {
         ShipDTO shipDTOA = new ShipDTO(new CoordinateDTO[]{
                 new CoordinateDTO(2, 3),
                 new CoordinateDTO(2, 4),

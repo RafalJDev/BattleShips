@@ -20,12 +20,12 @@ class WaitForStartGameController {
 
     private final RoomHolder roomHolder;
 
-    public WaitForStartGameController(RoomHolder roomHolder) {
+    WaitForStartGameController(RoomHolder roomHolder) {
         this.roomHolder = roomHolder;
     }
 
     @GetMapping(value = "/room/game/start")
-    public String canWeStartPlay(@RequestParam String playerName, @RequestParam String roomName) {
+    String canWeStartPlay(@RequestParam String playerName, @RequestParam String roomName) {
         final GameBoardHolder gameBoardHolder = getGameBoardHolder(roomName);
 
         Player askingPlayer = new Player(playerName);
