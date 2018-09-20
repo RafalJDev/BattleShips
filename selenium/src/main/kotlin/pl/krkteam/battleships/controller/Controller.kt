@@ -19,7 +19,7 @@ class Controller {
     constructor() {
         var pathToChrome = FileSystems.getDefault().getPath("").toAbsolutePath().toString()
 
-        pathToChrome += "/selenium/chromeDriver/chromedriver"
+        pathToChrome += "/selenium/chromeDriver/chromedriver.exe"
 
         System.setProperty("webdriver.chrome.driver", pathToChrome)
 
@@ -41,7 +41,7 @@ class Controller {
     }
 
     private fun openChrome() {
-        ChromeOpener.openChrome(webDriver, "localhost:4100")
+        ChromeOpener.openChrome(webDriver, "localhost:8080")
         Waiter.waitTillPageLoads(webDriver)
     }
 

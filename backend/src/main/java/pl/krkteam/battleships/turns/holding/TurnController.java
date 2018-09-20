@@ -12,7 +12,7 @@ import pl.krkteam.battleships.turns.holding.dto.TurnResultDTO;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class TurnController {
+class TurnController {
 
     private final RoomHolder roomHolder;
 

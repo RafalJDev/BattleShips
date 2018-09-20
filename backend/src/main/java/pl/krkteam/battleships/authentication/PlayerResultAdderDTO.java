@@ -1,9 +1,9 @@
 package pl.krkteam.battleships.authentication;
 
-public class PlayerResultAdderDTO {
+class PlayerResultAdderDTO {
     private boolean result;
 
-    public PlayerResultAdderDTO(boolean result) {
+    PlayerResultAdderDTO(boolean result) {
         this.result = result;
     }
 }

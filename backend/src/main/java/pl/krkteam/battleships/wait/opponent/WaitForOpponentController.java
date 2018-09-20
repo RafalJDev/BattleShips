@@ -13,7 +13,7 @@ import pl.krkteam.battleships.wait.opponent.dto.WaiterResponseDTO;
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class WaitForOpponentController {
+class WaitForOpponentController {
     private final RoomHolder roomHolder;
 
     public WaitForOpponentController(RoomHolder roomHolder) {

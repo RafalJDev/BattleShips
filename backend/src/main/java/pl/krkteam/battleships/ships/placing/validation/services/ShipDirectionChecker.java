@@ -3,19 +3,21 @@ package pl.krkteam.battleships.ships.placing.validation.services;
 import pl.krkteam.battleships.ships.placing.validation.fromJson.CoordinatesFromJson;
 import pl.krkteam.battleships.ships.placing.validation.fromJson.ShipFromJson;
 
+import static pl.krkteam.battleships.ships.placing.validation.services.Direction.*;
+
 class ShipDirectionChecker {
     static Direction whatDirection(ShipFromJson shipFromJson) {
         CoordinatesFromJson[] coordinatesFromJsonArray = shipFromJson.getCoordinates();
         if (isOneMastShip(coordinatesFromJsonArray)) {
-            return Direction.ONE_MAST;
+            return ONE_MAST;
         }
         if (checkIfShipHorizontal(coordinatesFromJsonArray)) {
-            return Direction.HORIZONTAL;
+            return HORIZONTAL;
         }
         if (checkIfShipVertical(coordinatesFromJsonArray)) {
-            return Direction.VERTICAL;
+            return VERTICAL;
         }
-        return Direction.WRONG;
+        return WRONG;
     }
 
     private static boolean isOneMastShip(CoordinatesFromJson[] coordinatesFromJsonArray) {

@@ -2,7 +2,7 @@ package pl.krkteam.battleships.shooting.services;
 
 import pl.krkteam.battleships.common.domain.Coordinates;
 
-public class UnexpectedShotResultException extends Exception {
+class UnexpectedShotResultException extends Exception {
 
     private Coordinates shotCoordinates;
 

@@ -20,19 +20,19 @@ import pl.krkteam.battleships.turns.holding.TurnHolder;
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class ShootingController {
+class ShootingController {
 
     private final ShotResultCheckerService shotResultCheckerService;
     private final RoomHolder roomHolder;
 
-    public ShootingController(ShotResultCheckerService shotResultCheckerService,
+    ShootingController(ShotResultCheckerService shotResultCheckerService,
                               RoomHolder roomHolder) {
         this.shotResultCheckerService = shotResultCheckerService;
         this.roomHolder = roomHolder;
     }
 
     @PostMapping(value = "/game/player/shot")
-    public String validateShot(@RequestBody String shotJson, @RequestParam String playerName,
+    String validateShot(@RequestBody String shotJson, @RequestParam String playerName,
                                @RequestParam String roomName) {
         final Player shootingPlayer = new Player(playerName);
         Gson gson = new Gson();

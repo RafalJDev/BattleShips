@@ -39,6 +39,7 @@ public class WaitForOpponentControllerTest {
     public void testIsOpponentPresentAndExpectPresent() throws Exception {
         String roomName = "someRoom";
         String waitingPlayer = "SomePlayer";
+
         when(roomHolder.isOpponentInRoom(eq(roomName), any(Player.class)))
                 .thenReturn(new OpponentPresentDTO());
 

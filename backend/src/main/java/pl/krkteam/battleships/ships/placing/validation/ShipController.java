@@ -17,13 +17,13 @@ import pl.krkteam.battleships.ships.placing.validation.services.ShipsPlacingVali
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class ShipController {
+class ShipController {
 
     private final ShipsPlacingValidatorService shipsLocationValidatorService;
     private final ShipsToShipHolder shipsToShipHolder;
     private final RoomHolder roomHolder;
 
-    public ShipController(ShipsPlacingValidatorService shipsLocationValidatorService,
+    ShipController(ShipsPlacingValidatorService shipsLocationValidatorService,
                           ShipsToShipHolder shipsToShipHolder,
                           RoomHolder roomHolder) {
         this.shipsLocationValidatorService = shipsLocationValidatorService;
@@ -32,7 +32,7 @@ public class ShipController {
     }
 
     @PostMapping(value = "/ships")
-    public String validateAndSaveShips(@RequestBody String shipsJson,
+    String validateAndSaveShips(@RequestBody String shipsJson,
                                        @RequestParam String playerName,
                                        @RequestParam String roomName) {
 

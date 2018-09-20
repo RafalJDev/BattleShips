@@ -12,16 +12,16 @@ import java.util.Set;
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class RegistrationController {
+class RegistrationController {
 
     private final PlayerHolder playerHolder;
 
-    public RegistrationController(PlayerHolder playerHolder) {
+    RegistrationController(PlayerHolder playerHolder) {
         this.playerHolder = playerHolder;
     }
 
     @PostMapping(value = "/login")
-    public String signPlayer(@RequestBody String post) {
+    String signPlayer(@RequestBody String post) {
         Gson gson = new Gson();
         PlayerDTO playerDTO = gson.fromJson(post, PlayerDTO.class);
         log.debug("PlayerDTO: " + playerDTO);
@@ -33,7 +33,7 @@ public class RegistrationController {
     }
 
     @GetMapping(value = "/registered")
-    public String getPlayers() {
+    String getPlayers() {
         Set<Player> players = playerHolder.getPlayers();
         PlayerDTO[] playerDTOs = PlayerConversionUtil.convertPlayerToPlayerDTOs(players);
         log.debug("Players list: " + Arrays.toString(playerDTOs));

@@ -16,7 +16,7 @@ import pl.krkteam.battleships.start.game.waiter.dto.ReadinessForPlayDTO;
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class WaitForStartGameController {
+class WaitForStartGameController {
 
     private final RoomHolder roomHolder;
 

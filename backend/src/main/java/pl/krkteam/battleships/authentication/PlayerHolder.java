@@ -10,11 +10,11 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class PlayerHolder {
+class PlayerHolder {
 
     private Set<Player> players = new HashSet<>();
 
-    public PlayerResultAdderDTO addPlayer(Player player) {
+    PlayerResultAdderDTO addPlayer(Player player) {
         if (player == null) {
             log.error("Player cannot be null");
             throw new IllegalArgumentException("Player cannot be null");
@@ -23,7 +23,7 @@ public class PlayerHolder {
         return new PlayerResultAdderDTO(players.add(player));
     }
 
-    public boolean isRegistered(Player player) {
+    boolean isRegistered(Player player) {
         if (player == null) {
             log.error("Given player is null");
             throw new IllegalArgumentException("Player cannot be null");
@@ -31,7 +31,7 @@ public class PlayerHolder {
         return players.contains(player);
     }
 
-    public Set<Player> getPlayers() {
+    Set<Player> getPlayers() {
         return Collections.unmodifiableSet(players);
     }
 

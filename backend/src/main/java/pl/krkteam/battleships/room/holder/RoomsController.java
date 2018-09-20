@@ -13,12 +13,12 @@ import pl.krkteam.battleships.room.holder.dto.room.list.RoomListDTO;
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-public class RoomsController {
+class RoomsController {
 
     private final RoomHolder roomHolder;
     private final RoomHolderToRoomListDTO roomHolderToRoomListDTO;
 
-    public RoomsController(RoomHolder roomHolder,
+    RoomsController(RoomHolder roomHolder,
                            RoomHolderToRoomListDTO roomHolderToRoomListDTO) {
         this.roomHolder = roomHolder;
         this.roomHolderToRoomListDTO = roomHolderToRoomListDTO;
@@ -26,7 +26,7 @@ public class RoomsController {
     }
 
     @GetMapping(value = "/room/list")
-    public String getRoomList() {
+    String getRoomList() {
 
         final RoomListDTO roomListDTO = roomHolderToRoomListDTO.convert(roomHolder);
         log.debug(roomListDTO.toString());
@@ -36,7 +36,7 @@ public class RoomsController {
     }
 
     @GetMapping(value = "/room/join")
-    public String joinRoom(@RequestParam String playerName, @RequestParam String roomName) {
+    String joinRoom(@RequestParam String playerName, @RequestParam String roomName) {
         Gson gson = new Gson();
 
         Player joiningPlayer = new Player(playerName);
@@ -48,7 +48,7 @@ public class RoomsController {
     }
 
     @PostMapping(value = "/room/create")
-    public String createRoom(@RequestBody String roomJson, @RequestParam String playerName) {
+    String createRoom(@RequestBody String roomJson, @RequestParam String playerName) {
         Gson gson = new Gson();
 
         RoomDTO roomDTO = gson.fromJson(roomJson, RoomDTO.class);

@@ -5,13 +5,13 @@ import pl.krkteam.battleships.common.dto.PlayerDTO;
 
 import java.util.Collection;
 
-public class PlayerConversionUtil {
+class PlayerConversionUtil {
 
-    public static Player convertPlayerDTOtoPlayer(PlayerDTO playerDTO) {
+    static Player convertPlayerDTOtoPlayer(PlayerDTO playerDTO) {
         return new Player(playerDTO.getName());
     }
 
-    public static PlayerDTO[] convertPlayerToPlayerDTOs(Collection<Player> playerCollection) {
+    static PlayerDTO[] convertPlayerToPlayerDTOs(Collection<Player> playerCollection) {
         return playerCollection.stream()
                 .map(playerDAO -> new PlayerDTO(playerDAO.getPlayerName()))
                 .toArray(PlayerDTO[]::new);
