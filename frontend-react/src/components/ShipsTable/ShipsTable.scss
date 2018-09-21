@@ -1,0 +1,140 @@
+@import '../../colors.scss';
+
+.ships-table-component {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 387px;
+  max-width: 387px;
+  min-height: 387px;
+  max-height: 387px;
+
+  border-radius: 8px;
+
+  font-size: 16px;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 1px solid $GRAY;
+
+  .ships-table--top-header, .ships-table--left-header {
+    display: flex;
+    background-color: #e4e4e4;
+
+    .ships-table--top-header-cell, .ships-table--left-header-cell {
+      display: flex;
+      min-width: 35px;
+      max-width: 35px;
+      min-height: 35px;
+      max-height: 35px;
+      color: #2f2f2f;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+  }
+
+  .ships-table--top-header {
+    flex-direction: row;
+    width: 100%;
+    min-height: 35px;
+    max-height: 35px;
+    border-bottom: 1px solid $GRAY;
+
+    .ships-table--top-header-cell {
+      &:not(:last-child) {
+        border-right: 1px solid $GRAY;
+      }
+    }
+  }
+
+  .ships-table-container {
+    display: flex;
+  }
+
+  .ships-table--left-header {
+    flex-direction: column;
+    min-width: 35px;
+    max-width: 35px;
+    height: 100%;
+    border-right: 1px solid $GRAY;
+
+    .ships-table--left-header-cell {
+      &:not(:last-child) {
+        border-bottom: 1px solid $GRAY;
+      }
+    }
+  }
+
+  .ships-table--body {
+    display: flex;
+    flex-direction: column;
+
+    width: 350px;
+    height: 350px;
+
+    .ships-table--body-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 35px;
+
+      overflow: hidden;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #eee;
+      }
+
+      .ships-table--body-cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 35px;
+        max-width: 35px;
+        min-height: 35px;
+        max-height: 35px;
+
+        overflow: hidden;
+
+        .ships-table--body-cell-indicator {
+          width: 14px;
+          height: 14px;
+        }
+
+        &.cell-ship {
+          .ships-table--body-cell-indicator {
+            background-color: #2f2f2f;
+          }
+        }
+        &.cell-hit {
+          .ships-table--body-cell-indicator {
+            background-color: $RED;
+          }
+        }
+        &.cell-miss {
+          .ships-table--body-cell-indicator {
+            background-color: $BLUE;
+          }
+        }
+
+
+        &:not(:last-child) {
+          border-right: 1px solid #eee;
+        }
+      }
+    }
+
+    &.enemy {
+      .ships-table--body-cell {
+        cursor: pointer;
+        &.cell-miss, &.cell-hit {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
+}

@@ -1,0 +1,10 @@
+@import '../../styles/colors.scss';
+
+.header {
+  display: flex;
+
+  min-height: 50px;
+  max-height: 50px;
+  border-bottom: 2px solid $NAVY;
+  background-color: $BLUE;
+}

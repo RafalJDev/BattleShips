@@ -1,0 +1,13 @@
+.home-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .form {
+    display: flex;
+    width: 400px;
+    height: 150px;
+
+    background-color: #fff;
+  }
+}
