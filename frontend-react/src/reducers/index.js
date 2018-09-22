@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   playerShips: playerShipsReducer,
   playerName: playerNameReducer,
   enemyShips: enemyShipsReducer,
-  player: playersReducer,
+  players: playersReducer,
   rooms: roomsReducer
 });
 

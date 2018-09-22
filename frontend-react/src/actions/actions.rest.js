@@ -26,7 +26,7 @@ export const registerPlayer = (playerName) => async (dispatch) => {
 export const getPlayers = () => async (dispatch) => {
   const url = `${hostUrl}/registered`;
   try {
-    const reponse = await axios.get(url);
+    const response = await axios.get(url);
     dispatch({ type: UPDATE_PLAYERS_LIST, payload: response.data });
   }
   catch (error) {
@@ -37,7 +37,7 @@ export const getPlayers = () => async (dispatch) => {
 export const getRooms = () => async (dispatch) => {
   const url = `${hostUrl}/room/list`;
   try {
-    const reponse = await axios.get(url);
+    const response = await axios.get(url);
     dispatch({ type: UPDATE_ROOMS_LIST, payload: response.data });
   }
   catch (error) {
@@ -48,7 +48,7 @@ export const getRooms = () => async (dispatch) => {
 export const joinRoom = (playerName, roomName) => async (dispatch) => {
   const url = `${hostUrl}/room/join?playerName=${playerName}&roomName=${roomName}`;
   try {
-    const reponse = await axios.get(url);
+    const response = await axios.get(url);
     // TODO handle response 
     // dispatch({ type: SET_ROOM_NAME, payload: response.data });
   }
@@ -63,7 +63,7 @@ export const createRoom = (playerName, roomName) => async (dispatch) => {
     roomName
   };
   try {
-    const reponse = await axios.post(url, payload);
+    const response = await axios.post(url, payload);
     // TODO handle response 
   }
   catch (error) {
@@ -75,7 +75,7 @@ export const sendShipsConfiguration = (playerName, roomName, shipsConfiguration)
   const url = `${hostUrl}/room/join?playerName=${playerName}&roomName=${roomName}`;
   const payload = shipsConfiguration;
   try {
-    const reponse = await axios.post(url, payload);
+    const response = await axios.post(url, payload);
     // TODO handle response 
   }
   catch (error) {
