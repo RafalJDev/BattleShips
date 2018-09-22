@@ -7,7 +7,7 @@ class SocketExample extends Component {
     this.socket = null;
   }
 
-  static socketUrl = 'ws://battleships.kuba005.nazwa.pl'
+  static socketUrl = 'ws://localhost:8080'
 
   componentDidMount() {
     this.socket = new WebSocket(SocketExample.socketUrl);

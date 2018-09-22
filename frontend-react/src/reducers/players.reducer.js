@@ -1,4 +1,4 @@
-import { UPDATE_PLAYERS_LIST } from '../actions/action.types';
+import { UPDATE_PLAYERS_LIST } from '../actions/actions.types';
 
 const INITIAL_STATE = [];
 export default function (state = INITIAL_STATE, action) {
