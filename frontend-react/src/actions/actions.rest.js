@@ -5,7 +5,7 @@ import {
   SET_PLAYER_NAME, SET_ROOM_NAME
 } from './actions.types';
 
-export const registerPlayer = (playerName) => async (dispath) => {
+export const registerPlayer = (playerName) => async (dispatch) => {
   const url = `${hostUrl}/login`;
   const payload = {
     name: playerName
@@ -13,14 +13,15 @@ export const registerPlayer = (playerName) => async (dispath) => {
   try {
     const reponse = await axios.post(url, payload);
     // TODO handle response 
+    console.log(reponse.status);
     // dispatch({ type: SET_PLAYER_NAME, paylaod: response.data })
   }
   catch (error) {
-    console.log(error);
+    console.log('registerPlayer ERROR:', error);
   }
 }
 
-export const getPlayers = () => async (dispath) => {
+export const getPlayers = () => async (dispatch) => {
   const url = `${hostUrl}/registered`;
   try {
     const reponse = await axios.get(url);
@@ -31,7 +32,7 @@ export const getPlayers = () => async (dispath) => {
   }
 }
 
-export const getRooms = () => async (dispath) => {
+export const getRooms = () => async (dispatch) => {
   const url = `${hostUrl}/room/list`;
   try {
     const reponse = await axios.get(url);
@@ -42,7 +43,7 @@ export const getRooms = () => async (dispath) => {
   }
 }
 
-export const joinRoom = (playerName, roomName) => async (dispath) => {
+export const joinRoom = (playerName, roomName) => async (dispatch) => {
   const url = `${hostUrl}/room/join?playerName=${playerName}&roomName=${roomName}`;
   try {
     const reponse = await axios.get(url);
@@ -54,7 +55,7 @@ export const joinRoom = (playerName, roomName) => async (dispath) => {
   }
 }
 
-export const createRoom = (playerName, roomName) => async (dispath) => {
+export const createRoom = (playerName, roomName) => async (dispatch) => {
   const url = `${hostUrl}/room/create?playerName=${playerName}`;
   const paylaod = {
     roomName
@@ -68,7 +69,7 @@ export const createRoom = (playerName, roomName) => async (dispath) => {
   }
 }
 
-export const sendShipsConfiguration = (playerName, roomName, shipsConfiguration) => async (dispath) => {
+export const sendShipsConfiguration = (playerName, roomName, shipsConfiguration) => async (dispatch) => {
   const url = `${hostUrl}/room/join?playerName=${playerName}&roomName=${roomName}`;
   const paylaod = shipsConfiguration;
   try {
