@@ -4,6 +4,7 @@ import {
   UPDATE_PLAYERS_LIST, UPDATE_ROOMS_LIST,
   SET_PLAYER_NAME, SET_ROOM_NAME
 } from './actions.types';
+import { history } from '../index';
 
 export const registerPlayer = (playerName) => async (dispatch) => {
   const url = `${hostUrl}/login`;
@@ -11,10 +12,11 @@ export const registerPlayer = (playerName) => async (dispatch) => {
     name: playerName
   }
   try {
-    const reponse = await axios.post(url, payload);
-    // TODO handle response 
-    console.log(reponse.status);
-    // dispatch({ type: SET_PLAYER_NAME, paylaod: response.data })
+    const response = await axios.post(url, payload);
+    if (response && response.data && response.data.result === true) {
+      dispatch({ type: SET_PLAYER_NAME, payload: playerName });
+      history.push('/lobby');
+    }
   }
   catch (error) {
     console.log('registerPlayer ERROR:', error);
@@ -25,7 +27,7 @@ export const getPlayers = () => async (dispatch) => {
   const url = `${hostUrl}/registered`;
   try {
     const reponse = await axios.get(url);
-    dispatch({ type: UPDATE_PLAYERS_LIST, paylaod: response.data })
+    dispatch({ type: UPDATE_PLAYERS_LIST, payload: response.data });
   }
   catch (error) {
     console.log(error);
@@ -36,7 +38,7 @@ export const getRooms = () => async (dispatch) => {
   const url = `${hostUrl}/room/list`;
   try {
     const reponse = await axios.get(url);
-    dispatch({ type: UPDATE_ROOMS_LIST, paylaod: response.data })
+    dispatch({ type: UPDATE_ROOMS_LIST, payload: response.data });
   }
   catch (error) {
     console.log(error);
@@ -48,7 +50,7 @@ export const joinRoom = (playerName, roomName) => async (dispatch) => {
   try {
     const reponse = await axios.get(url);
     // TODO handle response 
-    // dispatch({ type: SET_ROOM_NAME, paylaod: response.data })
+    // dispatch({ type: SET_ROOM_NAME, payload: response.data });
   }
   catch (error) {
     console.log(error);
@@ -57,11 +59,11 @@ export const joinRoom = (playerName, roomName) => async (dispatch) => {
 
 export const createRoom = (playerName, roomName) => async (dispatch) => {
   const url = `${hostUrl}/room/create?playerName=${playerName}`;
-  const paylaod = {
+  const payload = {
     roomName
   };
   try {
-    const reponse = await axios.post(url, paylaod);
+    const reponse = await axios.post(url, payload);
     // TODO handle response 
   }
   catch (error) {
@@ -71,9 +73,9 @@ export const createRoom = (playerName, roomName) => async (dispatch) => {
 
 export const sendShipsConfiguration = (playerName, roomName, shipsConfiguration) => async (dispatch) => {
   const url = `${hostUrl}/room/join?playerName=${playerName}&roomName=${roomName}`;
-  const paylaod = shipsConfiguration;
+  const payload = shipsConfiguration;
   try {
-    const reponse = await axios.post(url, paylaod);
+    const reponse = await axios.post(url, payload);
     // TODO handle response 
   }
   catch (error) {

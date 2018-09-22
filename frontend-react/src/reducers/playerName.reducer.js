@@ -1,11 +1,11 @@
-import { UPDATE_PLAYERS_LIST } from '../actions/actions.types';
+import { SET_PLAYER_NAME } from '../actions/actions.types';
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = '';
 export default function (state = INITIAL_STATE, action) {
   const { type, payload } = action;
   switch (type) {
-    case UPDATE_PLAYERS_LIST:
-      return [...payload];
+    case SET_PLAYER_NAME:
+      return payload;
     default:
       return state;
   }
