@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.common.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.common.js",
+    "dev": "webpack-dev-server --open --config webpack.common.js",
     "build": "webpack --config webpack.prod.js",
     "test": "mocha -r mocha-clean -r babel-core/register -r ./test/common.js -r ./test/dom.js -r ./test/sass.js ./src/**/*.test.js",
     "tdd": "npm test -- --watch -R list"
