@@ -1,0 +1,63 @@
+@import '../../styles/colors.scss';
+
+.common-single-form {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  max-height: 40px;
+
+  .common-single-form-input {
+    display: flex;
+    flex-grow: 1;
+    min-height: 40px;
+    max-height: 40px;
+    padding: 10px;
+    outline: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border: 2px solid #007bff;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+
+    &.error {
+      border: 2px solid $RED;
+    }
+  }
+
+  .common-single-form-button {
+      min-width: 80px;
+    max-width: 80px;
+    min-height: 40px;
+    max-height: 40px;
+    color: #fff;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+
+    transition: all 0.2s ease-in-out;
+    
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-left-width: 0;
+
+    &:hover {
+      background-color: #0065d1;
+      cursor: pointer;
+    }
+    
+    &.error {
+      border: 2px solid $RED;
+
+      background-color: $RED;
+      border: 2px solid $RED;
+      border-left-width: 0;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
