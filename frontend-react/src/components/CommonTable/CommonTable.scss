@@ -1,0 +1,59 @@
+@import '../../styles/colors.scss';
+
+.common-table {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border-radius: 8px;
+  font-size: 16px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid $GRAY;
+  user-select: none;
+ 
+  .common-table-header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    min-height: 35px;
+    max-height: 35px;
+    background-color: #e4e4e4;
+    border-bottom: 1px solid $GRAY;
+
+    .common-table-cell {
+      &:not(:last-child) {
+        border-right: 1px solid $GRAY;
+      }
+    }
+  }
+
+  .common-table-row {
+    display: flex;
+    min-height: 35px;
+    max-height: 35px;
+    border-bottom: 1px solid #eee;
+
+    &.hoverable {
+      &:hover {
+        background-color: #fafafa;
+        cursor: pointer;
+      }
+    }
+
+    .common-table-cell {
+      &:not(:last-child) {
+        border-right: 1px solid #eee;
+      }
+    }
+  }
+
+  .common-table-cell {
+    font-family: 'Montserrat', sans-serif;
+    color: #2f2f2f;
+    padding: 0 15px;
+    line-height: 35px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

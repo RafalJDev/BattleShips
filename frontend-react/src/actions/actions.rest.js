@@ -49,8 +49,10 @@ export const joinRoom = (playerName, roomName) => async (dispatch) => {
   const url = `${hostUrl}/room/join?playerName=${playerName}&roomName=${roomName}`;
   try {
     const response = await axios.get(url);
-    // TODO handle response 
-    // dispatch({ type: SET_ROOM_NAME, payload: response.data });
+    if (response && response.data && response.data.result === 'Ok') {
+      dispatch({ type: SET_ROOM_NAME, payload: roomName });
+      history.push(`/room/${roomName}`);
+    }
   }
   catch (error) {
     console.log(error);

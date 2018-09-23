@@ -19,6 +19,7 @@
       border-bottom-left-radius: 8px;
       border: 2px solid #007bff;
       transition: all 0.2s ease-in-out;
+      font-family: 'Montserrat', sans-serif;
 
       &.error {
         border: 2px solid $RED;
@@ -34,6 +35,7 @@
       border-radius: 0;
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
 
       transition: all 0.2s ease-in-out;
       
