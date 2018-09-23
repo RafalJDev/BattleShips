@@ -7,7 +7,7 @@
   border-radius: 8px;
   font-size: 16px;
   overflow: hidden;
-  background: #fff;
+  background: $COMMON_TABLE_BACKGROUND;
   border: 1px solid $GRAY;
   user-select: none;
  
@@ -17,7 +17,7 @@
     top: 0;
     min-height: 35px;
     max-height: 35px;
-    background-color: #e4e4e4;
+    background-color: $COMMON_TABLE_HEADER_BACKGROUND;
     border-bottom: 1px solid $GRAY;
 
     .common-table-cell {
@@ -31,18 +31,18 @@
     display: flex;
     min-height: 35px;
     max-height: 35px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $COMMON_TABLE_CELL_BORDER_COLOR;
 
     &.hoverable {
       &:hover {
-        background-color: #fafafa;
+        background-color: $COMMON_TABLE_ROW_HOVER_BACKGROUND;
         cursor: pointer;
       }
     }
 
     .common-table-cell {
       &:not(:last-child) {
-        border-right: 1px solid #eee;
+        border-right: 1px solid $COMMON_TABLE_CELL_BORDER_COLOR;
       }
     }
   }
