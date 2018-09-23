@@ -67,6 +67,10 @@ export const createRoom = (playerName, roomName) => async (dispatch) => {
   try {
     const response = await axios.post(url, payload);
     // TODO handle response 
+    // if (response && response.data && response.data.result === 'Ok') {
+    //   dispatch({ type: SET_ROOM_NAME, payload: roomName });
+    //   history.push(`/room/${roomName}`);
+    // }
   }
   catch (error) {
     console.log(error);

@@ -13,6 +13,7 @@ class HomeView extends Component {
   constructor(props) {
     super(props);
 
+    this.handlePlayerRegister = this.handlePlayerRegister.bind(this);
   }
 
   static validateNameValue(value) {
@@ -20,9 +21,13 @@ class HomeView extends Component {
     return regex.test(value)
   }
 
+  handlePlayerRegister(playerName) {
+    this.props.registerPlayer(playerName);
+  }
+
   render() {
     const formProps = {
-      handleSubmit: this.props.registerPlayer,
+      handleSubmit: this.handlePlayerRegister,
       placeholder: 'Enter name...',
       autoFocus: 'on',
       validateMethod: HomeView.validateNameValue

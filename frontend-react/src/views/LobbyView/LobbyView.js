@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './LobbyView.scss';
-import { getPlayers, getRooms, joinRoom } from '../../actions';
+import { getPlayers, getRooms, joinRoom, createRoom } from '../../actions';
 import { history } from '../../index';
 
 import CommonTable from '../../components/CommonTable/CommonTable';
+import CommonSingleForm from '../../components/CommonSingleForm/CommonSingleForm';
 
 class LobbyView extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class LobbyView extends Component {
 
     this.getData = this.getData.bind(this);
     this.handleRoomRowClick = this.handleRoomRowClick.bind(this);
+    this.handleRoomCreate = this.handleRoomCreate.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +36,11 @@ class LobbyView extends Component {
     window.clearInterval(this.dataTimer);
   }
 
+  static validateRoomValue(value) {
+    const regex = /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]*$/
+    return regex.test(value)
+  }
+
   getData() {
     const { getPlayers, getRooms, rooms } = this.props;
     getPlayers();
@@ -45,11 +52,22 @@ class LobbyView extends Component {
     this.props.joinRoom(playerName, roomName);
   }
 
-  renderCreateRoomForm() {
-    return (
-      <form className='form'>
+  handleRoomCreate(roomName) {
+    const { playerName } = this.props;
+    this.props.createRoom(playerName, roomName)
+  }
 
-      </form>
+  renderCreateRoomForm() {
+    const formProps = {
+      handleSubmit: this.handleRoomCreate,
+      placeholder: 'Create room',
+      validateMethod: LobbyView.validateRoomValue
+    }
+
+    return (
+      <div className='form'>
+        <CommonSingleForm {...formProps} />
+      </div>
     );
   }
 
@@ -167,7 +185,7 @@ function mapStateToProps({ players, rooms, playerName }) {
   return { players, rooms, playerName };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getPlayers, getRooms, joinRoom }, dispatch);
+  return bindActionCreators({ getPlayers, getRooms, joinRoom, createRoom }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LobbyView);
